@@ -1,7 +1,6 @@
 import type { NextConfig } from "next";
 
-const nextConfig: NextConfig = {
-  /* config options here */
-};
+// All images are self-hosted under /public/images — no remote patterns needed.
+const nextConfig: NextConfig = {};
 
 export default nextConfig;

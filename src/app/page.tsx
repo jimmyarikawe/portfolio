@@ -1,69 +1,194 @@
-import Image from "next/image";
+"use client";
 
-export default function Home() {
+import { useState } from "react";
+import Link from "next/link";
+import { motion } from "framer-motion";
+import { ArrowDown, ArrowUpRight } from "lucide-react";
+import { projects } from "@/data/projects";
+import { articles } from "@/data/articles";
+import { ProjectCard } from "@/components/ProjectCard";
+import { WorkFilter } from "@/components/WorkFilter";
+import { ServicesGrid } from "@/components/ServicesGrid";
+import { JournalCard } from "@/components/JournalCard";
+import { HeroSpotlight } from "@/components/HeroSpotlight";
+
+export default function HomePage() {
+  const [selectedCategory, setSelectedCategory] = useState("All");
+
+  const categories = [
+    "All",
+    "Fintech",
+    "Operational AI",
+    "AI & Cybersecurity",
+    "Generative AI",
+    "Consumer Tech"
+  ];
+
+  const filteredProjects =
+    selectedCategory === "All"
+      ? projects
+      : projects.filter(
+          (p) =>
+            p.category.toLowerCase().includes(selectedCategory.toLowerCase()) ||
+            p.categories.some((c) =>
+              c.toLowerCase().includes(selectedCategory.toLowerCase())
+            )
+        );
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
+    <div className="max-w-6xl mx-auto px-6 pt-12 md:pt-16 space-y-28 md:space-y-40">
+      {/* 1. HERO SECTION */}
+      <section className="flex flex-col lg:flex-row lg:items-center gap-10 lg:gap-16">
+        <div className="flex-1 space-y-8">
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            className="glass-pill inline-flex items-center gap-2 px-3 py-1.5 rounded text-xs font-mono-accent text-neutral-700 dark:text-neutral-300"
+          >
+            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse-subtle" />
+            <span>Available</span>
+          </motion.div>
+
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+            className="text-4xl sm:text-5xl md:text-6xl font-medium tracking-tight text-neutral-950 dark:text-white leading-[1.08]"
+          >
+            Product design for
+            <br />
+            high-stakes technology.
+          </motion.h1>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            className="space-y-6"
+          >
+            <p className="text-base sm:text-lg text-neutral-600 dark:text-neutral-300 leading-relaxed max-w-xl">
+              UK-based designer with 7+ years across fintech, enterprise, and AI. I combine research, design, and code to ship products that hold up under real-world complexity.
+            </p>
+
+            <div className="flex items-center gap-3">
+              <a
+                href="#selected-work"
+                className="inline-flex items-center gap-2 px-5 py-3 rounded bg-neutral-950 text-white dark:bg-white dark:text-neutral-950 text-xs font-mono-accent hover:bg-neutral-800 dark:hover:bg-neutral-200 transition-colors"
+              >
+                <span>Explore Work</span>
+                <ArrowDown className="w-3.5 h-3.5" />
+              </a>
+
+              <Link
+                href="/contact"
+                className="inline-flex items-center gap-1.5 px-5 py-3 rounded bg-white dark:bg-white/5 border border-black/10 dark:border-white/10 text-neutral-900 dark:text-white text-xs font-mono-accent hover:bg-neutral-50 dark:hover:bg-white/10 transition-colors"
+              >
+                <span>Contact</span>
+                <ArrowUpRight className="w-3.5 h-3.5" />
+              </Link>
+            </div>
+          </motion.div>
+        </div>
+
+        {/* Right: Interactive holographic badge — ~1/5 of the viewport width on desktop */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.97 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.7, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+          className="w-48 h-48 sm:w-56 sm:h-56 lg:w-72 lg:h-72 mx-auto lg:mx-0 shrink-0"
+        >
+          <HeroSpotlight />
+        </motion.div>
+      </section>
+
+      {/* 2. SELECTED WORK SECTION */}
+      <section id="selected-work" className="space-y-8 scroll-mt-28">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-4 border-b border-black/5 dark:border-white/10">
+          <div>
+            <span className="text-xs font-mono-accent text-neutral-400 dark:text-neutral-500 uppercase tracking-wider block mb-1">
+              Portfolio
+            </span>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-medium tracking-tight text-neutral-950 dark:text-white">
+              Selected Work
+            </h2>
+          </div>
+
+          <Link
+            href="/work"
+            className="text-xs font-mono-accent text-neutral-900 dark:text-neutral-200 hover:text-neutral-600 dark:hover:text-white inline-flex items-center gap-1 group"
+          >
+            <span>View all projects</span>
+            <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+          </Link>
+        </div>
+
+        {/* Category Filters */}
+        <WorkFilter
+          categories={categories}
+          activeCategory={selectedCategory}
+          onSelectCategory={setSelectedCategory}
         />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+
+        {/* Project Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4 md:gap-5">
+          {filteredProjects.map((project, index) => (
+            <ProjectCard
+              key={project.id}
+              project={project}
+              index={index}
+              priority={index < 2}
+            />
+          ))}
+        </div>
+      </section>
+
+      {/* 4. TECHNICAL SKILLS & DISCIPLINES */}
+      <section className="space-y-8">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-4 border-b border-black/5 dark:border-white/10">
+          <div>
+            <span className="text-xs font-mono-accent text-neutral-400 dark:text-neutral-500 uppercase tracking-wider block mb-1">
+              Capabilities
+            </span>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-medium tracking-tight text-neutral-950 dark:text-white">
+              What I bring
+            </h2>
+          </div>
+          <p className="text-sm text-neutral-500 dark:text-neutral-400 max-w-sm">
+            Core tools and disciplines I work across day to day.
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+
+        <ServicesGrid />
+      </section>
+
+      {/* 5. JOURNAL & RESEARCH PUBLICATION */}
+      <section className="space-y-8">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-4 border-b border-black/5 dark:border-white/10">
+          <div>
+            <span className="text-xs font-mono-accent text-neutral-400 dark:text-neutral-500 uppercase tracking-wider block mb-1">
+              Journal
+            </span>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-medium tracking-tight text-neutral-950 dark:text-white">
+              Recent Writing
+            </h2>
+          </div>
+
+          <Link
+            href="/journal"
+            className="text-xs font-mono-accent text-neutral-900 dark:text-neutral-200 hover:text-neutral-600 dark:hover:text-white inline-flex items-center gap-1 group"
           >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+            <span>All Articles</span>
+            <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+          </Link>
         </div>
-      </main>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+          {articles.slice(0, 2).map((article, index) => (
+            <JournalCard key={article.slug} article={article} index={index} />
+          ))}
+        </div>
+      </section>
     </div>
   );
 }

@@ -1,0 +1,123 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ArrowUpRight } from "lucide-react";
+
+interface CursorData {
+  title: string;
+  subtitle?: string;
+}
+
+export function CustomCursor() {
+  const [mousePosition, setMousePosition] = useState({ x: -100, y: -100 });
+  const [cursorData, setCursorData] = useState<CursorData | null>(null);
+  const [isHovered, setIsHovered] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    // Only enable on fine pointer devices (desktop/mouse)
+    if (window.matchMedia("(pointer: coarse)").matches) return;
+
+    document.documentElement.classList.add("custom-cursor-active");
+
+    const onMouseMove = (e: MouseEvent) => {
+      setMousePosition({ x: e.clientX, y: e.clientY });
+      if (!isVisible) setIsVisible(true);
+    };
+
+    const onMouseLeave = () => {
+      setIsVisible(false);
+    };
+
+    const onMouseEnter = () => {
+      setIsVisible(true);
+    };
+
+    // Listen to custom cursor triggers
+    const handleElementHover = (e: MouseEvent) => {
+      const target = (e.target as HTMLElement)?.closest("[data-cursor]");
+      if (target) {
+        const title = target.getAttribute("data-cursor") || "";
+        const subtitle = target.getAttribute("data-cursor-subtitle") || undefined;
+        setCursorData({ title, subtitle });
+        setIsHovered(true);
+      } else {
+        setCursorData(null);
+        setIsHovered(false);
+      }
+    };
+
+    window.addEventListener("mousemove", onMouseMove);
+    window.addEventListener("mouseleave", onMouseLeave);
+    window.addEventListener("mouseenter", onMouseEnter);
+    document.addEventListener("mouseover", handleElementHover);
+
+    return () => {
+      window.removeEventListener("mousemove", onMouseMove);
+      window.removeEventListener("mouseleave", onMouseLeave);
+      window.removeEventListener("mouseenter", onMouseEnter);
+      document.removeEventListener("mouseover", handleElementHover);
+      document.documentElement.classList.remove("custom-cursor-active");
+    };
+  }, [isVisible]);
+
+  if (!isVisible) return null;
+
+  const hasArrow = cursorData ? /[↗→←]/.test(cursorData.title) : false;
+
+  return (
+    <>
+      {/* 1. Precise Center Cursor Dot (Always visible at pointer tip) */}
+      <motion.div
+        className="fixed top-0 left-0 pointer-events-none z-50"
+        animate={{
+          x: mousePosition.x - 4,
+          y: mousePosition.y - 4,
+          opacity: isVisible ? 1 : 0,
+        }}
+        transition={{
+          type: "spring",
+          damping: 35,
+          stiffness: 800,
+          mass: 0.05,
+        }}
+      >
+        <div className="w-2 h-2 rounded-full bg-neutral-900 dark:bg-white shadow-xs border border-white/40 dark:border-black/40" />
+      </motion.div>
+
+      {/* 2. Floating Context Tooltip / Pill on Hover */}
+      <AnimatePresence>
+        {isHovered && cursorData && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.85, y: 8 }}
+            animate={{
+              opacity: 1,
+              scale: 1,
+              x: mousePosition.x + 14,
+              y: mousePosition.y + 14,
+            }}
+            exit={{ opacity: 0, scale: 0.85 }}
+            transition={{
+              type: "spring",
+              damping: 30,
+              stiffness: 450,
+              mass: 0.1,
+            }}
+            className="fixed top-0 left-0 pointer-events-none z-50 px-3 py-2 rounded bg-neutral-950/95 dark:bg-neutral-900/95 backdrop-blur-md text-white border border-white/15 dark:border-white/20 flex flex-col gap-0.5 max-w-xs"
+          >
+            <div className="flex items-center gap-1.5 text-xs font-mono-accent font-medium tracking-tight text-white">
+              <span>{cursorData.title}</span>
+              {!hasArrow && <ArrowUpRight className="w-3.5 h-3.5 opacity-80 shrink-0 text-emerald-400" />}
+            </div>
+            {cursorData.subtitle && (
+              <span className="text-[10px] font-mono-accent text-neutral-400 dark:text-neutral-400 line-clamp-1 max-w-[220px]">
+                {cursorData.subtitle}
+              </span>
+            )}
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
+  );
+}
