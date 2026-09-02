@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowUpRight, Download, Sparkles } from "lucide-react";
+import { ArrowUpRight, Sparkles } from "lucide-react";
 import { ExperienceTimeline } from "@/components/ExperienceTimeline";
 import { ServicesGrid } from "@/components/ServicesGrid";
 

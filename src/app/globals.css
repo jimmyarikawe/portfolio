@@ -37,6 +37,17 @@
 
   * {
     border-color: var(--border-subtle);
+  }
+
+  html,
+  body,
+  header,
+  footer,
+  main,
+  article,
+  section,
+  .editorial-card,
+  .glass-pill {
     transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease;
   }
 
@@ -150,4 +161,14 @@
 .custom-cursor-active a,
 .custom-cursor-active button {
   cursor: none;
+}
+
+.custom-cursor-active input,
+.custom-cursor-active textarea,
+.custom-cursor-active select {
+  cursor: text !important;
+}
+
+.custom-cursor-active select {
+  cursor: pointer !important;
 }

@@ -6,12 +6,14 @@ interface WorkFilterProps {
   categories: string[];
   activeCategory: string;
   onSelectCategory: (category: string) => void;
+  layoutId?: string;
 }
 
 export function WorkFilter({
   categories,
   activeCategory,
   onSelectCategory,
+  layoutId = "active-filter-pill",
 }: WorkFilterProps) {
   return (
     <div className="flex flex-wrap items-center gap-2 mb-10 md:mb-14">
@@ -29,7 +31,7 @@ export function WorkFilter({
           >
             {isSelected && (
               <motion.div
-                layoutId="active-filter-pill"
+                layoutId={layoutId}
                 className="absolute inset-0 bg-neutral-950 dark:bg-white rounded-full"
                 transition={{ type: "spring", stiffness: 400, damping: 32 }}
               />

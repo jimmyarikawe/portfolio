@@ -13,6 +13,7 @@ export function CustomCursor() {
   const [mousePosition, setMousePosition] = useState({ x: -100, y: -100 });
   const [cursorData, setCursorData] = useState<CursorData | null>(null);
   const [isHovered, setIsHovered] = useState(false);
+  const [isOverForm, setIsOverForm] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -24,6 +25,9 @@ export function CustomCursor() {
     const onMouseMove = (e: MouseEvent) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
       if (!isVisible) setIsVisible(true);
+
+      const isInput = !!(e.target as HTMLElement)?.closest("input, textarea, select");
+      setIsOverForm(isInput);
     };
 
     const onMouseLeave = () => {
@@ -68,13 +72,13 @@ export function CustomCursor() {
 
   return (
     <>
-      {/* 1. Precise Center Cursor Dot (Always visible at pointer tip) */}
+      {/* 1. Precise Center Cursor Dot (Always visible at pointer tip unless over text input) */}
       <motion.div
         className="fixed top-0 left-0 pointer-events-none z-50"
         animate={{
           x: mousePosition.x - 4,
           y: mousePosition.y - 4,
-          opacity: isVisible ? 1 : 0,
+          opacity: isVisible && !isOverForm ? 1 : 0,
         }}
         transition={{
           type: "spring",

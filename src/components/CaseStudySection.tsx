@@ -42,6 +42,12 @@ export function CaseStudySection({
   const [copiedShare, setCopiedShare] = useState(false);
   const [activeImageIndex, setActiveImageIndex] = useState<number | null>(null);
 
+  // Consolidate hero + gallery images for lightbox navigation
+  const primaryHero = project.heroImage || project.coverImage;
+  const modalImages = primaryHero && !project.gallery.includes(primaryHero)
+    ? [primaryHero, ...project.gallery]
+    : project.gallery;
+
   const handleShare = () => {
     if (typeof window !== "undefined") {
       navigator.clipboard.writeText(window.location.href);
@@ -50,26 +56,38 @@ export function CaseStudySection({
     }
   };
 
+  // Lock background scroll when lightbox is open
+  useEffect(() => {
+    if (activeImageIndex !== null) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [activeImageIndex]);
+
   // Keyboard navigation for lightbox
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (activeImageIndex === null) return;
       if (e.key === "Escape") setActiveImageIndex(null);
-      if (e.key === "ArrowRight" && project.gallery) {
+      if (e.key === "ArrowRight" && modalImages.length > 0) {
         setActiveImageIndex((prev) =>
-          prev !== null && prev < project.gallery.length - 1 ? prev + 1 : 0
+          prev !== null && prev < modalImages.length - 1 ? prev + 1 : 0
         );
       }
-      if (e.key === "ArrowLeft" && project.gallery) {
+      if (e.key === "ArrowLeft" && modalImages.length > 0) {
         setActiveImageIndex((prev) =>
-          prev !== null && prev > 0 ? prev - 1 : project.gallery.length - 1
+          prev !== null && prev > 0 ? prev - 1 : modalImages.length - 1
         );
       }
     };
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [activeImageIndex, project.gallery]);
+  }, [activeImageIndex, modalImages]);
 
   return (
     <>
@@ -373,7 +391,10 @@ export function CaseStudySection({
                   {project.gallery.map((img, idx) => (
                     <div
                       key={idx}
-                      onClick={() => setActiveImageIndex(idx)}
+                      onClick={() => {
+                        const targetIdx = modalImages.indexOf(img);
+                        setActiveImageIndex(targetIdx !== -1 ? targetIdx : idx);
+                      }}
                       className={`group relative rounded overflow-hidden bg-neutral-100 dark:bg-neutral-900 border border-black/5 dark:border-white/10 cursor-zoom-in transition-all duration-300 hover:border-black/20 dark:hover:border-white/20 ${
                         idx === 0 ? "sm:col-span-2 aspect-[16/10]" : "aspect-[4/3] sm:aspect-[16/11]"
                       }`}
@@ -559,7 +580,7 @@ export function CaseStudySection({
 
       {/* FULLSCREEN LIGHTBOX MODAL */}
       <AnimatePresence>
-        {activeImageIndex !== null && project.gallery && (
+        {activeImageIndex !== null && modalImages.length > 0 && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -576,7 +597,7 @@ export function CaseStudySection({
                 <span className="font-medium text-white">{project.title}</span>
                 <span className="text-neutral-500">•</span>
                 <span className="text-neutral-400">
-                  Artifact {activeImageIndex + 1} of {project.gallery.length}
+                  Artifact {activeImageIndex + 1} of {modalImages.length}
                 </span>
               </div>
 
@@ -600,7 +621,7 @@ export function CaseStudySection({
               onClick={(e) => e.stopPropagation()}
             >
               <Image
-                src={project.gallery[activeImageIndex]}
+                src={modalImages[activeImageIndex]}
                 alt={`${project.title} artifact ${activeImageIndex + 1}`}
                 fill
                 className="object-contain"
@@ -616,21 +637,22 @@ export function CaseStudySection({
               <button
                 onClick={() =>
                   setActiveImageIndex((prev) =>
-                    prev !== null && prev > 0 ? prev - 1 : project.gallery.length - 1
+                    prev !== null && prev > 0 ? prev - 1 : modalImages.length - 1
                   )
                 }
                 className="inline-flex items-center gap-2 px-4 py-2 rounded bg-white/10 hover:bg-white/20 text-xs font-mono-accent transition-colors"
+                aria-label="Previous image"
               >
                 <ChevronLeft className="w-4 h-4" />
                 <span>Prev</span>
               </button>
 
-              <div className="flex gap-1.5">
-                {project.gallery.map((_, i) => (
+              <div className="flex gap-1.5 overflow-x-auto py-1 max-w-[160px] no-scrollbar">
+                {modalImages.map((_, i) => (
                   <button
                     key={i}
                     onClick={() => setActiveImageIndex(i)}
-                    className={`w-2 h-2 rounded-full transition-all ${
+                    className={`w-2 h-2 rounded-full transition-all shrink-0 ${
                       i === activeImageIndex
                         ? "bg-white w-5"
                         : "bg-white/30 hover:bg-white/60"
@@ -643,10 +665,11 @@ export function CaseStudySection({
               <button
                 onClick={() =>
                   setActiveImageIndex((prev) =>
-                    prev !== null && prev < project.gallery.length - 1 ? prev + 1 : 0
+                    prev !== null && prev < modalImages.length - 1 ? prev + 1 : 0
                   )
                 }
                 className="inline-flex items-center gap-2 px-4 py-2 rounded bg-white/10 hover:bg-white/20 text-xs font-mono-accent transition-colors"
+                aria-label="Next image"
               >
                 <span>Next</span>
                 <ChevronRight className="w-4 h-4" />

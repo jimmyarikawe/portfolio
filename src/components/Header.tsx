@@ -11,9 +11,11 @@ import { TypewriterLogo } from "@/components/TypewriterLogo";
 export function Header() {
   const pathname = usePathname();
   const [timeString, setTimeString] = useState<string>("");
+  const [mounted, setMounted] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     const updateTime = () => {
       const now = new Date();
       const formatted = now.toLocaleTimeString("en-GB", {
@@ -21,6 +23,7 @@ export function Header() {
         minute: "2-digit",
         second: "2-digit",
         hour12: true,
+        timeZone: "Europe/London",
       });
       setTimeString(formatted.toUpperCase());
     };
@@ -53,12 +56,12 @@ export function Header() {
           <TypewriterLogo className="text-sm sm:text-base" delay={150} />
         </div>
 
-        {/* Center: Live Clock (hidden on small screens) */}
+        {/* Center: Live London Clock (hidden on small screens) */}
         <span
           suppressHydrationWarning
           className="hidden md:block text-xs font-mono-accent text-neutral-500 dark:text-neutral-400 pointer-events-auto"
         >
-          {timeString || "12:00:00 AM"}
+          {mounted && timeString ? `UK • ${timeString}` : "London, UK"}
         </span>
 
         {/* Right: Nav + Theme Toggle + Mobile Trigger */}
@@ -98,6 +101,8 @@ export function Header() {
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               aria-label="Toggle Navigation Menu"
+              aria-expanded={mobileMenuOpen}
+              aria-controls="mobile-navigation"
               className="p-1 text-neutral-700 dark:text-neutral-300 hover:text-neutral-950 dark:hover:text-white rounded transition-colors flex items-center justify-center"
             >
               {mobileMenuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
@@ -110,11 +115,12 @@ export function Header() {
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
+            id="mobile-navigation"
             initial={{ opacity: 0, y: -6 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -6 }}
             transition={{ duration: 0.18, ease: "easeOut" }}
-            className="md:hidden pointer-events-auto absolute left-4 right-4 sm:left-8 sm:right-8 top-full mt-2 glass-pill rounded p-4"
+            className="md:hidden pointer-events-auto absolute left-4 right-4 sm:left-8 sm:right-8 top-full mt-2 glass-pill rounded p-4 shadow-xl"
           >
             <div className="flex flex-col gap-1">
               {navLinks.map((link) => (

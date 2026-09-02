@@ -20,8 +20,8 @@ export default function HomePage() {
     "Fintech",
     "Operational AI",
     "AI & Cybersecurity",
-    "Generative AI",
-    "Consumer Tech"
+    "Voice AI",
+    "Mobility",
   ];
 
   const filteredProjects =
@@ -128,19 +128,32 @@ export default function HomePage() {
           categories={categories}
           activeCategory={selectedCategory}
           onSelectCategory={setSelectedCategory}
+          layoutId="home-work-filter"
         />
 
         {/* Project Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4 md:gap-5">
-          {filteredProjects.map((project, index) => (
-            <ProjectCard
-              key={project.id}
-              project={project}
-              index={index}
-              priority={index < 2}
-            />
-          ))}
-        </div>
+        {filteredProjects.length === 0 ? (
+          <div className="py-16 text-center space-y-3 rounded bg-neutral-50 dark:bg-white/[0.02] border border-black/5 dark:border-white/10">
+            <p className="text-sm text-neutral-500 font-mono-accent">No projects found in this category.</p>
+            <button
+              onClick={() => setSelectedCategory("All")}
+              className="text-xs font-mono-accent underline text-neutral-900 dark:text-white"
+            >
+              Reset to All Projects
+            </button>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4 md:gap-5">
+            {filteredProjects.map((project, index) => (
+              <ProjectCard
+                key={project.id}
+                project={project}
+                index={index}
+                priority={index < 2}
+              />
+            ))}
+          </div>
+        )}
       </section>
 
       {/* 4. TECHNICAL SKILLS & DISCIPLINES */}

@@ -54,10 +54,8 @@ export default async function CaseStudyPage({ params }: CaseStudyProps) {
   }
 
   const project = projects[currentIndex];
-  const nextProject =
-    currentIndex < projects.length - 1 ? projects[currentIndex + 1] : undefined;
-  const prevProject =
-    currentIndex > 0 ? projects[currentIndex - 1] : undefined;
+  const nextProject = projects[(currentIndex + 1) % projects.length];
+  const prevProject = projects[(currentIndex - 1 + projects.length) % projects.length];
 
   return (
     <CaseStudySection
