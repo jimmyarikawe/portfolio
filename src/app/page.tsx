@@ -44,21 +44,24 @@ export default function HomePage() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            className="glass-pill inline-flex items-center gap-2 px-3 py-1.5 rounded text-xs font-mono-accent text-neutral-700 dark:text-neutral-300"
+            className="flex flex-wrap items-center gap-3"
           >
-            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse-subtle" />
-            <span>Available</span>
+            <div className="glass-pill inline-flex items-center gap-2 px-3 py-1.5 rounded text-xs font-mono-accent text-neutral-700 dark:text-neutral-300">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse-subtle" />
+              <span>Available for Select Projects & Leadership</span>
+            </div>
+            <span className="text-xs font-mono-accent text-neutral-400 dark:text-neutral-500 hidden sm:inline">
+              UK • MSc AI (Distinction)
+            </span>
           </motion.div>
 
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-            className="text-4xl sm:text-5xl md:text-6xl font-medium tracking-tight text-neutral-950 dark:text-white leading-[1.08]"
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium tracking-tight text-neutral-950 dark:text-white leading-[1.08]"
           >
-            Product design for
-            <br />
-            high-stakes technology.
+            Product Designer & Manager at the intersection of craft, code & AI.
           </motion.h1>
 
           <motion.div
@@ -67,11 +70,26 @@ export default function HomePage() {
             transition={{ duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
             className="space-y-6"
           >
-            <p className="text-base sm:text-lg text-neutral-600 dark:text-neutral-300 leading-relaxed max-w-xl">
-              UK-based designer with 7+ years across fintech, enterprise, and AI. I combine research, design, and code to ship products that hold up under real-world complexity.
+            <p className="text-base sm:text-lg text-neutral-600 dark:text-neutral-300 leading-relaxed max-w-2xl">
+              I’m <strong className="text-neutral-950 dark:text-white font-medium">Jimmy Arikawe</strong>. With 7+ years across fintech, cybersecurity, and enterprise systems — backed by an <span className="text-neutral-950 dark:text-white font-medium">MSc in Artificial Intelligence (Distinction)</span> — I lead products from zero-to-one strategy and interaction architecture to production code and human-in-the-loop AI.
             </p>
 
-            <div className="flex items-center gap-3">
+            <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs font-mono-accent text-neutral-500 dark:text-neutral-400">
+              <span className="flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-neutral-400 dark:bg-neutral-600" />
+                7+ Years in Fintech & Enterprise
+              </span>
+              <span className="flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-neutral-400 dark:bg-neutral-600" />
+                MSc AI (Distinction) · Strathclyde
+              </span>
+              <span className="flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-neutral-400 dark:bg-neutral-600" />
+                Strategy · Interaction Systems · Code
+              </span>
+            </div>
+
+            <div className="flex flex-wrap items-center gap-3 pt-2">
               <a
                 href="#selected-work"
                 className="inline-flex items-center gap-2 px-5 py-3 rounded bg-neutral-950 text-white dark:bg-white dark:text-neutral-950 text-xs font-mono-accent hover:bg-neutral-800 dark:hover:bg-neutral-200 transition-colors"
@@ -81,10 +99,18 @@ export default function HomePage() {
               </a>
 
               <Link
+                href="/about"
+                className="inline-flex items-center gap-1.5 px-5 py-3 rounded bg-neutral-100 dark:bg-white/5 border border-black/5 dark:border-white/10 text-neutral-900 dark:text-white text-xs font-mono-accent hover:bg-neutral-200 dark:hover:bg-white/10 transition-colors"
+              >
+                <span>About & Career</span>
+                <ArrowUpRight className="w-3.5 h-3.5" />
+              </Link>
+
+              <Link
                 href="/contact"
                 className="inline-flex items-center gap-1.5 px-5 py-3 rounded bg-white dark:bg-white/5 border border-black/10 dark:border-white/10 text-neutral-900 dark:text-white text-xs font-mono-accent hover:bg-neutral-50 dark:hover:bg-white/10 transition-colors"
               >
-                <span>Contact</span>
+                <span>Get in Touch</span>
                 <ArrowUpRight className="w-3.5 h-3.5" />
               </Link>
             </div>
