@@ -72,23 +72,149 @@ const BIO_SCRIPT = [
   },
 ];
 
-// Picks the best available voice for a language rather than just the first
-// match — OSes/browsers often expose several per language, and the default
-// pick is usually the flattest-sounding one.
-function pickVoice(voices: SpeechSynthesisVoice[], langCode: string) {
+// Prioritized list of natural, authoritative male voice names by language prefix.
+// Designed to pick distinguished, warm British/European male voices matching Jimmy's persona.
+const PREFERRED_MALE_VOICES: Record<string, string[]> = {
+  en: [
+    "daniel",                 // Premier macOS/iOS British male voice
+    "google uk english male", // Chrome UK neural male voice
+    "oliver",                 // Natural British male voice
+    "george",                 // UK male
+    "arthur",                 // UK male
+    "jamie",                  // UK male
+    "ryan",                   // Microsoft Edge Natural UK male voice
+    "guy",                    // Natural male voice
+    "rishi",                  // Crisp Commonwealth English
+    "thomas",                 // UK/International male
+  ],
+  fr: ["thomas", "jacques", "nicolas", "paul", "henri", "antoine", "google français"],
+  es: ["jorge", "diego", "enrique", "manuel", "carlos", "alvaro", "google español"],
+  de: ["martin", "yannick", "hans", "stefan", "florian", "google deutsch"],
+  pt: ["eusebio", "joao", "felipe", "cristiano", "rodrigo", "google português"],
+};
+
+// Exclude cartoon/novelty voices and female voices so Jimmy's spoken introduction
+// always sounds like an articulate, professional male product leader.
+const EXCLUDED_VOICE_KEYWORDS = [
+  // Cartoon, child & novelty voices
+  "eddy",
+  "flo",
+  "grandma",
+  "grandpa",
+  "rocko",
+  "sandy",
+  "shelley",
+  "junior",
+  "jester",
+  "bad news",
+  "good news",
+  "bahh",
+  "bells",
+  "boing",
+  "bubbles",
+  "cellos",
+  "organ",
+  "superstar",
+  "trinoids",
+  "whisper",
+  "zarvox",
+  "wobble",
+  "albert",
+  "fred",
+  "ralph",
+  // Female voice names
+  "serena",
+  "karen",
+  "samantha",
+  "stephanie",
+  "kate",
+  "victoria",
+  "moira",
+  "fiona",
+  "veena",
+  "tessa",
+  "susan",
+  "zira",
+  "hazel",
+  "amelie",
+  "amélie",
+  "charlotte",
+  "aurelie",
+  "hortense",
+  "julie",
+  "monica",
+  "mónica",
+  "paulina",
+  "soledad",
+  "lucia",
+  "helena",
+  "marta",
+  "anna",
+  "petra",
+  "marlene",
+  "katja",
+  "joana",
+  "luciana",
+  "female",
+];
+
+function pickVoice(voices: SpeechSynthesisVoice[], langCode: string): SpeechSynthesisVoice | undefined {
+  if (!voices || voices.length === 0) return undefined;
+
   const prefix = langCode.slice(0, 2).toLowerCase();
-  const candidates = voices.filter((v) => v.lang.toLowerCase().startsWith(prefix));
+  const candidates = voices.filter(
+    (v) =>
+      v.lang.toLowerCase() === langCode.toLowerCase() ||
+      v.lang.replace("_", "-").toLowerCase() === langCode.toLowerCase() ||
+      v.lang.toLowerCase().startsWith(prefix)
+  );
+
   if (candidates.length === 0) return undefined;
 
-  const exact = candidates.filter((v) => v.lang.toLowerCase() === langCode.toLowerCase());
-  const pool = exact.length > 0 ? exact : candidates;
+  const preferredNames = PREFERRED_MALE_VOICES[prefix] || PREFERRED_MALE_VOICES.en;
 
-  const score = (v: SpeechSynthesisVoice) => {
-    if (/neural|enhanced|premium|natural/i.test(v.name)) return 2;
-    if (v.localService) return 1;
-    return 0;
+  const score = (v: SpeechSynthesisVoice): number => {
+    const name = v.name.toLowerCase();
+    let pts = 0;
+
+    // Heavily penalize cartoon and female voice names
+    if (EXCLUDED_VOICE_KEYWORDS.some((kw) => name.includes(kw))) {
+      pts -= 1000;
+    }
+
+    // High bonus for preferred male voices, prioritizing top choices (Daniel, Oliver, Google UK Male)
+    const prefIndex = preferredNames.findIndex((pref) => name.includes(pref));
+    if (prefIndex !== -1) {
+      pts += 500 - prefIndex * 20;
+    }
+
+    // Explicit male keyword bonus
+    if (/\bmale\b/i.test(name) || name.includes(" male") || name.includes("homme")) {
+      pts += 100;
+    }
+
+    // High fidelity indicators
+    if (/enhanced/i.test(name)) pts += 60;
+    if (/neural/i.test(name)) pts += 50;
+    if (/natural/i.test(name)) pts += 40;
+    if (/premium/i.test(name)) pts += 30;
+
+    // Exact regional dialect match bonus (e.g. en-GB over en-US)
+    const exactLang = langCode.toLowerCase();
+    const vLang = v.lang.toLowerCase().replace("_", "-");
+    if (vLang === exactLang) {
+      pts += 80;
+    } else if (vLang.startsWith("en-gb")) {
+      pts += 60;
+    }
+
+    if (v.localService) pts += 10;
+
+    return pts;
   };
-  return [...pool].sort((a, b) => score(b) - score(a))[0];
+
+  const sorted = [...candidates].sort((a, b) => score(b) - score(a));
+  return sorted[0];
 }
 
 type PlaybackStatus = "idle" | "speaking" | "paused";
@@ -133,8 +259,8 @@ export function HeroSpotlight() {
     utterance.lang = entry.lang;
     const voice = pickVoice(window.speechSynthesis.getVoices(), entry.lang);
     if (voice) utterance.voice = voice;
-    utterance.rate = 0.95;
-    utterance.pitch = 1;
+    utterance.rate = 0.94;
+    utterance.pitch = 0.96;
     utterance.onend = () => {
       if (currentUtteranceRef.current === utterance) setStatus("idle");
     };
