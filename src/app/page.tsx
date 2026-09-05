@@ -55,24 +55,25 @@ export default function HomePage() {
             </span>
           </motion.div>
 
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium tracking-tight text-neutral-950 dark:text-white leading-[1.08]"
-          >
-            Product Designer & Manager at the intersection of craft, code & AI.
-          </motion.h1>
+          <div className="space-y-6 max-w-3xl">
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+              className="text-3xl sm:text-4xl md:text-5xl font-medium tracking-tight text-neutral-950 dark:text-white leading-[1.12]"
+            >
+              Product Designer & Manager at the intersection of craft, code & AI.
+            </motion.h1>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="space-y-6"
-          >
-            <p className="text-base sm:text-lg text-neutral-600 dark:text-neutral-300 leading-relaxed max-w-2xl">
-              I’m <strong className="text-neutral-950 dark:text-white font-medium">Jimmy Arikawe</strong>. With 7+ years across fintech, cybersecurity, and enterprise systems — backed by an <span className="text-neutral-950 dark:text-white font-medium">MSc in Artificial Intelligence (Distinction)</span> — I lead products from zero-to-one strategy and interaction architecture to production code and human-in-the-loop AI.
-            </p>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+              className="space-y-6"
+            >
+              <p className="text-base sm:text-lg text-neutral-600 dark:text-neutral-300 leading-relaxed">
+                I’m <strong className="text-neutral-950 dark:text-white font-medium">Jimmy Arikawe</strong>. With 7+ years across fintech, cybersecurity, and enterprise systems — backed by an <span className="text-neutral-950 dark:text-white font-medium">MSc in Artificial Intelligence (Distinction)</span> — I lead products from zero-to-one strategy and interaction architecture to production code and human-in-the-loop AI.
+              </p>
 
             <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs font-mono-accent text-neutral-500 dark:text-neutral-400">
               <span className="flex items-center gap-1.5">
@@ -116,6 +117,7 @@ export default function HomePage() {
             </div>
           </motion.div>
         </div>
+      </div>
 
         {/* Right: Interactive holographic badge — ~1/5 of the viewport width on desktop */}
         <motion.div
