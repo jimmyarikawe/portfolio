@@ -97,7 +97,7 @@ export function CaseStudySection({
         className="fixed top-0 left-0 right-0 h-[2px] bg-neutral-950 dark:bg-white origin-left z-50 pointer-events-none"
       />
 
-      <article className="max-w-6xl mx-auto px-4 sm:px-8 lg:px-10 pt-8 sm:pt-12 md:pt-16 pb-24">
+      <article className="w-full max-w-[1800px] mx-auto px-4 sm:px-8 lg:px-10 pt-8 sm:pt-12 md:pt-16 pb-24">
         {/* Navigation & Action Header */}
         <div className="flex items-center justify-between gap-4 mb-8 sm:mb-12">
           <Link

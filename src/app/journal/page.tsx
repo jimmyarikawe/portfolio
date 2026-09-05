@@ -6,7 +6,7 @@ import { JournalCard } from "@/components/JournalCard";
 
 export default function JournalPage() {
   return (
-    <div className="max-w-6xl mx-auto px-4 sm:px-8 lg:px-10 pt-12 md:pt-16 space-y-12">
+    <div className="w-full max-w-[1800px] mx-auto px-4 sm:px-8 lg:px-10 pt-12 md:pt-16 space-y-12">
       {/* Header */}
       <div className="space-y-4 max-w-3xl">
         <motion.div

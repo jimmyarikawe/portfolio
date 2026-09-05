@@ -50,7 +50,7 @@ export function Header() {
         Skip to main content
       </a>
 
-      <div className="max-w-6xl mx-auto px-4 sm:px-8 lg:px-10">
+      <div className="w-full max-w-[1800px] mx-auto px-4 sm:px-8 lg:px-10">
         <div className="flex items-center justify-between gap-4 w-full">
           {/* Left: Logo */}
           <div className="pointer-events-auto shrink-0">

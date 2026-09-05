@@ -9,7 +9,7 @@ import { ServicesGrid } from "@/components/ServicesGrid";
 
 export default function AboutPage() {
   return (
-    <div className="max-w-6xl mx-auto px-4 sm:px-8 lg:px-10 pt-12 md:pt-16 space-y-28 md:space-y-40">
+    <div className="w-full max-w-[1800px] mx-auto px-4 sm:px-8 lg:px-10 pt-12 md:pt-16 space-y-28 md:space-y-40">
       {/* 1. HERO & CV SUMMARY */}
       <section className="space-y-12">
         <div className="space-y-4 max-w-3xl">
