@@ -3,7 +3,7 @@ import { ArrowLeft, ArrowUpRight } from "lucide-react";
 
 export default function NotFound() {
   return (
-    <div className="min-h-[70vh] flex items-center justify-center px-6 py-20">
+    <div className="min-h-[70vh] flex items-center justify-center px-4 sm:px-8 lg:px-10 py-20">
       <div className="max-w-md w-full editorial-card p-8 sm:p-10 rounded space-y-6 text-center">
         <div className="space-y-2">
           <span className="text-xs font-mono-accent text-neutral-400 dark:text-neutral-500 uppercase tracking-widest block">

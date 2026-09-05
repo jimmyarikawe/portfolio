@@ -36,7 +36,7 @@ export default function HomePage() {
         );
 
   return (
-    <div className="max-w-6xl mx-auto px-6 pt-12 md:pt-16 space-y-28 md:space-y-40">
+    <div className="max-w-6xl mx-auto px-4 sm:px-8 lg:px-10 pt-12 md:pt-16 space-y-28 md:space-y-40">
       {/* 1. HERO SECTION */}
       <section className="flex flex-col lg:flex-row lg:items-center gap-10 lg:gap-16">
         <div className="flex-1 space-y-8">

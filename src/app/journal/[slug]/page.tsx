@@ -50,7 +50,7 @@ export default async function SingleArticlePage({ params }: ArticlePageProps) {
   return (
     <>
       <ReadingProgressBar />
-      <article className="max-w-4xl mx-auto px-6 pt-12 md:pt-16">
+      <article className="max-w-4xl mx-auto px-4 sm:px-8 lg:px-10 pt-12 md:pt-16">
       {/* Back link */}
       <Link
         href="/journal"

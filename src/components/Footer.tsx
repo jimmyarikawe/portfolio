@@ -22,7 +22,7 @@ export function Footer() {
 
   return (
     <footer className="mt-28 md:mt-40 border-t border-black/5 dark:border-white/10 bg-[#F7F7F7] dark:bg-[#0E0E10] relative">
-      <div className="max-w-6xl mx-auto px-6 pt-20 pb-12">
+      <div className="max-w-6xl mx-auto px-4 sm:px-8 lg:px-10 pt-20 pb-12">
         {/* Main CTA Banner */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-end pb-16 border-b border-black/5 dark:border-white/10">
           <div className="lg:col-span-8 space-y-6">
