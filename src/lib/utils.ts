@@ -44,3 +44,21 @@ export function parseArticleContent(content: string): ArticleBlock[] {
 
   return blocks;
 }
+
+/**
+ * The single aspect ratio every project cover is framed in — the /work grid,
+ * the home page showcase and "more work" grid, the case-study hero, the
+ * gallery strip and the prev/next cards.
+ *
+ * It lives here because it previously did not: the grids and the hero used
+ * 16/10 while the two horizontal scrollers used 860/620, so the same cover was
+ * a different shape depending on which page you met it on. Import this rather
+ * than writing the class inline, so the ratio cannot drift apart again.
+ *
+ * Covers currently range from 1.387 to 1.778, and every frame pairs this with
+ * `object-contain` — so an image letterboxes onto `bg-frame` (which is
+ * theme-aware) instead of being cropped. `object-cover` would fill the frame
+ * edge to edge but would clip roughly 10-13% off the tallest and widest
+ * covers, which on a UI screenshot means cutting off real interface.
+ */
+export const MEDIA_FRAME = "aspect-16/10";

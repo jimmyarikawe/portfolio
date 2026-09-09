@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 import { ReadingProgressBar } from "@/components/ReadingProgressBar";
 import type { Project } from "@/data/projects";
+import { MEDIA_FRAME } from "@/lib/utils";
 
 interface CaseStudySectionProps {
   project: Project;
@@ -198,7 +199,7 @@ export function CaseStudySection({
             type="button"
             onClick={() => setActiveImageIndex(heroIndex)}
             data-cursor="Expand"
-            className={`${FRAME} aspect-16/10 w-full focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink`}
+            className={`${FRAME} ${MEDIA_FRAME} w-full focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink`}
           >
             <Image
               src={primaryHero}
@@ -272,6 +273,58 @@ export function CaseStudySection({
           </section>
         )}
 
+        {/* CHAPTER 04: ARTEFACTS — full width, natural aspect, captioned. */}
+        {project.figures && project.figures.length > 0 && (
+          <section className={SECTION}>
+            <p className={`mb-2 ${META}`}>04 / Systems &amp; Flows</p>
+            <h2 className={`mb-3 sm:mb-4 ${HEADING}`}>
+              Artefacts &amp; Decisions
+            </h2>
+
+            <div className="mt-6 flex flex-col gap-10 sm:gap-14">
+              {project.figures.map((figure) => (
+                <figure key={figure.src}>
+                  {/*
+                    Diagrams break out to the viewport edge; annotated screen
+                    sets stay in the column. Both keep their own ratio via
+                    `h-auto` on an intrinsically-sized image.
+                  */}
+                  <button
+                    type="button"
+                    onClick={() => openLightbox(figure.src, 0)}
+                    data-cursor="Expand"
+                    className={`block w-full overflow-hidden rounded-2xl bg-frame focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink wide:rounded-[24px] ${
+                      figure.wide
+                        ? "ml-[calc(50%-50vw)] w-screen rounded-none wide:ml-[calc(50%-50vw)] wide:w-screen wide:rounded-none"
+                        : ""
+                    }`}
+                  >
+                    <Image
+                      src={figure.src}
+                      alt={`${project.title} — ${figure.title}`}
+                      width={1920}
+                      height={1080}
+                      sizes={figure.wide ? "100vw" : "(max-width: 899px) 100vw, 860px"}
+                      loading="lazy"
+                      className="h-auto w-full"
+                    />
+                    <span className="sr-only">Expand {figure.title}</span>
+                  </button>
+
+                  <figcaption className="mt-3 sm:mt-3.5">
+                    <span className="block text-[15px] font-medium sm:text-[16px]">
+                      {figure.title}
+                    </span>
+                    <span className={`mt-1 block max-w-[68ch] ${BODY}`}>
+                      {figure.caption}
+                    </span>
+                  </figcaption>
+                </figure>
+              ))}
+            </div>
+          </section>
+        )}
+
         {/* CHAPTER 04: THE EXPERIENCE & SOLUTION WALKTHROUGH */}
         <section className={SECTION}>
           <p className={`mb-2 ${META}`}>04 / Core Solutions</p>
@@ -311,7 +364,7 @@ export function CaseStudySection({
                 type="button"
                 onClick={() => openLightbox(img, idx)}
                 data-cursor="Expand"
-                className={`${FRAME} aspect-860/620 w-[82vw] shrink-0 snap-start focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink sm:w-[80vw] wide:w-215`}
+                className={`${FRAME} ${MEDIA_FRAME} w-[82vw] shrink-0 snap-start focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink sm:w-[80vw] wide:w-215`}
               >
                 <Image
                   src={img}
@@ -396,8 +449,9 @@ export function CaseStudySection({
         <section className={`${SECTION} border-t border-rule pt-10 sm:pt-12`}>
           <h2 className={HEADING}>Interested in working together?</h2>
           <p className={`mt-2 max-w-[52ch] ${BODY}`}>
-            I&apos;m open to Senior Product Designer roles, and happy to walk through
-            the decisions behind this project in more detail.
+            I&apos;m open to Senior Product Design and Design Engineering roles,
+            and happy to walk through the decisions behind this project in more
+            detail.
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
             <Link href="/contact" className="btn">
@@ -432,7 +486,7 @@ export function CaseStudySection({
                 >
                   <span className={`block ${META}`}>{label}</span>
 
-                  <span className={`${FRAME} mt-3 aspect-16/10 w-full`}>
+                  <span className={`${FRAME} ${MEDIA_FRAME} mt-3 w-full`}>
                     <Image
                       src={target.coverImage}
                       alt={target.title}

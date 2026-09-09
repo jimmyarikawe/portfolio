@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import type { Project } from "@/data/projects";
+import { MEDIA_FRAME } from "@/lib/utils";
 
 interface ProjectShowcaseProps {
   project: Project;
@@ -51,7 +52,7 @@ export function ProjectShowcase({ project, eager = false }: ProjectShowcaseProps
           return (
             <figure
               key={src}
-              className={`relative aspect-[860/620] w-[82vw] shrink-0 snap-start overflow-hidden rounded-2xl bg-frame sm:w-[80vw] sm:rounded-[20px] wide:w-215 wide:rounded-[30px] ${
+              className={`relative ${MEDIA_FRAME} w-[82vw] shrink-0 snap-start overflow-hidden rounded-2xl bg-frame sm:w-[80vw] sm:rounded-[20px] wide:w-215 wide:rounded-[30px] ${
                 isCover || open ? "" : "wide:hidden"
               }`}
             >

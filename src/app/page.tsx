@@ -1,11 +1,11 @@
 import Link from "next/link";
 import Image from "next/image";
 import { projects } from "@/data/projects";
-import { articles } from "@/data/articles";
 import { ProjectShowcase } from "@/components/ProjectShowcase";
 import { AvailabilityInterlude } from "@/components/AvailabilityInterlude";
 import { ExperienceList } from "@/components/ExperienceList";
 import { StackList } from "@/components/StackList";
+import { MEDIA_FRAME } from "@/lib/utils";
 
 /*
  * Ordered for a reader who is deciding, in under a minute, whether to keep
@@ -38,10 +38,11 @@ export default function HomePage() {
         </h1>
 
         <p className="mt-3.5 max-w-[54ch] text-[17px] leading-6 text-muted sm:mt-4.5 sm:text-[20px] sm:leading-7 wide:mt-6.25 wide:text-[24px] wide:leading-8">
-          I&apos;m <span className="text-ink">Jimmy Arikawe</span>, a Senior
-          Product Designer. Seven years across cross-border payments, enterprise
-          operations and AI — and I write the production front-end alongside the
-          engineers shipping it.
+          I&apos;m <span className="text-ink">Jimmy Arikawe</span> — a Senior
+          Product Designer and design engineer. Seven years across cross-border
+          payments, enterprise operations and AI. I led product at{" "}
+          <span className="text-ink">Omits</span>, and I still write the
+          front-end that ships.
         </p>
 
         <div className="mt-7 flex flex-wrap gap-3 sm:mt-8">
@@ -108,7 +109,9 @@ export default function HomePage() {
               data-cursor="View case study ↗"
               className="group block"
             >
-              <span className="relative block aspect-16/10 w-full overflow-hidden rounded-2xl bg-frame">
+              <span
+                className={`relative block ${MEDIA_FRAME} w-full overflow-hidden rounded-2xl bg-frame`}
+              >
                 <Image
                   src={project.coverImage}
                   alt={`${project.title} — ${project.tagline}`}
@@ -166,9 +169,6 @@ export default function HomePage() {
           >
             See the code on GitHub
           </a>
-          <Link href="/journal" className="btn btn-outline">
-            Read the writing
-          </Link>
         </div>
       </section>
 
@@ -183,38 +183,7 @@ export default function HomePage() {
         </div>
       </div>
 
-      {/* 7. WRITING */}
-      <section className="mt-16 sm:mt-20 wide:mt-24">
-        <div className="mb-3 flex items-baseline justify-between gap-4 sm:mb-4">
-          <h2 className="text-[17px] font-medium sm:text-[18px] wide:text-[20px]">
-            Writing
-          </h2>
-          <Link
-            href="/journal"
-            className="text-[15px] text-muted transition-colors hover:text-ink sm:text-[16px]"
-          >
-            All writing →
-          </Link>
-        </div>
-
-        {articles.slice(0, 3).map((article) => (
-          <Link
-            key={article.slug}
-            href={`/journal/${article.slug}`}
-            data-cursor="Read article ↗"
-            className="group mb-5 block wide:mb-6.25"
-          >
-            <p className="text-[16px] leading-5.5 transition-colors group-hover:text-muted sm:text-[17px] wide:text-[20px] wide:leading-normal">
-              {article.title}
-            </p>
-            <p className="mt-1 text-[13px] font-medium text-dim sm:mt-1.5">
-              {article.category} · {article.date} · {article.readTime}
-            </p>
-          </Link>
-        ))}
-      </section>
-
-      {/* 8. CLOSING CTA */}
+      {/* 7. CLOSING CTA */}
       <AvailabilityInterlude />
     </div>
   );

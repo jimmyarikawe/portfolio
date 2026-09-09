@@ -92,10 +92,13 @@ export default function AboutPage() {
           </p>
           <p>
             Today I&apos;m a{" "}
-            <span className="text-ink">Senior Product Designer</span> at{" "}
-            <span className="text-ink">Radical Company</span>, having previously
-            led product design at <span className="text-ink">Omits</span> and
-            designed for enterprise technology clients at{" "}
+            <span className="text-ink">
+              Senior Product Designer and design engineer
+            </span>{" "}
+            at <span className="text-ink">Radical Company</span>. Before that I
+            was <span className="text-ink">Product Lead at Omits</span>, owning
+            strategy and design for a cross-border payments platform across web,
+            iOS and Android, and designed for enterprise technology clients at{" "}
             <span className="text-ink">Pentagram</span>. I still write the
             front-end.
           </p>

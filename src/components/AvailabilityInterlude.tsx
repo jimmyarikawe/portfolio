@@ -40,8 +40,8 @@ export function AvailabilityInterlude() {
           </svg>
         </span>
 
-        <h2 className="font-display max-w-[18ch] text-balance text-[32px] font-bold leading-9 text-white sm:text-[48px] sm:leading-13 wide:max-w-none wide:text-[80px] wide:leading-20">
-          Open to Senior Product Designer roles.
+        <h2 className="font-display max-w-[22ch] text-balance text-[32px] font-bold leading-9 text-white sm:text-[48px] sm:leading-13 wide:max-w-none wide:text-[80px] wide:leading-20">
+          Open to Senior Product Design and Design Engineering roles.
         </h2>
 
         <p className="mt-3 max-w-[46ch] text-[16px] font-medium leading-5.75 text-[#7E7E7E] sm:mt-4 sm:text-[18px] sm:leading-6.5 wide:mt-5 wide:text-[28px] wide:leading-9.5">

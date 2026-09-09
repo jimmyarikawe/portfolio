@@ -11,7 +11,6 @@ import { TypewriterLogo } from "@/components/TypewriterLogo";
 const navLinks = [
   { name: "Work", href: "/work" },
   { name: "About", href: "/about" },
-  { name: "Journal", href: "/journal" },
   { name: "Résumé", href: "/resume" },
 ];
 

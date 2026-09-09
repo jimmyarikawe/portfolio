@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { projects } from "@/data/projects";
+import { MEDIA_FRAME } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "Work — Jimmy Arikawe",
@@ -39,7 +40,9 @@ export default function WorkPage() {
             data-cursor="View case study ↗"
             className="group block"
           >
-            <span className="relative block aspect-16/10 w-full overflow-hidden rounded-2xl bg-frame wide:rounded-3xl">
+            <span
+              className={`relative block ${MEDIA_FRAME} w-full overflow-hidden rounded-2xl bg-frame wide:rounded-3xl`}
+            >
               <Image
                 src={project.coverImage}
                 alt={`${project.title} — ${project.tagline}`}
@@ -86,7 +89,8 @@ export default function WorkPage() {
           Want the detail behind any of these?
         </h2>
         <p className="mt-2 max-w-[52ch] text-[16px] leading-6 text-soft sm:text-[17px] wide:text-[18px] wide:leading-7">
-          I&apos;m open to Senior Product Designer roles, and happy to walk
+          I&apos;m open to Senior Product Design and Design Engineering roles,
+          and happy to walk
           through the research, the trade-offs and the things that didn&apos;t
           work.
         </p>

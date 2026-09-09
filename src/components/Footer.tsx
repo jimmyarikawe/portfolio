@@ -10,7 +10,6 @@ import { socials } from "@/data/profile";
 const navColumn = [
   { name: "Work", href: "/work" },
   { name: "About", href: "/about" },
-  { name: "Journal", href: "/journal" },
   { name: "Résumé", href: "/resume" },
   { name: "Contact", href: "/contact" },
 ];
@@ -28,7 +27,8 @@ export function Footer() {
               Jimmy Arikawe
             </p>
             <p className="mt-1.5 text-[15px] leading-6 text-muted">
-              Senior Product Designer, United Kingdom. Open to new roles.
+              Senior Product Designer &amp; design engineer, United Kingdom.
+              Open to new roles.
             </p>
             <a
               href="mailto:hi@jimmyarikawe.com"

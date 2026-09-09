@@ -8,7 +8,7 @@ import { ImageResponse } from "next/og";
  */
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
-export const alt = "Jimmy Arikawe — Senior Product Designer";
+export const alt = "Jimmy Arikawe — Senior Product Designer & Design Engineer";
 
 export default function OpengraphImage() {
   return new ImageResponse(
@@ -46,12 +46,12 @@ export default function OpengraphImage() {
             style={{
               display: "flex",
               marginTop: 18,
-              fontSize: 38,
+              fontSize: 34,
               color: "#2D2D2D",
               letterSpacing: "-1px",
             }}
           >
-            Senior Product Designer
+            Senior Product Designer &amp; Design Engineer
           </div>
           <div
             style={{
@@ -62,7 +62,7 @@ export default function OpengraphImage() {
               lineHeight: 1.4,
             }}
           >
-            Fintech, enterprise operations and AI products — designed and built.
+            Fintech, enterprise operations and AI — designed, led and built.
           </div>
         </div>
 

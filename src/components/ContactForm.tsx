@@ -302,8 +302,8 @@ export function ContactForm() {
         </h3>
 
         <p className="mt-2 text-[16px] leading-6 text-soft sm:text-[17px] wide:leading-7">
-          I&apos;m open to Senior Product Designer roles in the UK and
-          remote, and to selective contract work. Happy to walk through any
+          I&apos;m open to Senior Product Design and Design Engineering roles
+          in the UK and remote, and to selective contract work. Happy to walk through any
           project in more detail.
         </p>
 

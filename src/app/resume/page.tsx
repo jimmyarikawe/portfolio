@@ -10,7 +10,7 @@ import {
 import { projects } from "@/data/projects";
 
 export const metadata: Metadata = {
-  title: "Résumé — Jimmy Arikawe, Senior Product Designer",
+  title: "Résumé — Jimmy Arikawe, Senior Product Designer & Design Engineer",
   description:
     "Seven years designing fintech, enterprise and AI products. Full CV: experience, selected work, skills and education. Available as a PDF download.",
 };
@@ -51,7 +51,7 @@ export default function ResumePage() {
               Résumé
             </h1>
             <p className="mt-3.5 text-[17px] leading-6 text-muted sm:mt-4.5 sm:text-[20px] sm:leading-7">
-              Senior Product Designer · United Kingdom
+              Senior Product Designer &amp; Design Engineer · United Kingdom
             </p>
           </div>
 
@@ -73,7 +73,7 @@ export default function ResumePage() {
           Jimmy Arikawe
         </h1>
         <p className="mt-1 text-[10pt] text-black">
-          Senior Product Designer · United Kingdom ·{" "}
+          Senior Product Designer &amp; Design Engineer · United Kingdom ·{" "}
           {CONTACT.map((c) => c.label).join(" · ")}
         </p>
       </div>
@@ -82,13 +82,15 @@ export default function ResumePage() {
       <section className="mt-12 sm:mt-16 print:mt-5">
         <h2 className={SECTION_LABEL}>Summary</h2>
         <p className="mt-3 text-[17px] leading-6.5 text-body sm:text-[19px] sm:leading-7 print:mt-2 print:text-[10pt] print:leading-[1.4] print:text-black">
-          Senior Product Designer with seven years across fintech, enterprise
-          operations and AI products. I take ambiguous problems through
-          research, interaction design and high-fidelity prototyping to shipped
-          software — and write the production front-end alongside the engineers
-          building it. MSc Artificial Intelligence (Distinction); I prototype
-          against live models rather than mocking them, which is how latency,
-          failure states and human-in-the-loop handoffs get designed properly.
+          Senior Product Designer and design engineer with seven years across
+          fintech, enterprise operations and AI. I take ambiguous problems
+          through research, interaction design and prototyping to shipped
+          software, and write the production front-end alongside the engineers
+          building it. Product Lead at Omits, where I owned strategy and design
+          for a cross-border payments platform across web, iOS and Android. MSc
+          Artificial Intelligence (Distinction); I prototype against live models
+          rather than mocking them, which is how latency, failure states and
+          human-in-the-loop handoffs get designed properly.
         </p>
       </section>
 
