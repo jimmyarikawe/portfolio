@@ -1,0 +1,51 @@
+/**
+ * Cloudflare Worker config, committed on purpose.
+ *
+ * Previously the CI deploy step ran a bare `npx wrangler deploy` with no config
+ * in the repo, so wrangler fell into its first-run setup wizard, answered its
+ * own prompts with non-interactive defaults, and generated this file inside the
+ * throwaway build container. The generated config took its name from
+ * package.json ("jimmy-portfolio") while Workers Builds deploys to the Worker
+ * configured in the dashboard ("portfolio") — so the WORKER_SELF_REFERENCE
+ * service binding pointed at a Worker that does not exist, and the deploy
+ * failed with error 10143.
+ *
+ * `name` must therefore match the Worker name in the Cloudflare dashboard.
+ */
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "portfolio",
+  "main": ".open-next/worker.js",
+  "compatibility_date": "2026-09-08",
+  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+
+  "assets": {
+    "directory": ".open-next/assets",
+    "binding": "ASSETS"
+  },
+
+  /*
+   * OpenNext calls the Worker back through this binding. The service name has
+   * to be the Worker's own name — that is the exact mismatch that broke the
+   * last deploy.
+   */
+  "services": [
+    {
+      "binding": "WORKER_SELF_REFERENCE",
+      "service": "portfolio"
+    }
+  ],
+
+  /*
+   * next/image is the only reason this site needs a runtime at all: every route
+   * is static or SSG. Without this binding the images would have to ship
+   * unoptimised, and the case-study galleries are the heaviest thing here.
+   */
+  "images": {
+    "binding": "IMAGES"
+  },
+
+  "observability": {
+    "enabled": true
+  }
+}
