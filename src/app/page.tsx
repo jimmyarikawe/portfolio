@@ -19,14 +19,6 @@ import { MEDIA_FRAME } from "@/lib/utils";
 const featured = projects.filter((p) => p.featured);
 const rest = projects.filter((p) => !p.featured);
 
-const PROOF = [
-  "Omits",
-  "Pentagram",
-  "Radical Company",
-  "Recyclan",
-  "MSc Artificial Intelligence, Distinction",
-];
-
 export default function HomePage() {
   return (
     <div className="site-col">
@@ -55,24 +47,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 2. PROOF BAR — borrowed credibility, in one glance. */}
-      <section
-        aria-label="Background"
-        className="mt-10 border-t border-rule pt-5 sm:mt-12 sm:pt-6"
-      >
-        <ul className="flex flex-wrap items-center gap-x-5 gap-y-2 sm:gap-x-7">
-          {PROOF.map((item) => (
-            <li
-              key={item}
-              className="text-[14px] font-medium text-dim sm:text-[15px]"
-            >
-              {item}
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      {/* 3. FEATURED WORK */}
+      {/* 2. FEATURED WORK */}
       <section className="mt-20 sm:mt-24 wide:mt-30">
         <div className="mb-3.5 flex items-baseline justify-between gap-4 sm:mb-4.5 wide:mb-6.5">
           <h2 className="text-[17px] font-medium sm:text-[18px] wide:text-[20px]">
@@ -82,7 +57,7 @@ export default function HomePage() {
             href="/work"
             className="text-[15px] text-muted transition-colors hover:text-ink sm:text-[16px]"
           >
-            All seven projects →
+            All six projects →
           </Link>
         </div>
 
@@ -95,7 +70,7 @@ export default function HomePage() {
         ))}
       </section>
 
-      {/* 4. THE REST — present, indexed, but not competing for the same weight. */}
+      {/* 3. THE REST — present, indexed, but not competing for the same weight. */}
       <section className="mt-4 sm:mt-6">
         <h2 className="mb-4 text-[17px] font-medium sm:mb-5 sm:text-[18px] wide:text-[20px]">
           More work
@@ -126,9 +101,7 @@ export default function HomePage() {
                 <span className="text-[16px] font-medium leading-6 transition-colors group-hover:text-muted sm:text-[17px]">
                   {project.title}
                 </span>
-                <span className="shrink-0 text-[13px] font-medium text-faint">
-                  {project.category}
-                </span>
+                <span className="badge shrink-0">{project.category}</span>
               </span>
 
               <span className="mt-1 block text-[15px] leading-6 text-soft">
@@ -139,7 +112,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 5. DESIGNER WHO CODES — the differentiator, made concrete. */}
+      {/* 4. DESIGNER WHO CODES — the differentiator, made concrete. */}
       <section className="mt-20 border-t border-rule pt-10 sm:mt-24 sm:pt-12 wide:mt-30">
         <h2 className="text-[17px] font-medium sm:text-[18px] wide:text-[20px]">
           I ship the front-end too
@@ -172,7 +145,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 6. EXPERIENCE + STACK */}
+      {/* 5. EXPERIENCE + STACK */}
       <div className="mt-16 flex flex-col sm:mt-20 sm:flex-row sm:justify-between sm:gap-6 wide:mt-24">
         <div className="sm:w-[62%] wide:w-145">
           <ExperienceList />
@@ -183,7 +156,7 @@ export default function HomePage() {
         </div>
       </div>
 
-      {/* 7. CLOSING CTA */}
+      {/* 6. CLOSING CTA */}
       <AvailabilityInterlude />
     </div>
   );

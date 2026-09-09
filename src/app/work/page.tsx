@@ -27,7 +27,7 @@ export default function WorkPage() {
         </h1>
 
         <p className="mt-3.5 max-w-[46ch] text-[17px] leading-6 text-muted sm:mt-4.5 sm:text-[20px] sm:leading-7 wide:mt-6.25 wide:text-[24px] wide:leading-8">
-          Seven products across payments, enterprise operations, AI and events.
+          Six products across payments, enterprise operations, AI and events.
           Each case study covers the problem, the decisions, and what shipped.
         </p>
       </section>
@@ -57,9 +57,7 @@ export default function WorkPage() {
               <span className="text-[17px] font-medium leading-6 transition-colors group-hover:text-muted sm:text-[18px] wide:text-[20px]">
                 {project.title}
               </span>
-              <span className="shrink-0 text-[13px] font-medium text-faint">
-                {project.category}
-              </span>
+              <span className="badge shrink-0">{project.category}</span>
             </span>
 
             <span className="mt-1.5 block text-[15px] leading-6 text-soft sm:text-[16px]">

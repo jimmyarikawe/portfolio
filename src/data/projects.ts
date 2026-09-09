@@ -259,7 +259,179 @@ export const projects: Project[] = [
   },
   {
     "id": "03",
-    "featured": true,
+    "slug": "circulaops",
+    "title": "Circula",
+    "tagline": "Operations, Inventory & Impact Reporting for the Circular Economy",
+    "category": "Operational Software",
+    "categories": [
+      "Circular Economy",
+      "Enterprise SaaS",
+      "Systems Design",
+      "Data Visualisation"
+    ],
+    "services": "Product Strategy, Information Architecture, Interaction Design, Design System",
+    "client": "Circula",
+    "engagement": "Co-founder · Circula",
+    "year": "2024–2025",
+    "role": "Co-founder & Product Designer",
+    "duration": "10 Months",
+    "coverImage": "/images/work/circulaops/00-impact-report.png",
+    "heroImage": "/images/work/circulaops/00-impact-report.png",
+    "description": "Informed data and analytics for the circular economy. Circula gives recyclers and material processors one system for the whole loop — material in, operations, inventory, invoicing — and turns the record it produces into an environmental and social impact report.",
+    "goal": "Give circular-economy businesses a single operating record for material, money and impact, so that reporting is a by-product of doing the work rather than a separate reconstruction after it.",
+    "outcome": "Shipped a seven-module platform tracking six material streams from intake to sale, with multi-currency invoicing across four currencies and an impact report generated from the same operational data.",
+    "principles": [
+      {
+        "title": "Weigh everything, in kilograms",
+        "description": "Material is the unit the business actually runs on. Every screen — dashboard, operations, inventory, reports — measures in kilograms first, and money second, because that is the order operators think in."
+      },
+      {
+        "title": "Waste is a first-class output",
+        "description": "Recording an operation captures what was produced and what was wasted, side by side. A recovery rate is only credible if the loss was logged at the same moment as the gain, not estimated later."
+      },
+      {
+        "title": "Impact is a read, not an entry",
+        "description": "Nobody types their CO₂ figure in. Environmental and social impact are derived from operations already recorded, which is what makes the report defensible to a funder or a regulator."
+      }
+    ],
+    "metrics": [
+      {
+        "label": "Material Streams Tracked",
+        "value": "6"
+      },
+      {
+        "label": "Invoicing Currencies",
+        "value": "4"
+      },
+      {
+        "label": "Operational Modules",
+        "value": "7"
+      }
+    ],
+    "overview": "Recycling and material-recovery businesses in emerging markets run on paper and memory. Material arrives from informal collectors, gets sorted and baled, and leaves as a sale — but the record of what came in, what was recovered, what was lost, and who was paid lives across notebooks, WhatsApp and a spreadsheet nobody trusts. The same businesses are then asked by funders, offtakers and regulators to prove environmental and social impact they have no reliable data to support. Circula was built to close that gap from the operational end.",
+    "challenge": "The hard part was not building an inventory tool. It was that one physical material has to stay identifiable through a chain of transformations. A kilogram of mixed plastic arrives from a vendor, becomes part of a sorting operation, splits into recovered PET and residual waste, and only some of it becomes sellable stock against an invoice. Model that too loosely and the recovery rate is fiction; model it too strictly and a yard supervisor with a phone and no patience will simply not use it. Both failure modes end in the same place: a business that still cannot prove what it did.",
+    "solution": "I anchored the whole system on a single object — the inventory record — and made every module a different view of its lifecycle. Material is logged in with vendor, material type, state, quantity and price. An operation consumes one or more inventory records and returns two numbers that must both be entered: quantity produced and waste produced, with a 'ready for sale' flag that promotes output into sellable stock. Inventory splits into raw materials, ready for sale and waste as tabs on one page rather than three separate screens. Invoices draw on the same records, in the currency the trade was actually done in. The impact report is a projection of everything above, expressed in the units its audience uses.",
+    "designSystem": "A restrained system carrying a lot of density: white ground, near-black chrome, and a single green accent reserved for the brand and for positive movement. Material streams carry the only other colour in the product — six fixed hues used consistently across the distribution bar, the tables and the reports, so glass is the same colour everywhere it appears. Tables share one row anatomy and one set of status pills across operations, inventory, invoices and contacts.",
+    "gallery": [
+      "/images/work/circulaops/01-dashboard.png",
+      "/images/work/circulaops/02-operations.png",
+      "/images/work/circulaops/03-new-operation.png",
+      "/images/work/circulaops/04-inventory.png",
+      "/images/work/circulaops/05-inventory-in.png",
+      "/images/work/circulaops/06-invoices.png",
+      "/images/work/circulaops/07-contacts.png",
+      "/images/work/circulaops/08-login.jpg"
+    ],
+    "features": [
+      {
+        "title": "Operations That Record Loss",
+        "description": "Logging an operation asks for input information before it starts and output information after it finishes — quantity produced and waste produced as two required fields, with sub-operations like sorting tracked as ongoing until closed."
+      },
+      {
+        "title": "Inventory in Three States",
+        "description": "Raw materials, ready for sale and waste are tabs on one inventory page, so the same physical stock is legible at whatever stage it has reached without navigating to a different part of the product."
+      },
+      {
+        "title": "Material Distribution at a Glance",
+        "description": "Glass, paper and cardboard, plastics, metals, e-wastes and rubber share one fixed colour scale, shown as a single distribution bar on both operations and inventory so composition reads the same way in either context."
+      },
+      {
+        "title": "Multi-Currency Invoicing",
+        "description": "Balances are held per currency — naira, dollars, pounds, euros — with awaiting, overdue and paid counts against each, because these businesses buy locally in naira and sell to offtakers abroad."
+      },
+      {
+        "title": "Impact Report as an Output",
+        "description": "Materials recycled, recovery rate, CO₂ equivalent avoided, energy saved and landfill space avoided — each translated into a plain-language equivalent — alongside social impact: direct and indirect jobs created, and representation of women and youth."
+      }
+    ],
+    "takeaways": "The insight that shaped the product was that impact reporting fails at the point of data entry, not at the point of reporting. Every organisation in this sector can produce a sustainability report; almost none can defend the numbers in it, because the numbers were reconstructed months later from records that were never designed to support them. Making waste a required field alongside output was the single most consequential decision in the system — it is mildly annoying at the moment of entry and it is the only reason the recovery rate downstream means anything. Designing for that trade-off, rather than for the report itself, is what I would carry into any measurement product."
+  },
+  {
+    "id": "04",
+    "slug": "voxaid",
+    "title": "VoxAid",
+    "tagline": "Conversational AI Speech Technology & Voice Modulation Interface",
+    "category": "AI & Healthcare",
+    "categories": [
+      "AI & Healthcare",
+      "Interface Design",
+      "Interaction Design",
+      "Voice AI"
+    ],
+    "services": "User Research, Interface Design, Interaction Design, Voice Modulation UX",
+    "client": "VoxAid AI Labs",
+    "year": "2023–2024",
+    "role": "Lead Product Designer",
+    "duration": "6 Months",
+    "coverImage": "/images/work/voxaid/10.png",
+    "heroImage": "/images/work/voxaid/10.png",
+    "description": "VoxAid is a voice-first AI application combining speech recognition, natural language processing (NLP), text-to-speech, and an AI voice modulation engine to deliver a conversational, highly customizable user experience.",
+    "goal": "Build an intuitive multi-modal voice AI interface that makes complex auditory modulation and natural conversation feel instant and accessible.",
+    "outcome": "Pioneered a real-time vocal feedback interface with under 200ms latency, achieving an 85% task completion rate on complex multi-turn commands.",
+    "principles": [
+      {
+        "title": "Multimodal Redundancy",
+        "description": "Always pair vocal inputs with crisp on-screen feedback so users never guess whether the AI heard or understood."
+      },
+      {
+        "title": "Zero Acoustic Deadweight",
+        "description": "Keep latency low through streaming speech-to-text tokenization and immediate UI status pulses."
+      },
+      {
+        "title": "Human-Centric Soundscapes",
+        "description": "Design acoustic parameters that mimic human inflection, cadence, and empathy."
+      }
+    ],
+    "metrics": [
+      {
+        "label": "Response Latency",
+        "value": "< 200ms"
+      },
+      {
+        "label": "Task Success Rate",
+        "value": "85%"
+      },
+      {
+        "label": "User Adoption",
+        "value": "45K+"
+      }
+    ],
+    "overview": "Voice AI systems often fail because users feel disconnected from the black-box audio pipeline. VoxAid bridges this gap by combining real-time spectral visualization with responsive conversation flows.",
+    "challenge": "Designing a reliable experience for non-deterministic speech recognition where accents, audio jitter, and ambient noise create uncertainty.",
+    "solution": "Built an interactive audio waveform HUD with real-time confidence scoring, instant rollback triggers, and customizable voice avatars.",
+    "designSystem": "Dark-mode optimized UI with neon audio frequency indicators, fluid dynamic typography, and minimal cognitive load controls.",
+    "gallery": [
+      "/images/work/voxaid/10.png",
+      "/images/work/voxaid/hero-in-hand.png",
+      "/images/work/voxaid/01.png",
+      "/images/work/voxaid/02.png",
+      "/images/work/voxaid/03.png",
+      "/images/work/voxaid/04.png",
+      "/images/work/voxaid/05.png",
+      "/images/work/voxaid/06.png",
+      "/images/work/voxaid/07.png",
+      "/images/work/voxaid/08.png",
+      "/images/work/voxaid/09.png",
+      "/images/work/voxaid/11.png"
+    ],
+    "features": [
+      {
+        "title": "Real-time Spectral Feedback",
+        "description": "Live visualizer illustrating input frequency levels and AI synthesis confidence."
+      },
+      {
+        "title": "Multi-turn Conversational Memory",
+        "description": "Maintains task context across complex multi-branch requests without requiring repetitive trigger words."
+      },
+      {
+        "title": "Dynamic Waveform Feedback",
+        "description": "Immediate visual biofeedback communicating speech recognition accuracy and processing states."
+      }
+    ],
+    "takeaways": "Voice interfaces succeed when they provide transparent visual feedback for auditory inputs. Blending sound and screen creates confidence in conversational AI."
+  },
+  {
+    "id": "05",
     "slug": "eventspad",
     "title": "Eventspad",
     "tagline": "End-to-End Event, Guest & Secure Check-In Operating System",
@@ -278,7 +450,7 @@ export const projects: Project[] = [
     "duration": "4 Months",
     "liveUrl": "https://eventspad.com",
     "coverImage": "/images/work/eventspad/cover.png",
-    "heroImage": "/images/work/eventspad/02-seating-floorplan.png",
+    "heroImage": "/images/work/eventspad/cover.png",
     "description": "Eventspad is an event operating system that carries organisers from the first invitation to the final check-in — guest lists, RSVPs, seating, secure QR passes, and sub-second door validation held in a single synchronised platform.",
     "goal": "Collapse the spreadsheet, printed card, and clipboard workflow into one system where every guest record, seat assignment, and QR pass stays in sync from invitation to door.",
     "outcome": "Shipped the full guest lifecycle: a three-step event wizard, a drag-and-drop 2D floor planner, three-channel invitations, an offline-capable door scanner, and an attendance funnel — priced per guest with no subscription.",
@@ -360,166 +532,6 @@ export const projects: Project[] = [
     "takeaways": "Owning the whole lifecycle is what makes the individual features work. Seating is only trustworthy because the pass reads from the same record; analytics are only honest because the door writes back to it. The harder design problem was not any single screen but keeping one guest record coherent across an organiser's laptop, a guest's browser, and an usher's phone on a venue's failing Wi-Fi."
   },
   {
-    "id": "04",
-    "slug": "circulaops",
-    "title": "CirculaOps",
-    "tagline": "Enterprise AI Circular Supply Chain & Operational Telemetry Platform",
-    "category": "Operational AI",
-    "categories": [
-      "Operational AI",
-      "Enterprise SaaS",
-      "Systems Design",
-      "Data Visualization"
-    ],
-    "services": "User Research, Design Leadership, Product Strategy, Systems Architecture",
-    "client": "CirculaOps",
-    "year": "2024–2025",
-    "role": "Co-founder & Product Designer",
-    "engagement": "Co-founder · CirculaOps",
-    "duration": "10 Months",
-    "coverImage": "/images/work/circulaops/08.png",
-    "heroImage": "/images/work/circulaops/02.png",
-    "description": "CirculaOps orchestrates complex circular supply chains, material traceability, and ESG regulatory compliance across collection networks, sorting centers, and processing plants.",
-    "goal": "Unify fragmented weighbridge IoT telemetry, sorting operations, and international ESG chain-of-custody compliance into a single operational cockpit.",
-    "outcome": "Increased operational throughput by +42%, slashed compliance audit preparation by 70%, and achieved 98% plant floor adoption across processing centers.",
-    "principles": [
-      {
-        "title": "Rugged Ergonomics",
-        "description": "High-contrast touch targets optimized for high-dust, high-speed tablet environments with intermittent connectivity."
-      },
-      {
-        "title": "Disciplined Color States",
-        "description": "Reserve color exclusively for operational severity (Normal, Warning, Critical) to eliminate visual fatigue across 12-hour shifts."
-      },
-      {
-        "title": "Audit-Ready Transparency",
-        "description": "Immutable material chain-of-custody graphs exportable with 1 click for global environmental compliance directives."
-      }
-    ],
-    "metrics": [
-      {
-        "label": "Operational Throughput",
-        "value": "+42%"
-      },
-      {
-        "label": "Compliance Audit Time",
-        "value": "-70%"
-      },
-      {
-        "label": "Plant Floor Adoption",
-        "value": "98%"
-      }
-    ],
-    "overview": "Managing circular economy supply chains requires tracking millions of material assets across fragmented processing facilities, remote weighbridges, and stringent international environmental compliance standards. CirculaOps unifies operational telemetry, IoT weight verification, and chain-of-custody data into an actionable digital cockpit.",
-    "challenge": "Plant floor operators work in fast-paced, high-dust environments with intermittent connectivity, while global enterprise buyers and compliance auditors need immutable, audit-ready data. The platform had to bridge the divide between rugged physical data capture and high-level executive analytics.",
-    "solution": "Architected a multi-tiered design system featuring high-contrast operational modes for plant floor tablets, rapid barcode/weighbridge data ingestion, automated anomaly detection alerts, and one-click ESG regulatory reporting.",
-    "designSystem": "Strictly disciplined color tokens where color is reserved exclusively for operational states (Normal, Warning, Critical) to prevent visual fatigue in high-density data environments.",
-    "gallery": [
-      "/images/work/circulaops/08.png",
-      "/images/work/circulaops/02.png",
-      "/images/work/circulaops/07.png",
-      "/images/work/circulaops/06.png",
-      "/images/work/circulaops/03.png",
-      "/images/work/circulaops/04.png",
-      "/images/work/circulaops/05.png",
-      "/images/work/circulaops/09.png",
-      "/images/work/circulaops/10.png"
-    ],
-    "features": [
-      {
-        "title": "Material Traceability Graph",
-        "description": "Interactive node graph visualizing asset movements, bottleneck choke points, and custody handoffs in real-time."
-      },
-      {
-        "title": "Predictive Equipment Diagnostics",
-        "description": "Machine learning models predicting sorting line downtime and maintenance intervals before failures occur."
-      },
-      {
-        "title": "Automated Regulatory Audits",
-        "description": "Instant export of certified chain-of-custody documentation compliant with international environmental directives."
-      }
-    ],
-    "takeaways": "Designing enterprise systems for physical operations requires spending time on the ground with operators. True simplicity in high-stakes environments eliminates error rates and saves millions in operational waste."
-  },
-  {
-    "id": "05",
-    "slug": "voxaid",
-    "title": "VoxAid",
-    "tagline": "Conversational AI Speech Technology & Voice Modulation Interface",
-    "category": "AI & Healthcare",
-    "categories": [
-      "AI & Healthcare",
-      "Interface Design",
-      "Interaction Design",
-      "Voice AI"
-    ],
-    "services": "User Research, Interface Design, Interaction Design, Voice Modulation UX",
-    "client": "VoxAid AI Labs",
-    "year": "2023–2024",
-    "role": "Lead Product Designer",
-    "duration": "6 Months",
-    "coverImage": "/images/work/voxaid/10.png",
-    "heroImage": "/images/work/voxaid/hero-mockup.png",
-    "description": "VoxAid is a voice-first AI application combining speech recognition, natural language processing (NLP), text-to-speech, and an AI voice modulation engine to deliver a conversational, highly customizable user experience.",
-    "goal": "Transform voice into a primary, emotionally expressive productivity interface with low-latency synthetic modulation.",
-    "outcome": "Designed and shipped 60+ screen mobile app ecosystem with sub-250ms latency and 20+ customizable vocal identity profiles.",
-    "principles": [
-      {
-        "title": "Multi-Sensory Audio Biofeedback",
-        "description": "Real-time organic waveform animations communicate model processing states and speech recognition accuracy."
-      },
-      {
-        "title": "Continuous Conversational Context",
-        "description": "Maintain conversational state across complex multi-branch requests without requiring repeated trigger phrases."
-      },
-      {
-        "title": "Tactile Voice Control",
-        "description": "Seamlessly blend voice-first inputs with precise touch sliders and context chips for swift audio modulation."
-      }
-    ],
-    "metrics": [
-      {
-        "label": "Task Execution Latency",
-        "value": "< 250ms"
-      },
-      {
-        "label": "User Engagement",
-        "value": "+85%"
-      }
-    ],
-    "overview": "Most voice assistants rely on rigid command structures and generic voices, creating friction in nuanced tasks and limiting emotional connection. VoxAid transforms voice into a primary productivity interface by introducing expressive, customizable voice modulation.",
-    "challenge": "Traditional voice assistants fail to maintain context across multi-step commands and lack personalized vocal identity, making hands-free productivity feel sterile and frustrating.",
-    "solution": "Designed an intuitive audio canvas with real-time waveform feedback, dynamic voice changer sliders, context-aware command chips, and seamless switching between voice-first and touch modes.",
-    "designSystem": "Fluid organic waveform particle states paired with calming, tactile controls and high-contrast accessibility themes.",
-    "gallery": [
-      "/images/work/voxaid/10.png",
-      "/images/work/voxaid/hero-mockup.png",
-      "/images/work/voxaid/04.png",
-      "/images/work/voxaid/02.png",
-      "/images/work/voxaid/03.png",
-      "/images/work/voxaid/05.png",
-      "/images/work/voxaid/06.png",
-      "/images/work/voxaid/07.png",
-      "/images/work/voxaid/08.png",
-      "/images/work/voxaid/09.png"
-    ],
-    "features": [
-      {
-        "title": "AI Voice Modulation Engine",
-        "description": "Real-time tone, pitch, and resonance personalization for synthetic assistant voices and user speech."
-      },
-      {
-        "title": "Multi-Step Conversational Memory",
-        "description": "Maintains task context across complex multi-branch requests without requiring repetitive trigger words."
-      },
-      {
-        "title": "Dynamic Waveform Feedback",
-        "description": "Immediate visual biofeedback communicating speech recognition accuracy and processing states."
-      }
-    ],
-    "takeaways": "Voice interfaces succeed when they provide transparent visual feedback for auditory inputs. Blending sound and screen creates confidence in conversational AI."
-  },
-  {
     "id": "06",
     "slug": "spotfinance",
     "title": "Spot Finance",
@@ -537,7 +549,7 @@ export const projects: Project[] = [
     "role": "Senior Product Designer",
     "duration": "5 Months",
     "coverImage": "/images/work/spotfinance/13.png",
-    "heroImage": "/images/work/spotfinance/hero-in-hand.png",
+    "heroImage": "/images/work/spotfinance/13.png",
     "description": "Spot Finance is a unified fintech mobile application integrating stock investments, automated savings vaults, peer-to-peer transfers, and QR code merchant payments into a single intuitive interface.",
     "goal": "Consolidate fragmented banking, fractional stock investing, automated round-up savings, and P2P payments into a unified consumer app.",
     "outcome": "Achieved a 4.9★ rating across 120,000+ active users with 99.8% transaction success and seamless dark/light mode parity.",
@@ -603,176 +615,6 @@ export const projects: Project[] = [
       }
     ],
     "takeaways": "Balancing density with simplicity is the hallmark of great fintech design. When complex portfolio charts feel effortless to explore, users gain agency over their financial future."
-  },
-  {
-    "id": "07",
-    "slug": "yourparkingspace",
-    "title": "YourParkingSpace",
-    "tagline": "Event Parking & Smart Mobility Experience for the UK & Ireland Market",
-    "category": "Mobility",
-    "categories": [
-      "Mobility & Travel",
-      "Design Research",
-      "Interface Design",
-      "Conversion"
-    ],
-    "services": "Design Research, Interface & Experience Design, Event Parking Integration",
-    "client": "YourParkingSpace UK",
-    "year": "2022–2023",
-    "role": "Lead UX/UI Designer",
-    "duration": "8 Months",
-    "coverImage": "/images/work/yourparkingspace/hero-mockup.png",
-    "heroImage": "/images/work/yourparkingspace/07.png",
-    "description": "YourParkingSpace is the UK's leading online parking marketplace and operator. We designed dedicated event parking flows catering to millions of drivers attending stadium concerts, sports matches, and festivals.",
-    "goal": "Eliminate pre-event parking anxiety, provide guaranteed venue-centric reservations, and reduce checkout drop-off.",
-    "outcome": "Boosted event booking conversion by +34%, decreased checkout abandonment by 22%, and scaled to 1.5M+ annual drivers.",
-    "principles": [
-      {
-        "title": "Venue-Centric Proximity",
-        "description": "Anchor search results around stadium gates and precise walking duration rather than generic city center pins."
-      },
-      {
-        "title": "Time-Sensitive Clarity",
-        "description": "Clearly communicate event start times, road closure zones, and egress bottlenecks so drivers make informed choices."
-      },
-      {
-        "title": "1-Tap Gate Pass Delivery",
-        "description": "Streamline checkout into a single click with instant Apple Wallet barcode pass delivery and turn-by-turn routing."
-      }
-    ],
-    "metrics": [
-      {
-        "label": "Event Booking Conversion",
-        "value": "+34%"
-      },
-      {
-        "label": "Checkout Abandonment",
-        "value": "-22%"
-      },
-      {
-        "label": "Annual Drivers Served",
-        "value": "1.5M+"
-      }
-    ],
-    "overview": "Drivers attending major stadium events and concerts face extreme parking anxiety, dynamic congestion pricing, and unclear walking distances. YourParkingSpace integrated dedicated event discovery and pre-booking into its core platform.",
-    "challenge": "Event attendees need guaranteed parking spots close to venues with clear walking routes, but previous search flows were generic and failed to highlight event start times, road closures, or EV charging.",
-    "solution": "Conducted extensive surveys, user interviews, and usability testing to design venue-centric parking maps, real-time walking distance estimates, guaranteed space reservations, and 1-tap express checkout.",
-    "designSystem": "High-contrast outdoor-friendly UI palette optimized for mobile sunlight visibility, prominent venue landmark pins, and instant Apple Wallet gate pass integration.",
-    "gallery": [
-      "/images/work/yourparkingspace/hero-mockup.png",
-      "/images/work/yourparkingspace/07.png",
-      "/images/work/yourparkingspace/10.png",
-      "/images/work/yourparkingspace/02.png",
-      "/images/work/yourparkingspace/03.png",
-      "/images/work/yourparkingspace/04.png",
-      "/images/work/yourparkingspace/05.png",
-      "/images/work/yourparkingspace/06.png",
-      "/images/work/yourparkingspace/08.png",
-      "/images/work/yourparkingspace/09.png",
-      "/images/work/yourparkingspace/11.png"
-    ],
-    "features": [
-      {
-        "title": "Venue-Centric Event Search",
-        "description": "Filtered parking spaces by proximity to stadium entry gates, walking distance, and post-event egress speed."
-      },
-      {
-        "title": "ANPR Plate Recognition & Express Checkout",
-        "description": "Seamless single-click reservations with automatic number plate synchronization."
-      },
-      {
-        "title": "Digital Wallet Gate Passes",
-        "description": "Instant barcode and Apple Wallet pass delivery with live turn-by-turn navigation deep links."
-      }
-    ],
-    "takeaways": "Eliminating friction for time-sensitive, high-anxiety journeys requires anticipating physical real-world constraints like road closures and post-match stadium traffic."
-  },
-  {
-    "id": "08",
-    "slug": "omits-admin",
-    "title": "Omits Admin Portal",
-    "tagline": "Back-Office Console for Cross-Border Transaction Operations & Compliance",
-    "category": "Fintech Operations",
-    "categories": [
-      "Fintech",
-      "Enterprise Tools",
-      "Systems Design",
-      "Design Systems"
-    ],
-    "services": "Product Strategy, Information Architecture, Interaction Design, Design System",
-    "client": "Omits Technology Limited",
-    "engagement": "Full-time · Omits Technology Limited",
-    "year": "2025–2026",
-    "role": "Product Lead & Product Designer",
-    "duration": "5 Months",
-    "coverImage": "/images/work/omits-admin/02-transactions.png",
-    "heroImage": "/images/work/omits-admin/01-transaction-detail.png",
-    "description": "The internal console Omits staff use to investigate cross-border transactions, verify customers, adjust FX rates and approve one another's actions — designed so that no single person can move money alone.",
-    "goal": "Give operations, compliance and support one console for the money, with every sensitive action gated behind a second signature and written to an audit trail.",
-    "outcome": "Shipped a thirteen-module back-office built on a granular permission model, a maker-checker approval queue, and a transaction timeline that shows where money actually is rather than only its final status.",
-    "principles": [
-      {
-        "title": "Show the journey, not the verdict",
-        "description": "\"Pending\" tells an agent nothing they can act on. Every transaction renders as a timeline — initiated, screened, risk cleared, credited — so the next question is always obvious."
-      },
-      {
-        "title": "No single pair of hands",
-        "description": "Anything that moves money or unlocks an account is a request, not an action. One person raises it, another approves it, and both are recorded."
-      },
-      {
-        "title": "Permission is part of the layout",
-        "description": "Roles are modelled at the level of the individual action, so the interface a support agent sees is genuinely a different product from the one a finance approver sees."
-      }
-    ],
-    "metrics": [
-      {
-        "label": "Operational Modules",
-        "value": "13"
-      },
-      {
-        "label": "Granular Permissions",
-        "value": "~50"
-      },
-      {
-        "label": "Sensitive Actions Gated",
-        "value": "2-of-2"
-      }
-    ],
-    "overview": "Omits moves money between the UK, Nigeria, Ghana and Kenya. Everything a customer does on the mobile app eventually lands on a member of staff — a stalled payout, a KYC document that needs a human decision, a rate that has to be corrected before the next batch. Before this console, that work happened across database queries, spreadsheets and messages. I led design for the internal product that replaced it, working from the operations team's actual escalation paths rather than from a feature list.",
-    "challenge": "Back-office tools in regulated finance carry a specific tension: the people using them need to move quickly, and the regulator needs them to be unable to move alone. An agent chasing a stuck transfer wants one screen with the whole story. A compliance officer needs the same screen to prove, months later, exactly who did what and on whose authority. Designing for speed usually means fewer steps; designing for auditability usually means more. Both requirements are non-negotiable, and the console had to hold them at once.",
-    "solution": "The console is organised around the objects staff actually escalate — a transaction, a customer, a rate, a request — rather than around the teams that own them. Transactions open into a summary, a full detail record and a timeline that shows every stage the money passed through. Customers open into a tabbed record covering wallets, transaction history, compliance documents, security events and their own audit log. Sensitive actions do not execute inline: they create a request that lands in an authorisation queue for a second, differently-permissioned admin to approve or decline, with the reason captured on both sides.",
-    "designSystem": "A deliberately quiet system: white ground, near-black chrome, and colour reserved almost entirely for state — green for completed, amber for pending, red for failed or blocked. Every table shares one row anatomy, one status pill and one empty state, so an agent moving between transactions, users and requests is reading the same grammar. Dense by intent: these are screens people work in for a full shift, not screens they visit.",
-    "gallery": [
-      "/images/work/omits-admin/01-transaction-detail.png",
-      "/images/work/omits-admin/02-transactions.png",
-      "/images/work/omits-admin/03-overview.png",
-      "/images/work/omits-admin/04-user-management.png",
-      "/images/work/omits-admin/05-user-detail.png",
-      "/images/work/omits-admin/06-roles.png",
-      "/images/work/omits-admin/07-login.png"
-    ],
-    "features": [
-      {
-        "title": "Transaction Timeline",
-        "description": "Each transfer renders as the sequence it actually passed through — deposit initiated, compliance scan, flag raised, risk cleared, wallet credited — so an agent can see where a payment stopped instead of inferring it from a status word."
-      },
-      {
-        "title": "Maker-Checker Authorisation Queue",
-        "description": "Refunds, cancellations, wallet adjustments, credential resets and role changes are raised as requests with a stated reason, then approved or declined by a second admin from a shared queue split into all requests and the ones assigned to you."
-      },
-      {
-        "title": "Action-Level Permission Model",
-        "description": "Roles are composed from roughly fifty discrete permissions — transactions:refund, compliance:review, wallets:adjust — so a Support Agent, a Compliance Reviewer and a Finance Approver each see a genuinely different console."
-      },
-      {
-        "title": "Tabbed Customer Record",
-        "description": "One customer, eight views: profile, wallet accounts, transactions, compliance documents, referrals, security events, support tickets and their audit log — so an investigation never requires leaving the person you are investigating."
-      },
-      {
-        "title": "Audit Trail at Three Levels",
-        "description": "Actions are written to a global log, to the acting admin's own record, and to the affected customer's record, so the same event can be reconstructed from whichever direction a question arrives."
-      }
-    ],
-    "takeaways": "Designing for auditability changed how I think about confirmation. In consumer products a confirmation step is friction to be minimised; here the second pair of eyes is the product, and the design problem is making a deliberately slow path feel purposeful rather than obstructive. Framing sensitive actions as requests with a stated reason — rather than as buttons with a warning dialog — turned a compliance requirement into something the operations team could actually use to hand work to each other."
   }
 ];
+
