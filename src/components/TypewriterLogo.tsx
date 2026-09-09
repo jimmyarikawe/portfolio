@@ -81,12 +81,12 @@ export function TypewriterLogo({
       ref={containerRef}
       href="/"
       onMouseEnter={handleMouseEnter}
-      className={`group font-mono-accent font-medium tracking-tight text-neutral-950 dark:text-white hover:opacity-75 transition-opacity inline-flex items-center select-none ${className}`}
+      className={`group inline-flex select-none items-center transition-colors hover:text-ink ${className}`}
       aria-label={text}
     >
       <span>{displayText}</span>
       <span
-        className={`inline-block w-[1.5px] h-[1.1em] ml-0.5 bg-neutral-950 dark:bg-white align-middle transition-opacity duration-200 ${
+        className={`ml-0.5 inline-block h-[1.1em] w-[1.5px] bg-current align-middle transition-opacity duration-200 ${
           isTyping
             ? "animate-pulse opacity-100"
             : "opacity-0 group-hover:opacity-100"

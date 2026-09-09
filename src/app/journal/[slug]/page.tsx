@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { Metadata } from "next";
-import { ArrowLeft, ArrowUpRight } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import { articles } from "@/data/articles";
 import { parseArticleContent } from "@/lib/utils";
 import { ReadingProgressBar } from "@/components/ReadingProgressBar";
@@ -50,86 +50,80 @@ export default async function SingleArticlePage({ params }: ArticlePageProps) {
   return (
     <>
       <ReadingProgressBar />
-      <article className="max-w-4xl mx-auto px-4 sm:px-8 lg:px-10 pt-12 md:pt-16">
-      {/* Back link */}
-      <Link
-        href="/journal"
-        className="inline-flex items-center gap-2 text-xs font-mono-accent text-neutral-500 dark:text-neutral-400 hover:text-neutral-950 dark:hover:text-white transition-colors mb-8"
-      >
-        <ArrowLeft className="w-3.5 h-3.5" />
-        <span>Back to all articles</span>
-      </Link>
 
-      {/* Header */}
-      <div className="space-y-6 pb-12 border-b border-black/5 dark:border-white/10">
-        <div className="flex flex-wrap items-center gap-2">
-          <span className="px-3 py-1 rounded bg-neutral-900 text-white dark:bg-white dark:text-neutral-900 text-xs font-mono-accent">
-            {article.category}
-          </span>
-          <span className="px-3 py-1 rounded bg-neutral-100 dark:bg-white/10 text-neutral-800 dark:text-neutral-200 text-xs font-mono-accent">
-            {article.date}
-          </span>
-          <span className="px-3 py-1 rounded bg-neutral-100 dark:bg-white/10 text-neutral-600 dark:text-neutral-400 text-xs font-mono-accent">
-            {article.readTime}
-          </span>
-        </div>
+      <article className="site-col">
+        <div className="mt-20 sm:mt-22">
+          <Link
+            href="/journal"
+            className="inline-flex items-center gap-2 text-[13px] font-medium text-dim transition-colors hover:text-ink"
+          >
+            <ArrowLeft className="h-3.5 w-3.5" />
+            <span>Back to all articles</span>
+          </Link>
 
-        <h1 className="text-3xl sm:text-4xl md:text-5xl font-medium tracking-tight text-neutral-950 dark:text-white leading-[1.1]">
-          {article.title}
-        </h1>
+          <h1 className="mt-6 font-display text-balance text-[28px] font-medium leading-8.25 sm:text-[34px] sm:leading-9.5 wide:text-[42px] wide:leading-10.75">
+            {article.title}
+          </h1>
 
-        <p className="text-lg sm:text-xl text-neutral-600 dark:text-neutral-300 leading-relaxed font-normal">
-          {article.excerpt}
-        </p>
+          <p className="mt-2.5 text-[13px] font-medium text-dim sm:mt-3">
+            {article.category} · {article.date} · {article.readTime}
+          </p>
 
-        <div className="flex items-center gap-3 pt-4 text-xs font-mono-accent text-neutral-500 dark:text-neutral-400">
-          <span>By Jimmy Arikawe</span>
-          <span>·</span>
-          <span>Product Designer & Manager, Creative & AI Technologist</span>
-        </div>
-      </div>
+          <p className="mt-3.5 text-[17px] leading-6 text-muted sm:mt-4.5 sm:text-[20px] sm:leading-7 wide:mt-6.25 wide:text-[24px] wide:leading-8">
+            {article.excerpt}
+          </p>
 
-      {/* Article Content */}
-      <div className="py-12 prose prose-neutral dark:prose-invert max-w-none space-y-6 text-neutral-800 dark:text-neutral-200 leading-relaxed text-base sm:text-lg">
-        {parseArticleContent(article.content).map((block, i) =>
-          block.type === "heading" ? (
-            <h3
-              key={i}
-              className="text-2xl font-medium tracking-tight text-neutral-950 dark:text-white pt-6 mb-2"
-            >
-              {block.text}
-            </h3>
-          ) : (
-            <p key={i} className="text-neutral-700 dark:text-neutral-300 leading-relaxed">
-              {block.text}
-            </p>
-          )
-        )}
-      </div>
-
-      {/* Author Callout Box */}
-      <div className="editorial-card p-8 rounded mt-12 mb-16 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
-        <div className="space-y-1">
-          <span className="text-xs font-mono-accent text-neutral-400 dark:text-neutral-500 block">
-            About the Author
-          </span>
-          <h4 className="text-lg font-medium text-neutral-950 dark:text-white">
-            Jimmy Arikawe
-          </h4>
-          <p className="text-xs text-neutral-600 dark:text-neutral-400 max-w-md">
-            Product Designer & Manager, Creative & AI Technologist with an MSc in Artificial Intelligence (Distinction). Designing and engineering high-scale products.
+          <p className="mt-5 text-[13px] font-medium text-dim sm:mt-6">
+            By Jimmy Arikawe · Product Designer &amp; Manager, Creative &amp; AI
+            Technologist
           </p>
         </div>
 
-        <Link
-          href="/contact"
-          className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded bg-neutral-950 text-white dark:bg-white dark:text-neutral-950 text-xs font-mono-accent hover:bg-neutral-800 dark:hover:bg-neutral-200 transition-colors shrink-0"
-        >
-          <span>Get in Touch</span>
-          <ArrowUpRight className="w-3.5 h-3.5" />
-        </Link>
-      </div>
-    </article>
+        {/*
+          Long-form prose gets a measure of its own — the one place the 860px
+          column is narrowed further, because a 21px paragraph running the full
+          column is past a comfortable line length.
+        */}
+        <div className="mt-12 max-w-[65ch] sm:mt-18 wide:mt-22.5">
+          {parseArticleContent(article.content).map((block, i) =>
+            block.type === "heading" ? (
+              <h3
+                key={i}
+                className="mb-2.5 text-[16px] font-medium sm:text-[17px] wide:text-[19px]"
+              >
+                {block.text}
+              </h3>
+            ) : (
+              <p
+                key={i}
+                className="mb-5 text-[17px] leading-6.5 text-muted sm:mb-6 sm:text-[19px] sm:leading-7 wide:mb-7.5 wide:text-[21px] wide:leading-7.5"
+              >
+                {block.text}
+              </p>
+            )
+          )}
+        </div>
+
+        <div className="mt-12 border-t border-rule pt-9 sm:mt-18 wide:mt-22.5">
+          <h2 className="mb-3 text-[17px] font-medium sm:mb-4 sm:text-[18px] wide:text-[20px]">
+            About the Author
+          </h2>
+
+          <h3 className="text-[16px] font-medium sm:text-[17px] wide:text-[19px]">
+            Jimmy Arikawe
+          </h3>
+
+          <p className="mt-1 text-[16px] leading-6 text-soft sm:max-w-110 sm:text-[17px] wide:text-[18px] wide:leading-7">
+            Product Designer &amp; Manager, Creative &amp; AI Technologist with
+            an MSc in Artificial Intelligence (Distinction). Designing and
+            engineering high-scale products.
+          </p>
+
+          <Link href="/contact" className="btn mt-6">
+            Get in Touch
+          </Link>
+        </div>
+      </article>
     </>
   );
 }

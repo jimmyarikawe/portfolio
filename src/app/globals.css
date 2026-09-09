@@ -10,31 +10,91 @@
  */
 @custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
+/*
+ * Palette. The light values are the site's reference design language: a white
+ * ground, near-black for emphasis, and a ladder of greys that gets fainter as
+ * text gets less important (muted → soft → faint). Dark mode mirrors the same
+ * ladder inverted, so a `text-muted` reads as secondary in both themes.
+ */
 @layer base {
   :root {
-    --background: #FBFBFB;
-    --foreground: #111111;
+    --background: #FFFFFF;
     --surface: #FFFFFF;
-    --surface-muted: #F4F4F4;
+    --frame: #F3F3F3;          /* image/media placeholder ground */
+    --ink: #000000;            /* headings + emphasised body */
+    --body: #2D2D2D;           /* default text */
+    --muted: #9A9DAB;          /* lead paragraphs, prose, list copy */
+    --soft: #969696;           /* project descriptions */
+    --faint: #C8C8C8;          /* tag columns */
+    --dim: #A4A4A4;            /* dates, fine print */
+    --ghost: #CED2D4;          /* footer */
+    --rule: #E0E0E0;           /* dashed dividers, hairlines */
+    --control-border: #DADADA; /* secondary button outline */
     --border-subtle: rgba(0, 0, 0, 0.07);
     --border-strong: rgba(0, 0, 0, 0.15);
-    --text-muted: #666666;
-    --text-dim: #999999;
     --accent-green: #22C55E;
     --accent-orange: #FF7C47;
   }
 
   [data-theme="dark"] {
     --background: #0B0B0C;
-    --foreground: #EDEDED;
     --surface: #141416;
-    --surface-muted: #1E1E22;
+    --frame: #17171A;
+    --ink: #FFFFFF;
+    --body: #E4E4E7;
+    --muted: #9EA2B0;
+    --soft: #8A8A93;
+    --faint: #5A5A63;
+    --dim: #77777F;
+    --ghost: #45474B;
+    --rule: #2A2A2E;
+    --control-border: rgba(255, 255, 255, 0.16);
     --border-subtle: rgba(255, 255, 255, 0.08);
     --border-strong: rgba(255, 255, 255, 0.18);
-    --text-muted: #A1A1AA;
-    --text-dim: #71717A;
   }
+}
 
+/*
+ * The design's desktop tier starts at 900px, where the 860px column locks in.
+ *
+ * Two things about this declaration are load-bearing. It must be a registered
+ * breakpoint rather than an inline arbitrary min-width variant, because
+ * Tailwind emits arbitrary variants in a separate group ahead of the named
+ * scale. And it must be written in `rem`, because Tailwind can only sort two
+ * breakpoints against each other when their units match: the built-in scale
+ * is in `rem`, so a `900px` value sorts as incomparable and lands before `sm`
+ * (40rem). Either mistake puts this block above `sm:` in the output, which
+ * inverts the mobile-first cascade and lets `sm:` win on desktop.
+ */
+@theme {
+  --breakpoint-wide: 56.25rem; /* 900px */
+}
+
+/*
+ * `@theme inline` emits the var() reference rather than its resolved value, so
+ * `text-muted`, `bg-frame` etc. follow the [data-theme] switch at runtime. A
+ * plain `@theme` block would bake in the light value and break dark mode.
+ */
+@theme inline {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-frame: var(--frame);
+  --color-ink: var(--ink);
+  --color-body: var(--body);
+  --color-muted: var(--muted);
+  --color-soft: var(--soft);
+  --color-faint: var(--faint);
+  --color-dim: var(--dim);
+  --color-ghost: var(--ghost);
+  --color-rule: var(--rule);
+  --color-control: var(--control-border);
+
+  --font-sans: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-display: var(--font-geist-sans), var(--font-inter), -apple-system, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+@layer base {
   * {
     border-color: var(--border-subtle);
   }
@@ -54,7 +114,7 @@
   html {
     scroll-behavior: smooth;
     background-color: var(--background);
-    color: var(--foreground);
+    color: var(--body);
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -62,10 +122,19 @@
 
   body {
     background-color: var(--background);
-    color: var(--foreground);
-    font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    color: var(--body);
+    font-family: var(--font-sans);
+    /* The reference sets this one tracking value on every text element. */
+    letter-spacing: -0.264px;
     min-height: 100vh;
     overflow-x: hidden;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    color: var(--ink);
   }
 
   ::selection {
@@ -76,6 +145,190 @@
   [data-theme="dark"] ::selection {
     background-color: #FFFFFF;
     color: #111111;
+  }
+}
+
+/*
+ * Everything below is in `@layer components` so that Tailwind utilities can
+ * still override it. Unlayered CSS beats every layered rule, so an unlayered
+ * `.btn { display: inline-flex }` would defeat a `hidden` utility on the same
+ * element — the layer is what keeps these composable.
+ */
+@layer components {
+  /*
+   * The single measure every page is built on: a fixed 860px column, centred,
+   * falling back to a gutter-inset full width below 900px. The two thresholds
+   * mirror the `sm` and `wide` breakpoints exactly.
+   */
+  .site-col {
+    width: calc(100% - 50px);
+    margin-inline: 25px;
+  }
+
+  @media (min-width: 40rem) {
+    .site-col {
+      width: calc(100% - 48px);
+      margin-inline: 24px;
+    }
+  }
+
+  @media (min-width: 56.25rem) {
+    .site-col {
+      width: 860px;
+      margin-inline: auto;
+    }
+  }
+
+  /* Pill buttons — solid ink primary, outlined secondary. */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background: var(--ink);
+    color: var(--background);
+    border: 1px solid var(--ink);
+    border-radius: 30px;
+    padding: 12px 22px;
+    font-size: 16px;
+    font-weight: 535;
+    line-height: 18px;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: opacity 0.5s ease;
+  }
+
+  .btn:hover {
+    opacity: 0.7;
+  }
+
+  .btn-sml {
+    padding: 10px 15px;
+    font-size: 14.5px;
+  }
+
+  .btn-outline {
+    background: var(--surface);
+    border-color: var(--control-border);
+    color: var(--body);
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.09);
+  }
+
+  [data-theme="dark"] .btn-outline {
+    box-shadow: none;
+  }
+
+  .btn-disabled,
+  .btn-disabled:hover {
+    opacity: 0.3;
+    cursor: default;
+  }
+
+  /* For use on the always-black interlude panel, in either theme. */
+  .btn-invert {
+    background: #FFFFFF;
+    border-color: #FFFFFF;
+    color: #000000;
+  }
+
+  /* Inline links inside muted prose: promoted to ink, dotted underline. */
+  .prose-link,
+  .prose-link:visited {
+    color: var(--ink);
+    text-decoration: underline;
+    text-decoration-style: dotted;
+    text-underline-offset: 3px;
+  }
+
+  .prose-link:hover {
+    text-decoration-style: solid;
+  }
+
+  /* Dashed hairline used to bracket the full-bleed interlude. */
+  .rule-dashed {
+    height: 1px;
+    background-image: repeating-linear-gradient(
+      to right,
+      var(--rule) 0 6px,
+      transparent 6px 13px
+    );
+  }
+
+  .font-mono-accent {
+    font-family: var(--font-mono);
+  }
+
+  .font-display {
+    font-family: var(--font-display);
+  }
+
+  /* Horizontal galleries scroll-snap without showing a scrollbar. */
+  .no-scrollbar {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .glass-pill {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(0, 0, 0, 0.07);
+  }
+
+  [data-theme="dark"] .glass-pill {
+    background: rgba(20, 20, 22, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .editorial-card {
+    background: var(--surface);
+    border: 1px solid var(--border-subtle);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .editorial-card:hover {
+    border-color: var(--border-strong);
+  }
+
+  .animate-pulse-subtle {
+    animation: pulse-subtle 2.2s infinite ease-in-out;
+  }
+
+  .animate-spin-slow {
+    animation: spin-slow 18s linear infinite;
+  }
+}
+
+/* Pulsing badge animation */
+@keyframes pulse-subtle {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.3);
+    opacity: 0.6;
+  }
+}
+
+/* Slow rotation for the interlude's mark. */
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-spin-slow,
+  .animate-pulse-subtle {
+    animation: none;
   }
 }
 
@@ -101,61 +354,12 @@
   background: #55555C;
 }
 
-/* Typography styles */
-.font-mono-accent {
-  font-family: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-}
-
-.font-editorial {
-  font-family: var(--font-geist-sans), sans-serif;
-  letter-spacing: -0.03em;
-}
-
-/* Glassmorphism pill styling */
-.glass-pill {
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border: 1px solid rgba(0, 0, 0, 0.07);
-}
-
-[data-theme="dark"] .glass-pill {
-  background: rgba(20, 20, 22, 0.85);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-/* Clean Card Transitions */
-.editorial-card {
-  background: var(--surface);
-  border: 1px solid var(--border-subtle);
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.editorial-card:hover {
-  border-color: var(--border-strong);
-}
-
-/* Pulsing badge animation */
-@keyframes pulse-subtle {
-  0%, 100% {
-    transform: scale(1);
-    opacity: 1;
-  }
-  50% {
-    transform: scale(1.3);
-    opacity: 0.6;
-  }
-}
-
-.animate-pulse-subtle {
-  animation: pulse-subtle 2.2s infinite ease-in-out;
-}
-
 /*
  * CustomCursor renders its own dot/tooltip on fine-pointer devices. It adds
  * this class to <html> once mounted, so the native cursor is only hidden
  * after the replacement is actually on screen (if JS fails, the OS cursor
- * stays visible instead of disappearing entirely).
+ * stays visible instead of disappearing entirely). Left unlayered on purpose:
+ * this is a global mode that should beat per-element cursor utilities.
  */
 .custom-cursor-active,
 .custom-cursor-active a,

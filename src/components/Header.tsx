@@ -1,154 +1,103 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowUpRight, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { TypewriterLogo } from "@/components/TypewriterLogo";
 
+const navLinks = [
+  { name: "Work", href: "/work" },
+  { name: "About", href: "/about" },
+  { name: "Journal", href: "/journal" },
+];
+
 export function Header() {
   const pathname = usePathname();
-  const [timeString, setTimeString] = useState<string>("");
-  const [mounted, setMounted] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  useEffect(() => {
-    setMounted(true);
-    const updateTime = () => {
-      const now = new Date();
-      const formatted = now.toLocaleTimeString("en-GB", {
-        hour: "2-digit",
-        minute: "2-digit",
-        second: "2-digit",
-        hour12: true,
-        timeZone: "Europe/London",
-      });
-      setTimeString(formatted.toUpperCase());
-    };
-
-    updateTime();
-    const interval = setInterval(updateTime, 1000);
-    return () => clearInterval(interval);
-  }, []);
-
-  const navLinks = [
-    { name: "Work", href: "/work" },
-    { name: "About", href: "/about" },
-    { name: "Journal", href: "/journal" },
-    { name: "Contact", href: "/contact" },
-  ];
-
   return (
-    <header className="sticky top-0 z-50 w-full bg-transparent py-3.5 sm:py-5 pointer-events-none">
+    <header className="w-full pt-4 sm:pt-5">
       {/* Accessible Skip Link for keyboard/screen reader users */}
       <a
         href="#main-content"
-        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 z-50 px-4 py-2 rounded bg-neutral-950 text-white dark:bg-white dark:text-neutral-950 text-xs font-mono-accent pointer-events-auto"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 z-50 px-4 py-2 rounded-full bg-ink text-background text-sm"
       >
         Skip to main content
       </a>
 
-      <div className="w-full max-w-[1800px] mx-auto px-4 sm:px-8 lg:px-10">
-        <div className="flex items-center justify-between gap-4 w-full">
-          {/* Left: Logo */}
-          <div className="pointer-events-auto shrink-0">
-            <TypewriterLogo className="text-sm sm:text-base" delay={150} />
-          </div>
+      <div className="site-col">
+        <div className="flex min-h-10 items-center justify-between gap-4">
+          <TypewriterLogo
+            className="text-[16px] font-medium leading-10 text-muted wide:text-[17px]"
+            delay={150}
+          />
 
-          {/* Center: Live London Clock (hidden on small screens) */}
-          <span
-            suppressHydrationWarning
-            className="hidden md:block text-xs font-mono-accent text-neutral-500 dark:text-neutral-400 pointer-events-auto"
-          >
-            {mounted && timeString ? `UK • ${timeString}` : "London, UK"}
-          </span>
+          <div className="flex items-center gap-5">
+            <nav className="hidden items-center gap-5 wide:flex">
+              {navLinks.map((link) => {
+                const isActive = pathname.startsWith(link.href);
 
-          {/* Right: Nav + Theme Toggle + Mobile Trigger */}
-          <div className="flex items-center gap-2 pointer-events-auto shrink-0">
-            {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center gap-5 sm:gap-6 glass-pill px-4 py-2 rounded">
-              <nav className="flex items-center gap-5 sm:gap-6">
-                {navLinks.map((link) => {
-                  const isActive =
-                    link.href === "/" ? pathname === "/" : pathname.startsWith(link.href);
+                return (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className={`text-[15px] transition-colors hover:text-ink ${
+                      isActive ? "text-ink font-medium" : "text-muted"
+                    }`}
+                  >
+                    {link.name}
+                  </Link>
+                );
+              })}
+            </nav>
 
-                  return (
-                    <Link
-                      key={link.href}
-                      href={link.href}
-                      className={`text-xs font-mono-accent transition-colors ${
-                        isActive
-                          ? "text-neutral-950 dark:text-white font-medium"
-                          : "text-neutral-500 dark:text-neutral-400 hover:text-neutral-950 dark:hover:text-white"
-                      }`}
-                    >
-                      {link.name}
-                    </Link>
-                  );
-                })}
-              </nav>
+            <ThemeToggle className="p-0! text-muted hover:bg-transparent hover:text-ink" />
 
-              <div className="w-px h-3.5 bg-black/10 dark:bg-white/10" />
+            {/* Stays visible at every width — it is the reference's only
+                header action, and the hamburger beside it carries the pages
+                the reference does not have. */}
+            <Link href="/contact" className="btn btn-sml">
+              Get in touch
+            </Link>
 
-              <ThemeToggle className="!p-0 hover:bg-transparent" />
-            </div>
-
-            {/* Mobile hamburger button & Theme toggle */}
-            <div className="flex md:hidden items-center gap-1.5 glass-pill px-2.5 py-1.5 rounded">
-              <ThemeToggle className="!p-1" />
-              <div className="w-px h-3 bg-black/10 dark:bg-white/10" />
-              <button
-                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                aria-label="Toggle Navigation Menu"
-                aria-expanded={mobileMenuOpen}
-                aria-controls="mobile-navigation"
-                className="p-1 text-neutral-700 dark:text-neutral-300 hover:text-neutral-950 dark:hover:text-white rounded transition-colors flex items-center justify-center"
-              >
-                {mobileMenuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
-              </button>
-            </div>
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              aria-label="Toggle navigation menu"
+              aria-expanded={mobileMenuOpen}
+              aria-controls="mobile-navigation"
+              className="flex items-center justify-center p-1 text-muted transition-colors hover:text-ink wide:hidden"
+            >
+              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            </button>
           </div>
         </div>
 
-        {/* Mobile Dropdown */}
         <AnimatePresence>
           {mobileMenuOpen && (
-            <motion.div
+            <motion.nav
               id="mobile-navigation"
               initial={{ opacity: 0, y: -6 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -6 }}
               transition={{ duration: 0.18, ease: "easeOut" }}
-              className="md:hidden pointer-events-auto mt-2 glass-pill rounded p-4 shadow-xl"
+              className="mt-4 flex flex-col gap-1 border-t border-rule pt-4 wide:hidden"
             >
-              <div className="flex flex-col gap-1">
-                {navLinks.map((link) => (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    onClick={() => setMobileMenuOpen(false)}
-                    className={`px-3.5 py-2.5 rounded text-xs font-mono-accent transition-colors ${
-                      pathname.startsWith(link.href)
-                        ? "bg-neutral-100 dark:bg-white/10 text-neutral-950 dark:text-white font-medium"
-                        : "text-neutral-600 dark:text-neutral-400 hover:bg-black/5 dark:hover:bg-white/5"
-                    }`}
-                  >
-                    {link.name}
-                  </Link>
-                ))}
-
+              {navLinks.map((link) => (
                 <Link
-                  href="/contact"
+                  key={link.href}
+                  href={link.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  className="mt-2 flex items-center justify-center gap-2 py-3 rounded bg-neutral-900 text-white dark:bg-white dark:text-neutral-950 text-xs font-mono-accent font-medium"
+                  className={`py-2 text-[17px] transition-colors ${
+                    pathname.startsWith(link.href) ? "font-medium text-ink" : "text-muted"
+                  }`}
                 >
-                  <span>Get in Touch</span>
-                  <ArrowUpRight className="w-4 h-4" />
+                  {link.name}
                 </Link>
-              </div>
-            </motion.div>
+              ))}
+            </motion.nav>
           )}
         </AnimatePresence>
       </div>

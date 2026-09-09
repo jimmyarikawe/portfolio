@@ -1,149 +1,92 @@
-"use client";
-
-import { useState } from "react";
-import { motion } from "framer-motion";
 import { experiences, education, publications } from "@/data/experience";
 
-function CompanyFavicon({ name, domain }: { name: string; domain?: string }) {
-  const [hasError, setHasError] = useState(false);
-
-  // Clean and sanitize domain in case full URL with protocol or trailing slash was passed
-  const cleanDomain = domain
-    ? domain.replace(/^https?:\/\//i, "").replace(/^www\./i, "").split("/")[0]
-    : null;
-
-  // High-res favicon via Google's global CDN
-  const faviconUrl = cleanDomain
-    ? `https://www.google.com/s2/favicons?domain=${cleanDomain}&sz=64`
-    : null;
-
-  return (
-    <span className="inline-flex items-center justify-center w-5 h-5 rounded bg-neutral-100 dark:bg-white/10 overflow-hidden shrink-0 border border-black/5 dark:border-white/10 align-middle">
-      {faviconUrl && !hasError ? (
-        <img
-          src={faviconUrl}
-          alt={`${name} logo`}
-          width={14}
-          height={14}
-          className="w-3.5 h-3.5 object-contain"
-          onError={() => setHasError(true)}
-          loading="lazy"
-        />
-      ) : (
-        <span className="text-neutral-700 dark:text-neutral-300 text-[10px] font-mono-accent font-semibold">
-          {name.charAt(0)}
-        </span>
-      )}
-    </span>
-  );
-}
-
+/**
+ * The fuller narrative history used on the about page: role, employer, dates
+ * and a one-line summary per entry, then education and publications. The
+ * compact dates-only version lives in `ExperienceList` on the home page.
+ */
 function TimelineRow({
   period,
   title,
   subtitle,
   summary,
-  index,
   badge,
 }: {
   period: string;
-  title: React.ReactNode;
+  title: string;
   subtitle?: string;
   summary: string;
-  index: number;
   badge?: string;
 }) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 12 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-40px" }}
-      transition={{ duration: 0.4, delay: (index % 6) * 0.05 }}
-      className="grid grid-cols-1 sm:grid-cols-[130px_1fr] gap-1.5 sm:gap-8"
-    >
-      <div className="flex items-center gap-2 text-xs font-mono-accent text-neutral-400 dark:text-neutral-500">
-        <span>{period}</span>
-        {badge && (
-          <span className="px-1.5 py-0.5 rounded bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 text-[10px]">
-            {badge}
-          </span>
-        )}
-      </div>
-      <div>
-        <h3 className="text-base font-medium text-neutral-950 dark:text-white flex items-center gap-2 flex-wrap">
-          {title}
-        </h3>
-        {subtitle && (
-          <p className="text-xs font-mono-accent text-neutral-500 dark:text-neutral-400 mt-0.5">{subtitle}</p>
-        )}
-        <p className="text-sm text-neutral-500 dark:text-neutral-400 leading-relaxed mt-1.5">{summary}</p>
-      </div>
-    </motion.div>
+    <div className="mb-7 last:mb-0 sm:mb-8 wide:mb-10">
+      <p className="text-[16px] leading-5.5 sm:text-[17px] wide:text-[20px] wide:leading-normal">
+        {title}
+        {subtitle && <span className="text-muted"> at {subtitle}</span>}
+      </p>
+
+      <p className="mt-1 text-[13px] font-medium text-dim sm:mt-1.5">
+        {period}
+        {badge && <span className="text-ink"> · {badge}</span>}
+      </p>
+
+      <p className="mt-2 text-[16px] leading-6 text-soft sm:mt-2.5 sm:text-[17px] wide:text-[18px] wide:leading-7">
+        {summary}
+      </p>
+    </div>
   );
 }
 
 export function ExperienceTimeline() {
   return (
-    <div className="space-y-16">
+    <div>
       {/* Experience */}
-      <div className="space-y-8">
-        <div>
-          <span className="text-xs font-mono-accent text-neutral-400 dark:text-neutral-500 uppercase tracking-wider block mb-2">
-            Experience
-          </span>
-          <p className="text-sm text-neutral-500 dark:text-neutral-400 max-w-lg">
-            7+ years across fintech, enterprise, and AI — the roles, chronologically.
-          </p>
-        </div>
+      <div>
+        <h2 className="mb-3 text-[17px] font-medium sm:mb-4 sm:text-[18px] wide:text-[20px]">
+          Experience
+        </h2>
 
-        <div className="space-y-8">
-          {experiences.map((exp, i) => (
-            <TimelineRow
-              key={i}
-              index={i}
-              period={exp.period}
-              badge={exp.current ? "Current" : undefined}
-              title={
-                <>
-                  {exp.role} at <CompanyFavicon name={exp.company} domain={exp.domain} /> {exp.company}
-                </>
-              }
-              summary={exp.summary}
-            />
-          ))}
-        </div>
+        <p className="mb-7 text-[16px] leading-6 text-soft sm:mb-8 sm:text-[17px] wide:mb-10 wide:text-[18px] wide:leading-7">
+          7+ years across fintech, enterprise, and AI — the roles,
+          chronologically.
+        </p>
+
+        {experiences.map((exp) => (
+          <TimelineRow
+            key={`${exp.company}-${exp.period}`}
+            period={exp.period}
+            badge={exp.current ? "Current" : undefined}
+            title={exp.role}
+            subtitle={exp.company}
+            summary={exp.summary}
+          />
+        ))}
       </div>
 
       {/* Education */}
-      <div className="space-y-8">
-        <span className="text-xs font-mono-accent text-neutral-400 dark:text-neutral-500 uppercase tracking-wider block">
+      <div className="mt-12 sm:mt-18 wide:mt-30">
+        <h2 className="mb-3 text-[17px] font-medium sm:mb-4 sm:text-[18px] wide:text-[20px]">
           Education
-        </span>
+        </h2>
 
-        <div className="space-y-8">
-          {education.map((edu, i) => (
-            <TimelineRow
-              key={i}
-              index={i}
-              period={edu.period}
-              title={
-                <>
-                  {edu.degree} at <CompanyFavicon name={edu.institution} domain={edu.domain} /> {edu.institution}
-                </>
-              }
-              summary={edu.summary}
-            />
-          ))}
-          {publications.map((pub, i) => (
-            <TimelineRow
-              key={`pub-${i}`}
-              index={education.length + i}
-              period={pub.period}
-              title={pub.title}
-              summary={pub.summary}
-            />
-          ))}
-        </div>
+        {education.map((edu) => (
+          <TimelineRow
+            key={`${edu.institution}-${edu.period}`}
+            period={edu.period}
+            title={edu.degree}
+            subtitle={edu.institution}
+            summary={edu.summary}
+          />
+        ))}
+
+        {publications.map((pub) => (
+          <TimelineRow
+            key={pub.title}
+            period={pub.period}
+            title={pub.title}
+            summary={pub.summary}
+          />
+        ))}
       </div>
     </div>
   );

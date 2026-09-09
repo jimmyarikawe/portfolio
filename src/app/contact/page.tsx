@@ -1,42 +1,27 @@
-"use client";
-
-import { motion } from "framer-motion";
 import { ContactForm } from "@/components/ContactForm";
 
 export default function ContactPage() {
   return (
-    <div className="w-full max-w-[1800px] mx-auto px-4 sm:px-8 lg:px-10 pt-12 md:pt-16 space-y-12">
-      {/* Header */}
-      <div className="space-y-4 max-w-3xl">
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="inline-flex items-center gap-2 px-3 py-1 rounded bg-neutral-100 dark:bg-white/10 text-xs font-mono-accent text-neutral-600 dark:text-neutral-300"
-        >
-          <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse-subtle" />
-          <span>Available for new projects</span>
-        </motion.div>
-
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          className="text-3xl sm:text-4xl md:text-5xl font-medium tracking-tight text-neutral-950 dark:text-white"
-        >
+    <div className="site-col">
+      <section className="mt-20 sm:mt-22">
+        <h1 className="font-display text-balance text-[28px] font-medium leading-8.25 sm:text-[34px] sm:leading-9.5 wide:text-[42px] wide:leading-10.75">
           Get in touch
-        </motion.h1>
+        </h1>
 
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-base sm:text-lg text-neutral-600 dark:text-neutral-300 leading-relaxed"
-        >
-          Have a project, a team to grow, or a hard problem to solve? Send a message — I reply within 24 hours.
-        </motion.p>
-      </div>
+        <p className="mt-3.5 text-[17px] leading-6 text-muted sm:mt-4.5 sm:text-[20px] sm:leading-7 wide:mt-6.25 wide:text-[24px] wide:leading-8">
+          Have a project, a team to grow, or a hard problem to solve? Send a
+          message — I reply within 24 hours.
+        </p>
 
-      {/* Interactive Contact Form Component */}
+        <p className="mt-5 flex items-center gap-2 text-[13px] font-medium text-muted sm:mt-6">
+          <span
+            aria-hidden="true"
+            className="animate-pulse-subtle h-2 w-2 shrink-0 rounded-full bg-emerald-500"
+          />
+          Available for new projects
+        </p>
+      </section>
+
       <ContactForm />
     </div>
   );

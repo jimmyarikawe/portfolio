@@ -1,235 +1,152 @@
-"use client";
-
-import { useState } from "react";
 import Link from "next/link";
-import { motion } from "framer-motion";
-import { ArrowDown, ArrowUpRight } from "lucide-react";
 import { projects } from "@/data/projects";
 import { articles } from "@/data/articles";
-import { ProjectCard } from "@/components/ProjectCard";
-import { WorkFilter } from "@/components/WorkFilter";
-import { ServicesGrid } from "@/components/ServicesGrid";
-import { JournalCard } from "@/components/JournalCard";
-import { HeroSpotlight } from "@/components/HeroSpotlight";
+import { achievements } from "@/data/profile";
+import { ProjectShowcase } from "@/components/ProjectShowcase";
+import { AvailabilityInterlude } from "@/components/AvailabilityInterlude";
+import { ExperienceList } from "@/components/ExperienceList";
+import { StackList } from "@/components/StackList";
+import { SocialLinks } from "@/components/SocialLinks";
 
 export default function HomePage() {
-  const [selectedCategory, setSelectedCategory] = useState("All");
-
-  const categories = [
-    "All",
-    "Fintech",
-    "Operational AI",
-    "AI & Cybersecurity",
-    "Voice AI",
-    "Mobility",
-  ];
-
-  const filteredProjects =
-    selectedCategory === "All"
-      ? projects
-      : projects.filter(
-          (p) =>
-            p.category.toLowerCase().includes(selectedCategory.toLowerCase()) ||
-            p.categories.some((c) =>
-              c.toLowerCase().includes(selectedCategory.toLowerCase())
-            )
-        );
-
   return (
-    <div className="w-full max-w-[1800px] mx-auto px-4 sm:px-8 lg:px-10 pt-12 md:pt-16 space-y-28 md:space-y-40">
-      {/* 1. HERO SECTION */}
-      <section className="flex flex-col lg:flex-row lg:items-center gap-10 lg:gap-16">
-        <div className="flex-1 space-y-8">
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            className="flex flex-wrap items-center gap-3"
-          >
-            <div className="glass-pill inline-flex items-center gap-2 px-3 py-1.5 rounded text-xs font-mono-accent text-neutral-700 dark:text-neutral-300">
-              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse-subtle" />
-              <span>Available for Select Projects & Leadership</span>
-            </div>
-            <span className="text-xs font-mono-accent text-neutral-400 dark:text-neutral-500 hidden sm:inline">
-              UK • MSc AI (Distinction)
-            </span>
-          </motion.div>
+    <div className="site-col">
+      {/* 1. INTRO */}
+      <section className="mt-20 sm:mt-22">
+        <h1 className="font-display text-balance text-[28px] font-medium leading-8.25 sm:text-[34px] sm:leading-9.5 wide:text-[42px] wide:leading-10.75">
+          Product Designer &amp; Manager at the intersection of craft, code
+          &amp; AI.
+        </h1>
 
-          <div className="space-y-6 max-w-3xl">
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-              className="text-3xl sm:text-4xl md:text-5xl font-medium tracking-tight text-neutral-950 dark:text-white leading-[1.12]"
+        <p className="mt-3.5 text-[17px] leading-6 text-muted sm:mt-4.5 sm:text-[20px] sm:leading-7 wide:mt-6.25 wide:text-[24px] wide:leading-8">
+          I’m <span className="text-ink">Jimmy Arikawe</span>. With 7+ years
+          across fintech, cybersecurity and enterprise systems — backed by an
+          MSc in Artificial Intelligence (Distinction) — I lead products from
+          zero-to-one strategy and interaction architecture to production code
+          and human-in-the-loop AI.
+        </p>
+      </section>
+
+      {/* 2. PROJECTS */}
+      <section className="mt-25 sm:mt-30">
+        <h2 className="mb-3.5 text-[17px] font-medium sm:mb-4.5 sm:text-[18px] wide:mb-6.5 wide:text-[20px]">
+          Selected Work
+        </h2>
+
+        {projects.map((project, index) => (
+          <ProjectShowcase
+            key={project.id}
+            project={project}
+            eager={index === 0}
+          />
+        ))}
+      </section>
+
+      {/* 3. AVAILABILITY INTERLUDE */}
+      <AvailabilityInterlude />
+
+      {/* 4. ABOUT */}
+      <section>
+        <h2 className="mb-3 text-[17px] font-medium sm:mb-4 sm:text-[18px] wide:text-[20px]">
+          About me
+        </h2>
+
+        <div className="[&>p]:mb-5 [&>p]:text-[17px] [&>p]:leading-6.5 [&>p]:text-muted sm:[&>p]:mb-6 sm:[&>p]:text-[19px] sm:[&>p]:leading-7 wide:[&>p]:mb-7.5 wide:[&>p]:text-[21px] wide:[&>p]:leading-7.5">
+          <p>
+            I’m a product designer and manager with 7+ years building digital
+            products across fintech, enterprise and emerging AI. I work across
+            the full lifecycle — research, interaction design, prototyping and
+            shipping — usually close to engineering.
+          </p>
+          <p>
+            I hold an MSc in Artificial Intelligence &amp; Applications, passed
+            with Distinction, from the{" "}
+            <a
+              href="https://www.strath.ac.uk"
+              target="_blank"
+              rel="noopener"
+              className="prose-link"
             >
-              Product Designer & Manager at the intersection of craft, code & AI.
-            </motion.h1>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-              className="space-y-6"
+              University of Strathclyde
+            </a>
+            , and bring hands-on ML and LLM experience to design work —
+            particularly AI interaction patterns, human-in-the-loop systems and
+            conversational interfaces.
+          </p>
+          <p>
+            I’m currently a Product Designer, Researcher &amp; Manager at
+            Radical Company, leading design and research across client
+            engagements from early concept through to high-fidelity prototype.
+          </p>
+          <p>
+            Before that I led product design at Omits Technology on a
+            cross-border payments platform, and at Recyclan on an operational
+            data platform used across 14+ countries. I’ve also published{" "}
+            <Link
+              href="/journal/tech-driven-solutions-for-africas-waste-problem"
+              className="prose-link"
             >
-              <p className="text-base sm:text-lg text-neutral-600 dark:text-neutral-300 leading-relaxed">
-                I’m <strong className="text-neutral-950 dark:text-white font-medium">Jimmy Arikawe</strong>. With 7+ years across fintech, cybersecurity, and enterprise systems — backed by an <span className="text-neutral-950 dark:text-white font-medium">MSc in Artificial Intelligence (Distinction)</span> — I lead products from zero-to-one strategy and interaction architecture to production code and human-in-the-loop AI.
-              </p>
+              research on tech-driven solutions for Africa’s waste problem
+            </Link>
+            .
+          </p>
+        </div>
+      </section>
 
-            <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs font-mono-accent text-neutral-500 dark:text-neutral-400">
-              <span className="flex items-center gap-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-neutral-400 dark:bg-neutral-600" />
-                7+ Years in Fintech & Enterprise
-              </span>
-              <span className="flex items-center gap-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-neutral-400 dark:bg-neutral-600" />
-                MSc AI (Distinction) · Strathclyde
-              </span>
-              <span className="flex items-center gap-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-neutral-400 dark:bg-neutral-600" />
-                Strategy · Interaction Systems · Code
-              </span>
-            </div>
+      {/* 5. EXPERIENCE + STACK */}
+      <div className="mt-10 flex flex-col sm:mt-14 sm:flex-row sm:justify-between sm:gap-6 wide:mt-22.5">
+        <div className="sm:w-[62%] wide:w-145">
+          <ExperienceList />
+        </div>
 
-            <div className="flex flex-wrap items-center gap-3 pt-2">
-              <a
-                href="#selected-work"
-                className="inline-flex items-center gap-2 px-5 py-3 rounded bg-neutral-950 text-white dark:bg-white dark:text-neutral-950 text-xs font-mono-accent hover:bg-neutral-800 dark:hover:bg-neutral-200 transition-colors"
-              >
-                <span>Explore Work</span>
-                <ArrowDown className="w-3.5 h-3.5" />
-              </a>
-
-              <Link
-                href="/about"
-                className="inline-flex items-center gap-1.5 px-5 py-3 rounded bg-neutral-100 dark:bg-white/5 border border-black/5 dark:border-white/10 text-neutral-900 dark:text-white text-xs font-mono-accent hover:bg-neutral-200 dark:hover:bg-white/10 transition-colors"
-              >
-                <span>About & Career</span>
-                <ArrowUpRight className="w-3.5 h-3.5" />
-              </Link>
-
-              <Link
-                href="/contact"
-                className="inline-flex items-center gap-1.5 px-5 py-3 rounded bg-white dark:bg-white/5 border border-black/10 dark:border-white/10 text-neutral-900 dark:text-white text-xs font-mono-accent hover:bg-neutral-50 dark:hover:bg-white/10 transition-colors"
-              >
-                <span>Get in Touch</span>
-                <ArrowUpRight className="w-3.5 h-3.5" />
-              </Link>
-            </div>
-          </motion.div>
+        <div className="mt-9 sm:mt-0 sm:w-[32%] wide:w-52.5">
+          <StackList />
         </div>
       </div>
 
-        {/* Right: Interactive holographic badge — ~1/5 of the viewport width on desktop */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.97 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.7, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-          className="w-48 h-48 sm:w-56 sm:h-56 lg:w-72 lg:h-72 mx-auto lg:mx-0 shrink-0"
-        >
-          <HeroSpotlight />
-        </motion.div>
+      {/* 6. WRITING */}
+      <section className="mt-12 sm:mt-18 wide:mt-30">
+        <h2 className="mb-3 text-[17px] font-medium sm:mb-4 sm:text-[18px] wide:text-[20px]">
+          Writing
+        </h2>
+
+        {articles.map((article) => (
+          <Link
+            key={article.slug}
+            href={`/journal/${article.slug}`}
+            data-cursor="Read article ↗"
+            className="group mb-5 block wide:mb-6.25"
+          >
+            <p className="text-[16px] leading-5.5 transition-colors group-hover:text-muted sm:text-[17px] wide:text-[20px] wide:leading-normal">
+              {article.title}
+            </p>
+            <p className="mt-1 text-[13px] font-medium text-dim sm:mt-1.5">
+              {article.category} · {article.date} · {article.readTime}
+            </p>
+          </Link>
+        ))}
       </section>
 
-      {/* 2. SELECTED WORK SECTION */}
-      <section id="selected-work" className="space-y-8 scroll-mt-28">
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-4 border-b border-black/5 dark:border-white/10">
-          <div>
-            <span className="text-xs font-mono-accent text-neutral-400 dark:text-neutral-500 uppercase tracking-wider block mb-1">
-              Portfolio
-            </span>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-medium tracking-tight text-neutral-950 dark:text-white">
-              Selected Work
-            </h2>
-          </div>
+      {/* 7. ACHIEVEMENTS */}
+      <section className="mt-12 sm:mt-18 wide:mt-30">
+        <h2 className="mb-3 text-[17px] font-medium sm:mb-4 sm:text-[18px] wide:text-[20px]">
+          Achievements
+        </h2>
 
-          <Link
-            href="/work"
-            className="text-xs font-mono-accent text-neutral-900 dark:text-neutral-200 hover:text-neutral-600 dark:hover:text-white inline-flex items-center gap-1 group"
-          >
-            <span>View all projects</span>
-            <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-          </Link>
-        </div>
-
-        {/* Category Filters */}
-        <WorkFilter
-          categories={categories}
-          activeCategory={selectedCategory}
-          onSelectCategory={setSelectedCategory}
-          layoutId="home-work-filter"
-        />
-
-        {/* Project Grid */}
-        {filteredProjects.length === 0 ? (
-          <div className="py-16 text-center space-y-3 rounded bg-neutral-50 dark:bg-white/[0.02] border border-black/5 dark:border-white/10">
-            <p className="text-sm text-neutral-500 font-mono-accent">No projects found in this category.</p>
-            <button
-              onClick={() => setSelectedCategory("All")}
-              className="text-xs font-mono-accent underline text-neutral-900 dark:text-white"
+        <ul>
+          {achievements.map((achievement) => (
+            <li
+              key={achievement}
+              className="mb-2.5 text-[16px] leading-5.5 text-muted sm:mb-3 sm:text-[17px] wide:mb-3.5 wide:text-[20px] wide:leading-6"
             >
-              Reset to All Projects
-            </button>
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4 md:gap-5">
-            {filteredProjects.map((project, index) => (
-              <ProjectCard
-                key={project.id}
-                project={project}
-                index={index}
-                priority={index < 2}
-              />
-            ))}
-          </div>
-        )}
-      </section>
-
-      {/* 4. TECHNICAL SKILLS & DISCIPLINES */}
-      <section className="space-y-8">
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-4 border-b border-black/5 dark:border-white/10">
-          <div>
-            <span className="text-xs font-mono-accent text-neutral-400 dark:text-neutral-500 uppercase tracking-wider block mb-1">
-              Capabilities
-            </span>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-medium tracking-tight text-neutral-950 dark:text-white">
-              What I bring
-            </h2>
-          </div>
-          <p className="text-sm text-neutral-500 dark:text-neutral-400 max-w-sm">
-            Core tools and disciplines I work across day to day.
-          </p>
-        </div>
-
-        <ServicesGrid />
-      </section>
-
-      {/* 5. JOURNAL & RESEARCH PUBLICATION */}
-      <section className="space-y-8">
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-4 border-b border-black/5 dark:border-white/10">
-          <div>
-            <span className="text-xs font-mono-accent text-neutral-400 dark:text-neutral-500 uppercase tracking-wider block mb-1">
-              Journal
-            </span>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-medium tracking-tight text-neutral-950 dark:text-white">
-              Recent Writing
-            </h2>
-          </div>
-
-          <Link
-            href="/journal"
-            className="text-xs font-mono-accent text-neutral-900 dark:text-neutral-200 hover:text-neutral-600 dark:hover:text-white inline-flex items-center gap-1 group"
-          >
-            <span>All Articles</span>
-            <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-          </Link>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
-          {articles.slice(0, 2).map((article, index) => (
-            <JournalCard key={article.slug} article={article} index={index} />
+              {achievement}
+            </li>
           ))}
-        </div>
+        </ul>
       </section>
+
+      {/* 8. SOCIALS */}
+      <SocialLinks />
     </div>
   );
 }

@@ -27,8 +27,9 @@ export function ThemeToggle({ className = "" }: { className?: string }) {
 
   // The server always renders "light" (it doesn't know the visitor's actual
   // preference), while the client's real theme is known immediately from the
-  // DOM (see ThemeProvider). That's fine for CSS — `dark:` classes are static
-  // markup, an ancestor attribute decides which apply. But this icon and its
+  // DOM (see ThemeProvider). That's fine for CSS — the colour tokens resolve
+  // from a `data-theme` attribute on an ancestor, so the markup is identical
+  // either way and only the computed values differ. But this icon and its
   // label DO branch in React, so showing the real value pre-mount would mismatch
   // what the server sent and throw a hydration error. Deferring to "light"
   // until mounted keeps this one icon in sync with SSR; the rest of the page
@@ -39,7 +40,7 @@ export function ThemeToggle({ className = "" }: { className?: string }) {
     <button
       onClick={toggleTheme}
       aria-label={mounted ? `Switch to ${theme === "light" ? "dark" : "light"} mode` : "Toggle theme"}
-      className={`relative p-2 rounded text-neutral-600 dark:text-neutral-300 hover:text-neutral-950 dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/10 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-950 dark:focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-(--background) ${className}`}
+      className={`relative rounded-full p-2 text-muted transition-colors hover:text-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-2 focus-visible:ring-offset-background ${className}`}
     >
       <motion.div
         key={displayTheme}

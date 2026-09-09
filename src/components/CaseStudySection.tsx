@@ -3,29 +3,19 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion, AnimatePresence, useScroll } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   ArrowLeft,
   ArrowRight,
   ArrowUpRight,
-  CheckCircle2,
-  Sparkles,
-  Layers,
-  Target,
-  Compass,
-  Share2,
   Check,
-  Maximize2,
-  X,
   ChevronLeft,
   ChevronRight,
-  ShieldCheck,
-  TrendingUp,
-  Cpu,
-  Palette,
-  Lightbulb,
+  Share2,
+  X,
 } from "lucide-react";
-import { Project } from "@/data/projects";
+import { ReadingProgressBar } from "@/components/ReadingProgressBar";
+import type { Project } from "@/data/projects";
 
 interface CaseStudySectionProps {
   project: Project;
@@ -33,20 +23,59 @@ interface CaseStudySectionProps {
   prevProject?: Project;
 }
 
+/*
+ * The type ramps are named rather than repeated: this template renders six
+ * chapters plus a fact sheet, and inlining the same four class strings twenty
+ * times is how the old version drifted out of the scale.
+ */
+const HEADING = "text-[17px] font-medium sm:text-[18px] wide:text-[20px]";
+const SUBHEADING =
+  "text-[16px] font-medium sm:text-[17px] wide:text-[19px]";
+const PROSE =
+  "text-[17px] leading-6.5 text-muted sm:text-[19px] sm:leading-7 wide:text-[21px] wide:leading-7.5";
+const BODY =
+  "text-[16px] leading-6 text-soft sm:text-[17px] wide:text-[18px] wide:leading-7";
+const META = "text-[13px] font-medium text-dim";
+const SECTION = "mt-12 sm:mt-18 wide:mt-30";
+
+/** Media frame: the source captures run 1:1 to 2.75:1, so they letterbox. */
+const FRAME =
+  "relative block overflow-hidden rounded-2xl bg-frame wide:rounded-[30px]";
+
 export function CaseStudySection({
   project,
   nextProject,
   prevProject,
 }: CaseStudySectionProps) {
-  const { scrollYProgress } = useScroll();
   const [copiedShare, setCopiedShare] = useState(false);
   const [activeImageIndex, setActiveImageIndex] = useState<number | null>(null);
 
-  // Consolidate hero + gallery images for lightbox navigation
+  // Consolidate hero + gallery images for lightbox navigation. The hero is
+  // usually already inside `gallery`; when it is not it leads the sequence.
   const primaryHero = project.heroImage || project.coverImage;
-  const modalImages = primaryHero && !project.gallery.includes(primaryHero)
-    ? [primaryHero, ...project.gallery]
-    : project.gallery;
+  const modalImages = project.gallery.includes(primaryHero)
+    ? project.gallery
+    : [primaryHero, ...project.gallery];
+  const heroIndex = Math.max(0, modalImages.indexOf(primaryHero));
+  const galleryId = `case-study-gallery-${project.slug}`;
+
+  /* Every field the fact sheet can show, in reading order. */
+  const factSheet: { label: string; value: string; note?: string }[] = [
+    { label: "Company / Client", value: project.client },
+    { label: "Responsibilities", value: project.role, note: project.services },
+    { label: "Category", value: project.category },
+    { label: "Year", value: project.year },
+    ...(project.duration
+      ? [{ label: "Duration", value: project.duration }]
+      : []),
+    { label: "Core Objective", value: project.goal || project.description },
+    {
+      label: "Measurable Impact",
+      value:
+        project.outcome ||
+        project.metrics.map((m) => `${m.value} ${m.label}`).join(" • "),
+    },
+  ];
 
   const handleShare = () => {
     if (typeof window !== "undefined") {
@@ -70,70 +99,74 @@ export function CaseStudySection({
 
   // Keyboard navigation for lightbox
   useEffect(() => {
+    const imageCount = modalImages.length;
+
     const handleKeyDown = (e: KeyboardEvent) => {
       if (activeImageIndex === null) return;
       if (e.key === "Escape") setActiveImageIndex(null);
-      if (e.key === "ArrowRight" && modalImages.length > 0) {
+      if (e.key === "ArrowRight" && imageCount > 0) {
         setActiveImageIndex((prev) =>
-          prev !== null && prev < modalImages.length - 1 ? prev + 1 : 0
+          prev !== null && prev < imageCount - 1 ? prev + 1 : 0
         );
       }
-      if (e.key === "ArrowLeft" && modalImages.length > 0) {
+      if (e.key === "ArrowLeft" && imageCount > 0) {
         setActiveImageIndex((prev) =>
-          prev !== null && prev > 0 ? prev - 1 : modalImages.length - 1
+          prev !== null && prev > 0 ? prev - 1 : imageCount - 1
         );
       }
     };
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [activeImageIndex, modalImages]);
+  }, [activeImageIndex, modalImages.length]);
+
+  const openLightbox = (src: string, fallbackIndex: number) => {
+    const index = modalImages.indexOf(src);
+    setActiveImageIndex(index === -1 ? fallbackIndex : index);
+  };
 
   return (
     <>
-      {/* Top Reading Progress Bar */}
-      <motion.div
-        style={{ scaleX: scrollYProgress }}
-        className="fixed top-0 left-0 right-0 h-[2px] bg-neutral-950 dark:bg-white origin-left z-50 pointer-events-none"
-      />
+      <ReadingProgressBar />
 
-      <article className="w-full max-w-[1800px] mx-auto px-4 sm:px-8 lg:px-10 pt-8 sm:pt-12 md:pt-16 pb-24">
-        {/* Navigation & Action Header */}
-        <div className="flex items-center justify-between gap-4 mb-8 sm:mb-12">
+      <div className="site-col">
+        {/* Back link + share / live actions */}
+        <div className="mt-20 flex flex-wrap items-center justify-between gap-4 sm:mt-22">
           <Link
             href="/work"
-            className="inline-flex items-center gap-2 text-xs font-mono-accent text-neutral-500 dark:text-neutral-400 hover:text-neutral-950 dark:hover:text-white transition-colors group"
+            className={`group inline-flex items-center gap-2 transition-colors hover:text-ink ${META}`}
           >
-            <ArrowLeft className="w-3.5 h-3.5 transition-transform group-hover:-translate-x-1" />
+            <ArrowLeft className="h-3.5 w-3.5 transition-transform group-hover:-translate-x-1" />
             <span>Selected Work</span>
           </Link>
 
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2.5">
             {project.liveUrl && (
               <a
                 href={project.liveUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded text-xs font-mono-accent bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 border border-emerald-200/50 dark:border-emerald-800/40 hover:bg-emerald-100 dark:hover:bg-emerald-900/60 transition-colors"
+                className="btn btn-outline btn-sml"
               >
                 <span>Live Platform</span>
-                <ArrowUpRight className="w-3.5 h-3.5" />
+                <ArrowUpRight className="h-3.5 w-3.5" />
               </a>
             )}
 
             <button
+              type="button"
               onClick={handleShare}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded text-xs font-mono-accent text-neutral-700 dark:text-neutral-300 bg-neutral-100 dark:bg-white/5 hover:bg-neutral-200 dark:hover:bg-white/10 border border-black/5 dark:border-white/10 transition-colors"
+              className="btn btn-outline btn-sml"
               title="Copy case study link"
             >
               {copiedShare ? (
                 <>
-                  <Check className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
-                  <span className="text-emerald-600 dark:text-emerald-400">Copied</span>
+                  <Check className="h-3.5 w-3.5" />
+                  <span>Copied</span>
                 </>
               ) : (
                 <>
-                  <Share2 className="w-3.5 h-3.5" />
+                  <Share2 className="h-3.5 w-3.5" />
                   <span>Share</span>
                 </>
               )}
@@ -141,521 +174,347 @@ export function CaseStudySection({
           </div>
         </div>
 
-        {/* 1. EDITORIAL HEADER & METADATA TABLE */}
-        <header className="space-y-6 mb-12 sm:mb-16">
-          <div className="flex flex-wrap items-center gap-2">
-            <span className="px-3 py-1 rounded bg-neutral-950 text-white dark:bg-white dark:text-neutral-950 text-xs font-mono-accent font-medium">
-              {project.category}
-            </span>
-            <span className="px-3 py-1 rounded bg-neutral-100 dark:bg-white/10 text-neutral-800 dark:text-neutral-200 text-xs font-mono-accent">
-              {project.year}
-            </span>
-            {project.duration && (
-              <span className="px-3 py-1 rounded bg-neutral-100 dark:bg-white/10 text-neutral-600 dark:text-neutral-400 text-xs font-mono-accent">
-                {project.duration}
-              </span>
-            )}
-          </div>
-
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight text-neutral-950 dark:text-white leading-[1.08] max-w-4xl">
+        {/* 1. TITLE + TAGLINE */}
+        <header className="mt-8 sm:mt-10">
+          <h1 className="font-display text-balance text-[28px] font-medium leading-8.25 sm:text-[34px] sm:leading-9.5 wide:text-[42px] wide:leading-10.75">
             {project.title}
           </h1>
 
-          <p className="text-lg sm:text-xl md:text-2xl text-neutral-600 dark:text-neutral-300 max-w-3xl leading-relaxed font-normal">
+          <p className="mt-3.5 text-[17px] leading-6 text-muted sm:mt-4.5 sm:text-[20px] sm:leading-7 wide:mt-6.25 wide:text-[24px] wide:leading-8">
             {project.tagline}
           </p>
-
-          {/* Structured Metadata Deck (Inma Varandela Style) */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 p-6 sm:p-8 rounded bg-neutral-50 dark:bg-white/[0.02] border border-black/5 dark:border-white/10 text-xs font-mono-accent">
-            <div className="space-y-1.5">
-              <span className="text-neutral-400 dark:text-neutral-500 uppercase tracking-wider block text-[10px]">
-                Company / Client
-              </span>
-              <span className="text-neutral-900 dark:text-white font-medium text-sm block">
-                {project.client}
-              </span>
-            </div>
-
-            <div className="space-y-1.5">
-              <span className="text-neutral-400 dark:text-neutral-500 uppercase tracking-wider block text-[10px]">
-                Responsibilities
-              </span>
-              <span className="text-neutral-900 dark:text-white font-medium text-sm block">
-                {project.role}
-              </span>
-              <span className="text-neutral-500 dark:text-neutral-400 text-xs block leading-relaxed">
-                {project.services}
-              </span>
-            </div>
-
-            <div className="space-y-1.5">
-              <span className="text-neutral-400 dark:text-neutral-500 uppercase tracking-wider block text-[10px]">
-                Core Objective
-              </span>
-              <span className="text-neutral-800 dark:text-neutral-200 text-xs block leading-relaxed">
-                {project.goal || project.description}
-              </span>
-            </div>
-
-            <div className="space-y-1.5">
-              <span className="text-neutral-400 dark:text-neutral-500 uppercase tracking-wider block text-[10px]">
-                Measurable Impact
-              </span>
-              <span className="text-neutral-950 dark:text-white font-medium text-xs block leading-relaxed">
-                {project.outcome || project.metrics.map((m) => `${m.value} ${m.label}`).join(" • ")}
-              </span>
-            </div>
-          </div>
         </header>
 
-        {/* 2. FULL-BLEED HERO VISUAL */}
-        <section className="mb-20 sm:mb-28">
-          <div
-            onClick={() => setActiveImageIndex(0)}
-            className="group relative w-full aspect-[16/10] sm:aspect-[16/9] rounded overflow-hidden bg-neutral-100 dark:bg-neutral-900 border border-black/5 dark:border-white/10 cursor-zoom-in transition-all duration-500 hover:border-black/20 dark:hover:border-white/20"
+        {/*
+          2. HERO VISUAL — breaks the 860px column to sit in viewport gutters.
+          `max()` keeps the inset non-negative between 900px and 1000px, where
+          a bare `calc(50vw - 500px)` would go negative and overflow.
+        */}
+        <div className="ml-[calc(50%-50vw)] mt-8 w-screen px-6.25 sm:mt-10 sm:px-6 wide:mt-12.5 wide:px-[max(24px,calc(50vw-500px))]">
+          <button
+            type="button"
+            onClick={() => setActiveImageIndex(heroIndex)}
+            data-cursor="Expand"
+            className={`${FRAME} aspect-16/10 w-full focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink`}
           >
             <Image
-              src={project.heroImage || project.coverImage}
-              alt={project.title}
+              src={primaryHero}
+              alt={`${project.title} — ${project.tagline}`}
               fill
-              priority
-              sizes="(max-width: 1200px) 100vw, 1200px"
-              className="object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.02]"
+              sizes="(max-width: 639px) calc(100vw - 50px), (max-width: 899px) calc(100vw - 48px), 1000px"
+              /* `priority` is deprecated in Next 16 — see next/dist/docs image.md */
+              loading="eager"
+              fetchPriority="high"
+              className="object-contain"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-between p-6">
-              <span className="text-xs font-mono-accent text-white/90 bg-black/60 backdrop-blur-md px-3 py-1.5 rounded">
-                Hero Showcase • Click to expand
-              </span>
-              <div className="w-8 h-8 rounded bg-white/90 text-neutral-950 flex items-center justify-center shadow-lg">
-                <Maximize2 className="w-4 h-4" />
-              </div>
+            <span className="sr-only">
+              Expand the {project.title} hero image
+            </span>
+          </button>
+        </div>
+
+        {/* 3. FACT SHEET */}
+        <dl className="mt-10 sm:mt-12 wide:mt-15">
+          {factSheet.map((row) => (
+            <div
+              key={row.label}
+              className="flex flex-col gap-1 border-t border-rule py-4 sm:flex-row sm:gap-6 sm:py-4.5"
+            >
+              <dt className="text-[15px] font-medium leading-6.5 text-faint sm:w-[32%] sm:shrink-0 sm:text-[16px] wide:w-52.5">
+                {row.label}
+              </dt>
+              <dd className={`sm:flex-1 ${BODY}`}>
+                {row.value}
+                {row.note && (
+                  <span className="mt-1 block text-[15px] font-medium leading-6.5 text-faint sm:text-[16px]">
+                    {row.note}
+                  </span>
+                )}
+              </dd>
             </div>
+          ))}
+        </dl>
+
+        {/* CHAPTER 01: CONTEXT & MARKET OPPORTUNITY */}
+        <section className={SECTION}>
+          <p className={`mb-2 ${META}`}>01 / Context &amp; Background</p>
+          <h2 className={`mb-3 sm:mb-4 ${HEADING}`}>
+            The Landscape &amp; Opportunity
+          </h2>
+          <p className={PROSE}>{project.overview}</p>
+        </section>
+
+        {/* CHAPTER 02: THE CORE CHALLENGE */}
+        <section className={SECTION}>
+          <p className={`mb-2 ${META}`}>02 / The Core Challenge</p>
+          <h2 className={`mb-3 sm:mb-4 ${HEADING}`}>User Anxiety &amp; Friction</h2>
+          <p className={PROSE}>{project.challenge}</p>
+        </section>
+
+        {/* CHAPTER 03: DESIGN STRATEGY & PRINCIPLES */}
+        {project.principles && project.principles.length > 0 && (
+          <section className={SECTION}>
+            <p className={`mb-2 ${META}`}>03 / Design Principles</p>
+            <h2 className={`mb-3 sm:mb-4 ${HEADING}`}>Guiding Foundations</h2>
+
+            <div className="grid gap-7 sm:grid-cols-3 sm:gap-x-6 sm:gap-y-8">
+              {project.principles.map((principle, idx) => (
+                <div key={principle.title} className="border-t border-rule pt-4">
+                  <p className={META}>0{idx + 1}</p>
+                  <h3 className={`mt-2 ${SUBHEADING}`}>{principle.title}</h3>
+                  <p className={`mt-1.5 ${BODY}`}>{principle.description}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* CHAPTER 04: THE EXPERIENCE & SOLUTION WALKTHROUGH */}
+        <section className={SECTION}>
+          <p className={`mb-2 ${META}`}>04 / Core Solutions</p>
+          <h2 className={`mb-3 sm:mb-4 ${HEADING}`}>The User Experience</h2>
+          <p className={`mb-5 sm:mb-6 wide:mb-7.5 ${PROSE}`}>
+            {project.solution}
+          </p>
+
+          <div className="grid gap-7 sm:grid-cols-2 sm:gap-x-10 sm:gap-y-8">
+            {project.features.map((feature) => (
+              <div key={feature.title} className="border-t border-rule pt-4">
+                <h3 className={SUBHEADING}>{feature.title}</h3>
+                <p className={`mt-1.5 ${BODY}`}>{feature.description}</p>
+              </div>
+            ))}
+          </div>
+
+          {/* Visual walkthrough — full-bleed, horizontally snapping */}
+          <div className="mt-10 flex flex-wrap items-baseline justify-between gap-2 sm:mt-12">
+            <h3 className={SUBHEADING}>
+              High-Fidelity Artifacts &amp; Flows
+            </h3>
+            <p className={META}>
+              {project.gallery.length} Screens Documented
+            </p>
+          </div>
+
+          <div
+            id={galleryId}
+            role="region"
+            aria-label={`Screens from ${project.title}`}
+            className="no-scrollbar ml-[calc(50%-50vw)] mt-5 flex w-screen snap-x snap-mandatory gap-2.5 overflow-x-auto overflow-y-hidden pl-6.25 pr-6.25 scroll-pl-6.25 sm:mt-6 sm:gap-3 sm:pl-6 sm:pr-6 sm:scroll-pl-6 wide:mt-7.5 wide:gap-10 wide:pl-[calc(50vw-430px)] wide:pr-[calc(50vw-430px)] wide:scroll-pl-[calc(50vw-430px)]"
+          >
+            {project.gallery.map((img, idx) => (
+              <button
+                key={`${img}-${idx}`}
+                type="button"
+                onClick={() => openLightbox(img, idx)}
+                data-cursor="Expand"
+                className={`${FRAME} aspect-860/620 w-[82vw] shrink-0 snap-start focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink sm:w-[80vw] wide:w-215`}
+              >
+                <Image
+                  src={img}
+                  alt={`${project.title} screen ${idx + 1}`}
+                  fill
+                  sizes="(max-width: 639px) 82vw, (max-width: 899px) 80vw, 860px"
+                  loading="lazy"
+                  className="object-contain"
+                />
+                <span className="sr-only">
+                  Expand screen {idx + 1} of {project.gallery.length}
+                </span>
+              </button>
+            ))}
           </div>
         </section>
 
-        {/* 3. STRUCTURED EDITORIAL CHAPTERS */}
-        <div className="space-y-20 sm:space-y-28">
+        {/* CHAPTER 05: DESIGN SYSTEM & CRAFT */}
+        <section className={SECTION}>
+          <p className={`mb-2 ${META}`}>05 / System &amp; Craft</p>
+          <h2 className={`mb-3 sm:mb-4 ${HEADING}`}>Component Architecture</h2>
+          <p className={PROSE}>{project.designSystem}</p>
+        </section>
 
-          {/* CHAPTER 01: CONTEXT & MARKET OPPORTUNITY */}
-          <section className="grid grid-cols-1 md:grid-cols-12 gap-8 sm:gap-12 pt-12 border-t border-black/5 dark:border-white/10">
-            <div className="md:col-span-4 space-y-2 md:sticky md:top-24 md:self-start">
-              <span className="text-xs font-mono-accent text-neutral-400 dark:text-neutral-500 uppercase tracking-wider block">
-                01 / Context & Background
-              </span>
-              <h2 className="text-xl sm:text-2xl font-medium tracking-tight text-neutral-950 dark:text-white">
-                The Landscape & Opportunity
-              </h2>
-            </div>
+        {/* CHAPTER 06: RESULTS, IMPACT & TAKEAWAYS */}
+        <section className={SECTION}>
+          <p className={`mb-2 ${META}`}>06 / Outcomes &amp; Impact</p>
+          <h2 className={`mb-3 sm:mb-4 ${HEADING}`}>Measurable Results</h2>
 
-            <div className="md:col-span-8 space-y-6 text-neutral-600 dark:text-neutral-300 leading-relaxed text-base sm:text-lg">
-              <p>{project.overview}</p>
-              
-              <div className="p-5 sm:p-6 rounded bg-neutral-100/70 dark:bg-white/[0.03] border border-black/5 dark:border-white/10 space-y-2">
-                <div className="flex items-center gap-2 text-xs font-mono-accent text-neutral-900 dark:text-white font-medium">
-                  <Compass className="w-4 h-4 text-neutral-500" />
-                  <span>Cross-Functional Leadership</span>
-                </div>
-                <p className="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed font-normal">
-                  Collaborated across Product, Engineering, Compliance, and Customer Experience teams to ensure technical feasibility, risk mitigation, and seamless global scalability from Day 1.
-                </p>
+          <dl className="grid grid-cols-2 gap-x-6 gap-y-7 sm:grid-cols-4">
+            {project.metrics.map((metric) => (
+              <div
+                key={metric.label}
+                className="flex flex-col-reverse gap-1 border-t border-rule pt-4"
+              >
+                <dt className={META}>{metric.label}</dt>
+                <dd className="text-[24px] font-medium leading-7 text-ink sm:text-[26px] sm:leading-8 wide:text-[30px] wide:leading-9">
+                  {metric.value}
+                </dd>
               </div>
-            </div>
-          </section>
+            ))}
+          </dl>
 
-          {/* CHAPTER 02: THE CORE CHALLENGE */}
-          <section className="grid grid-cols-1 md:grid-cols-12 gap-8 sm:gap-12 pt-12 border-t border-black/5 dark:border-white/10">
-            <div className="md:col-span-4 space-y-2 md:sticky md:top-24 md:self-start">
-              <span className="text-xs font-mono-accent text-neutral-400 dark:text-neutral-500 uppercase tracking-wider block">
-                02 / The Core Challenge
-              </span>
-              <h2 className="text-xl sm:text-2xl font-medium tracking-tight text-neutral-950 dark:text-white">
-                User Anxiety & Friction
-              </h2>
-            </div>
-
-            <div className="md:col-span-8 space-y-6">
-              <p className="text-neutral-600 dark:text-neutral-300 leading-relaxed text-base sm:text-lg">
-                {project.challenge}
-              </p>
-
-              {/* Comparative Challenge vs Goal Bento */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
-                <div className="p-5 rounded bg-red-500/[0.03] dark:bg-red-500/[0.05] border border-red-500/15 dark:border-red-500/20 space-y-2">
-                  <div className="flex items-center gap-2 text-xs font-mono-accent text-red-700 dark:text-red-400 font-medium">
-                    <Target className="w-3.5 h-3.5" />
-                    <span>The User Problem</span>
-                  </div>
-                  <p className="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed">
-                    Unpredictable delays, opaque transaction fees, and complex verification create cognitive fatigue and drop-off.
-                  </p>
-                </div>
-
-                <div className="p-5 rounded bg-emerald-500/[0.03] dark:bg-emerald-500/[0.05] border border-emerald-500/15 dark:border-emerald-500/20 space-y-2">
-                  <div className="flex items-center gap-2 text-xs font-mono-accent text-emerald-700 dark:text-emerald-400 font-medium">
-                    <CheckCircle2 className="w-3.5 h-3.5" />
-                    <span>The Design Mandate</span>
-                  </div>
-                  <p className="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed">
-                    Deliver instant clarity, real-time fee locks, and seamless biometric authorization to establish trust.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          {/* CHAPTER 03: DESIGN STRATEGY & PRINCIPLES */}
-          {project.principles && project.principles.length > 0 && (
-            <section className="grid grid-cols-1 md:grid-cols-12 gap-8 sm:gap-12 pt-12 border-t border-black/5 dark:border-white/10">
-              <div className="md:col-span-4 space-y-2 md:sticky md:top-24 md:self-start">
-                <span className="text-xs font-mono-accent text-neutral-400 dark:text-neutral-500 uppercase tracking-wider block">
-                  03 / Design Principles
-                </span>
-                <h2 className="text-xl sm:text-2xl font-medium tracking-tight text-neutral-950 dark:text-white">
-                  Guiding Foundations
-                </h2>
-              </div>
-
-              <div className="md:col-span-8 space-y-4">
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                  {project.principles.map((principle, idx) => (
-                    <div
-                      key={idx}
-                      className="p-5 rounded bg-neutral-50 dark:bg-white/[0.02] border border-black/5 dark:border-white/10 space-y-2 flex flex-col justify-between"
-                    >
-                      <span className="text-xs font-mono-accent text-neutral-400 dark:text-neutral-500">
-                        0{idx + 1}
-                      </span>
-                      <div>
-                        <h3 className="text-sm font-medium text-neutral-950 dark:text-white mb-1">
-                          {principle.title}
-                        </h3>
-                        <p className="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed">
-                          {principle.description}
-                        </p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </section>
-          )}
-
-          {/* CHAPTER 04: THE EXPERIENCE & SOLUTION WALKTHROUGH */}
-          <section className="grid grid-cols-1 md:grid-cols-12 gap-8 sm:gap-12 pt-12 border-t border-black/5 dark:border-white/10">
-            <div className="md:col-span-4 space-y-2 md:sticky md:top-24 md:self-start">
-              <span className="text-xs font-mono-accent text-neutral-400 dark:text-neutral-500 uppercase tracking-wider block">
-                04 / Core Solutions
-              </span>
-              <h2 className="text-xl sm:text-2xl font-medium tracking-tight text-neutral-950 dark:text-white">
-                The User Experience
-              </h2>
-            </div>
-
-            <div className="md:col-span-8 space-y-8">
-              <p className="text-neutral-600 dark:text-neutral-300 leading-relaxed text-base sm:text-lg">
-                {project.solution}
-              </p>
-
-              {/* Core Feature Pillars */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {project.features.map((feature, idx) => (
-                  <div
-                    key={idx}
-                    className="p-5 rounded bg-neutral-50 dark:bg-white/[0.02] border border-black/5 dark:border-white/10 space-y-2"
-                  >
-                    <div className="flex items-center gap-2">
-                      <Sparkles className="w-3.5 h-3.5 text-neutral-400" />
-                      <h3 className="text-sm font-medium text-neutral-950 dark:text-white">
-                        {feature.title}
-                      </h3>
-                    </div>
-                    <p className="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed">
-                      {feature.description}
-                    </p>
-                  </div>
-                ))}
-              </div>
-
-              {/* Curated Visual Artifact Walkthrough */}
-              <div className="space-y-6 pt-6">
-                <div className="flex items-center justify-between">
-                  <span className="text-xs font-mono-accent text-neutral-400 dark:text-neutral-500 uppercase tracking-wider">
-                    High-Fidelity Artifacts & Flows
-                  </span>
-                  <span className="text-xs font-mono-accent text-neutral-500">
-                    {project.gallery.length} Screens Documented
-                  </span>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                  {project.gallery.map((img, idx) => (
-                    <div
-                      key={idx}
-                      onClick={() => {
-                        const targetIdx = modalImages.indexOf(img);
-                        setActiveImageIndex(targetIdx !== -1 ? targetIdx : idx);
-                      }}
-                      className={`group relative rounded overflow-hidden bg-neutral-100 dark:bg-neutral-900 border border-black/5 dark:border-white/10 cursor-zoom-in transition-all duration-300 hover:border-black/20 dark:hover:border-white/20 ${
-                        idx === 0 ? "sm:col-span-2 aspect-[16/10]" : "aspect-[4/3] sm:aspect-[16/11]"
-                      }`}
-                    >
-                      <Image
-                        src={img}
-                        alt={`${project.title} screen ${idx + 1}`}
-                        fill
-                        sizes="(max-width: 768px) 100vw, 800px"
-                        className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]"
-                      />
-                      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300 flex items-end justify-between p-4 opacity-0 group-hover:opacity-100">
-                        <span className="text-[11px] font-mono-accent text-white bg-black/70 backdrop-blur-md px-2.5 py-1 rounded">
-                          Artifact 0{idx + 1} • Expand
-                        </span>
-                        <div className="w-7 h-7 rounded bg-white text-neutral-950 flex items-center justify-center">
-                          <Maximize2 className="w-3.5 h-3.5" />
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </section>
-
-          {/* CHAPTER 05: DESIGN SYSTEM & CRAFT */}
-          <section className="grid grid-cols-1 md:grid-cols-12 gap-8 sm:gap-12 pt-12 border-t border-black/5 dark:border-white/10">
-            <div className="md:col-span-4 space-y-2 md:sticky md:top-24 md:self-start">
-              <span className="text-xs font-mono-accent text-neutral-400 dark:text-neutral-500 uppercase tracking-wider block">
-                05 / System & Craft
-              </span>
-              <h2 className="text-xl sm:text-2xl font-medium tracking-tight text-neutral-950 dark:text-white">
-                Component Architecture
-              </h2>
-            </div>
-
-            <div className="md:col-span-8 space-y-6">
-              <p className="text-neutral-600 dark:text-neutral-300 leading-relaxed text-base sm:text-lg">
-                {project.designSystem}
-              </p>
-
-              {/* Design System Craft Grid */}
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
-                <div className="p-4 rounded bg-neutral-50 dark:bg-white/[0.02] border border-black/5 dark:border-white/10 space-y-1.5">
-                  <span className="text-neutral-400 dark:text-neutral-500 text-[10px] font-mono-accent uppercase tracking-wider block">
-                    Typography & Scale
-                  </span>
-                  <span className="text-xs font-medium text-neutral-900 dark:text-white block">
-                    Inter & JetBrains Mono
-                  </span>
-                  <p className="text-[11px] text-neutral-500 dark:text-neutral-400">
-                    High legibility for numeric data, micro-amounts, and tabular currency rates.
-                  </p>
-                </div>
-
-                <div className="p-4 rounded bg-neutral-50 dark:bg-white/[0.02] border border-black/5 dark:border-white/10 space-y-1.5">
-                  <span className="text-neutral-400 dark:text-neutral-500 text-[10px] font-mono-accent uppercase tracking-wider block">
-                    Color Semantics
-                  </span>
-                  <span className="text-xs font-medium text-neutral-900 dark:text-white block">
-                    State-Driven Tokens
-                  </span>
-                  <p className="text-[11px] text-neutral-500 dark:text-neutral-400">
-                    Color reserved strictly for operational states, success verification, and critical alerts.
-                  </p>
-                </div>
-
-                <div className="p-4 rounded bg-neutral-50 dark:bg-white/[0.02] border border-black/5 dark:border-white/10 space-y-1.5">
-                  <span className="text-neutral-400 dark:text-neutral-500 text-[10px] font-mono-accent uppercase tracking-wider block">
-                    Accessibility
-                  </span>
-                  <span className="text-xs font-medium text-neutral-900 dark:text-white block">
-                    WCAG AAA / AA
-                  </span>
-                  <p className="text-[11px] text-neutral-500 dark:text-neutral-400">
-                    4.5:1 minimum contrast across light & dark modes with full keyboard navigability.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          {/* CHAPTER 06: RESULTS, IMPACT & TAKEAWAYS */}
-          <section className="grid grid-cols-1 md:grid-cols-12 gap-8 sm:gap-12 pt-12 border-t border-black/5 dark:border-white/10">
-            <div className="md:col-span-4 space-y-2 md:sticky md:top-24 md:self-start">
-              <span className="text-xs font-mono-accent text-neutral-400 dark:text-neutral-500 uppercase tracking-wider block">
-                06 / Outcomes & Impact
-              </span>
-              <h2 className="text-xl sm:text-2xl font-medium tracking-tight text-neutral-950 dark:text-white">
-                Measurable Results
-              </h2>
-            </div>
-
-            <div className="md:col-span-8 space-y-8">
-              {/* Quantified Impact Deck */}
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                {project.metrics.map((metric, idx) => (
-                  <div
-                    key={idx}
-                    className="p-5 rounded bg-neutral-950 text-white dark:bg-white dark:text-neutral-950 space-y-1"
-                  >
-                    <span className="text-2xl sm:text-3xl font-medium tracking-tight block">
-                      {metric.value}
-                    </span>
-                    <span className="text-xs font-mono-accent opacity-80 block leading-tight">
-                      {metric.label}
-                    </span>
-                  </div>
-                ))}
-              </div>
-
-              {/* Retrospective Takeaway Card */}
-              <div className="p-6 sm:p-8 rounded bg-neutral-50 dark:bg-white/[0.02] border border-black/5 dark:border-white/10 space-y-3">
-                <div className="flex items-center gap-2 text-xs font-mono-accent text-neutral-900 dark:text-white font-medium">
-                  <Lightbulb className="w-4 h-4 text-amber-500" />
-                  <span>Key Retrospective & Product Learnings</span>
-                </div>
-                <p className="text-sm text-neutral-600 dark:text-neutral-300 leading-relaxed font-normal">
-                  {project.takeaways}
-                </p>
-              </div>
-
-              {/* Roadmap if present */}
-              {project.roadmap && project.roadmap.length > 0 && (
-                <div className="space-y-3 pt-2">
-                  <span className="text-xs font-mono-accent text-neutral-400 dark:text-neutral-500 uppercase tracking-wider block">
-                    Future Roadmap & Next Iterations
-                  </span>
-                  <ul className="space-y-2 text-xs text-neutral-600 dark:text-neutral-400 font-mono-accent">
-                    {project.roadmap.map((item, idx) => (
-                      <li key={idx} className="flex items-start gap-2">
-                        <span className="text-neutral-400 mt-0.5">→</span>
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-            </div>
-          </section>
-
-        </div>
-
-        {/* 4. NEXT PROJECT TRANSITION CARD */}
-        {nextProject && (
-          <div className="mt-24 sm:mt-32 pt-12 border-t border-black/5 dark:border-white/10">
-            <Link
-              href={`/work/${nextProject.slug}`}
-              className="group block p-6 sm:p-10 rounded bg-neutral-50 dark:bg-white/[0.02] border border-black/5 dark:border-white/10 hover:border-black/20 dark:hover:border-white/20 transition-all duration-300"
-            >
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6">
-                <div className="space-y-2 max-w-xl">
-                  <span className="text-xs font-mono-accent text-neutral-400 dark:text-neutral-500 uppercase tracking-wider">
-                    Next Case Study
-                  </span>
-                  <h3 className="text-2xl sm:text-3xl font-medium tracking-tight text-neutral-950 dark:text-white group-hover:underline decoration-1 underline-offset-4">
-                    {nextProject.title}
-                  </h3>
-                  <p className="text-xs sm:text-sm text-neutral-500 dark:text-neutral-400 line-clamp-2">
-                    {nextProject.tagline}
-                  </p>
-                </div>
-
-                <div className="flex items-center gap-4 self-start sm:self-center">
-                  <div className="relative w-20 h-14 sm:w-28 sm:h-18 rounded overflow-hidden bg-neutral-200 dark:bg-neutral-800 border border-black/5 dark:border-white/10 shrink-0">
-                    <Image
-                      src={nextProject.coverImage}
-                      alt={nextProject.title}
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-                  <div className="w-10 h-10 rounded bg-neutral-950 text-white dark:bg-white dark:text-neutral-950 flex items-center justify-center transition-transform duration-300 group-hover:translate-x-1">
-                    <ArrowRight className="w-4 h-4" />
-                  </div>
-                </div>
-              </div>
-            </Link>
+          <div className="mt-10 sm:mt-12">
+            <h3 className={SUBHEADING}>
+              Key Retrospective &amp; Product Learnings
+            </h3>
+            <p className={`mt-2 ${BODY}`}>{project.takeaways}</p>
           </div>
-        )}
-      </article>
 
-      {/* FULLSCREEN LIGHTBOX MODAL */}
+          {project.roadmap && project.roadmap.length > 0 && (
+            <div className="mt-9 sm:mt-10">
+              <h3 className={SUBHEADING}>
+                Future Roadmap &amp; Next Iterations
+              </h3>
+              <ul className="mt-2">
+                {project.roadmap.map((item) => (
+                  <li
+                    key={item}
+                    className={`mb-2 flex gap-2.5 last:mb-0 ${BODY}`}
+                  >
+                    <span aria-hidden="true" className="text-faint">
+                      →
+                    </span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </section>
+
+        {/* 4. PREVIOUS / NEXT CASE STUDY */}
+        {(prevProject || nextProject) && (
+          <nav
+            aria-label="More case studies"
+            className={`grid gap-9 sm:grid-cols-2 sm:gap-6 ${SECTION}`}
+          >
+            {[
+              {
+                label: "Previous Case Study",
+                target: prevProject,
+                forward: false,
+              },
+              { label: "Next Case Study", target: nextProject, forward: true },
+            ].map(({ label, target, forward }) =>
+              target ? (
+                <Link
+                  key={label}
+                  href={`/work/${target.slug}`}
+                  data-cursor="View project ↗"
+                  className="group block"
+                >
+                  <span className={`block ${META}`}>{label}</span>
+
+                  <span className={`${FRAME} mt-3 aspect-16/10 w-full`}>
+                    <Image
+                      src={target.coverImage}
+                      alt={target.title}
+                      fill
+                      sizes="(max-width: 639px) calc(100vw - 50px), (max-width: 899px) 44vw, 418px"
+                      loading="lazy"
+                      className="object-contain"
+                    />
+                  </span>
+
+                  <span className="mt-3 flex items-center gap-2 text-[16px] leading-5.5 transition-colors group-hover:text-muted sm:text-[17px] wide:text-[20px] wide:leading-normal">
+                    {target.title}
+                    {forward ? (
+                      <ArrowRight className="h-4 w-4 shrink-0 transition-transform group-hover:translate-x-1" />
+                    ) : (
+                      <ArrowLeft className="h-4 w-4 shrink-0 transition-transform group-hover:-translate-x-1" />
+                    )}
+                  </span>
+
+                  <span className={`mt-1 block ${BODY}`}>{target.tagline}</span>
+                </Link>
+              ) : null
+            )}
+          </nav>
+        )}
+      </div>
+
+      {/* FULLSCREEN LIGHTBOX — always dark, so it carries its own palette. */}
       <AnimatePresence>
         {activeImageIndex !== null && modalImages.length > 0 && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 bg-black/95 backdrop-blur-md flex flex-col justify-between p-4 sm:p-8 select-none"
+            className="fixed inset-0 z-50 flex select-none flex-col justify-between bg-black/95 p-4 backdrop-blur-md sm:p-8"
             onClick={() => setActiveImageIndex(null)}
           >
             {/* Top Lightbox Bar */}
             <div
-              className="flex items-center justify-between text-white text-xs font-mono-accent z-10"
+              className="z-10 flex items-center justify-between gap-4 text-[13px] font-medium text-white"
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="flex items-center gap-3">
-                <span className="font-medium text-white">{project.title}</span>
-                <span className="text-neutral-500">•</span>
-                <span className="text-neutral-400">
+              <div className="flex flex-wrap items-center gap-2.5">
+                <span>{project.title}</span>
+                <span className="text-white/40">•</span>
+                <span className="text-white/60">
                   Artifact {activeImageIndex + 1} of {modalImages.length}
                 </span>
               </div>
 
               <div className="flex items-center gap-3">
-                <span className="hidden sm:inline text-[11px] text-neutral-500">
+                <span className="hidden text-white/50 sm:inline">
                   Use ← → keys to navigate • Esc to close
                 </span>
                 <button
+                  type="button"
                   onClick={() => setActiveImageIndex(null)}
-                  className="p-2 rounded bg-white/10 hover:bg-white/20 text-white transition-colors"
+                  className="btn btn-invert btn-sml"
                   aria-label="Close modal"
                 >
-                  <X className="w-4 h-4" />
+                  <X className="h-4 w-4" />
                 </button>
               </div>
             </div>
 
             {/* Central Modal Image */}
             <div
-              className="relative w-full h-[75vh] flex items-center justify-center my-auto"
+              className="relative my-auto flex h-[75vh] w-full items-center justify-center"
               onClick={(e) => e.stopPropagation()}
             >
               <Image
                 src={modalImages[activeImageIndex]}
                 alt={`${project.title} artifact ${activeImageIndex + 1}`}
                 fill
+                sizes="100vw"
+                loading="eager"
+                fetchPriority="high"
                 className="object-contain"
-                priority
               />
             </div>
 
             {/* Bottom Controls */}
             <div
-              className="flex items-center justify-between text-white z-10 max-w-sm mx-auto w-full"
+              className="z-10 mx-auto flex w-full max-w-96 items-center justify-between text-[13px] font-medium text-white"
               onClick={(e) => e.stopPropagation()}
             >
               <button
+                type="button"
                 onClick={() =>
                   setActiveImageIndex((prev) =>
                     prev !== null && prev > 0 ? prev - 1 : modalImages.length - 1
                   )
                 }
-                className="inline-flex items-center gap-2 px-4 py-2 rounded bg-white/10 hover:bg-white/20 text-xs font-mono-accent transition-colors"
+                className="btn btn-invert btn-sml"
                 aria-label="Previous image"
               >
-                <ChevronLeft className="w-4 h-4" />
+                <ChevronLeft className="h-4 w-4" />
                 <span>Prev</span>
               </button>
 
-              <div className="flex gap-1.5 overflow-x-auto py-1 max-w-[160px] no-scrollbar">
-                {modalImages.map((_, i) => (
+              <div className="no-scrollbar flex max-w-40 gap-1.5 overflow-x-auto py-1">
+                {modalImages.map((src, i) => (
                   <button
-                    key={i}
+                    key={`${src}-${i}`}
+                    type="button"
                     onClick={() => setActiveImageIndex(i)}
-                    className={`w-2 h-2 rounded-full transition-all shrink-0 ${
+                    className={`h-2 shrink-0 rounded-full transition-all ${
                       i === activeImageIndex
-                        ? "bg-white w-5"
-                        : "bg-white/30 hover:bg-white/60"
+                        ? "w-5 bg-white"
+                        : "w-2 bg-white/30 hover:bg-white/60"
                     }`}
                     aria-label={`Go to slide ${i + 1}`}
                   />
@@ -663,16 +522,17 @@ export function CaseStudySection({
               </div>
 
               <button
+                type="button"
                 onClick={() =>
                   setActiveImageIndex((prev) =>
                     prev !== null && prev < modalImages.length - 1 ? prev + 1 : 0
                   )
                 }
-                className="inline-flex items-center gap-2 px-4 py-2 rounded bg-white/10 hover:bg-white/20 text-xs font-mono-accent transition-colors"
+                className="btn btn-invert btn-sml"
                 aria-label="Next image"
               >
                 <span>Next</span>
-                <ChevronRight className="w-4 h-4" />
+                <ChevronRight className="h-4 w-4" />
               </button>
             </div>
           </motion.div>

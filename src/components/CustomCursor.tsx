@@ -87,7 +87,7 @@ export function CustomCursor() {
           mass: 0.05,
         }}
       >
-        <div className="w-2 h-2 rounded-full bg-neutral-900 dark:bg-white shadow-xs border border-white/40 dark:border-black/40" />
+        <div className="h-2 w-2 rounded-full border border-background/40 bg-ink shadow-xs" />
       </motion.div>
 
       {/* 2. Floating Context Tooltip / Pill on Hover */}
@@ -108,14 +108,16 @@ export function CustomCursor() {
               stiffness: 450,
               mass: 0.1,
             }}
-            className="fixed top-0 left-0 pointer-events-none z-50 px-3 py-2 rounded bg-neutral-950/95 dark:bg-neutral-900/95 backdrop-blur-md text-white border border-white/15 dark:border-white/20 flex flex-col gap-0.5 max-w-xs"
+            className="fixed top-0 left-0 z-50 flex max-w-xs flex-col gap-0.5 rounded-full bg-ink px-4 py-2.5 text-background pointer-events-none"
           >
-            <div className="flex items-center gap-1.5 text-xs font-mono-accent font-medium tracking-tight text-white">
+            <div className="flex items-center gap-1.5 text-[14.5px] font-medium">
               <span>{cursorData.title}</span>
-              {!hasArrow && <ArrowUpRight className="w-3.5 h-3.5 opacity-80 shrink-0 text-emerald-400" />}
+              {!hasArrow && (
+                <ArrowUpRight className="h-3.5 w-3.5 shrink-0 opacity-70" />
+              )}
             </div>
             {cursorData.subtitle && (
-              <span className="text-[10px] font-mono-accent text-neutral-400 dark:text-neutral-400 line-clamp-1 max-w-[220px]">
+              <span className="line-clamp-1 max-w-55 text-[11px] opacity-60">
                 {cursorData.subtitle}
               </span>
             )}

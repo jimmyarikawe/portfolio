@@ -1,90 +1,55 @@
-"use client";
-
-import { useState } from "react";
-import { motion } from "framer-motion";
+import Link from "next/link";
 import { projects } from "@/data/projects";
-import { ProjectCard } from "@/components/ProjectCard";
-import { WorkFilter } from "@/components/WorkFilter";
 
+/**
+ * A compact index of every case study. The home page already renders each
+ * project in full as an expandable gallery, so this page deliberately stays a
+ * plain list of rows — title and tagline on the left, the project's first few
+ * categories in a right-aligned tag column, matching ProjectShowcase.
+ */
 export default function WorkPage() {
-  const [selectedCategory, setSelectedCategory] = useState("All");
-  const categories = [
-    "All",
-    "Fintech",
-    "Operational AI",
-    "AI & Cybersecurity",
-    "Voice AI",
-    "Mobility",
-  ];
-
-  const filteredProjects =
-    selectedCategory === "All"
-      ? projects
-      : projects.filter(
-          (p) =>
-            p.category.toLowerCase().includes(selectedCategory.toLowerCase()) ||
-            p.categories.some((c) =>
-              c.toLowerCase().includes(selectedCategory.toLowerCase())
-            )
-        );
-
   return (
-    <div className="w-full max-w-[1800px] mx-auto px-4 sm:px-8 lg:px-10 pt-12 md:pt-16 space-y-12">
-      {/* Header */}
-      <div className="space-y-4 max-w-3xl">
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="inline-flex items-center gap-2 px-3 py-1 rounded bg-neutral-100 dark:bg-white/10 text-xs font-mono-accent text-neutral-600 dark:text-neutral-300"
-        >
-          <span>Case Studies</span>
-        </motion.div>
-
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          className="text-3xl sm:text-4xl md:text-5xl font-medium tracking-tight text-neutral-950 dark:text-white"
-        >
+    <div className="site-col">
+      <section className="mt-20 sm:mt-22">
+        <h1 className="font-display text-balance text-[28px] font-medium leading-8.25 sm:text-[34px] sm:leading-9.5 wide:text-[42px] wide:leading-10.75">
           Work
-        </motion.h1>
+        </h1>
 
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-base sm:text-lg text-neutral-600 dark:text-neutral-300 leading-relaxed"
-        >
+        <p className="mt-3.5 text-[17px] leading-6 text-muted sm:mt-4.5 sm:text-[20px] sm:leading-7 wide:mt-6.25 wide:text-[24px] wide:leading-8">
           Product work across fintech, AI security, and enterprise systems.
-        </motion.p>
-      </div>
+        </p>
+      </section>
 
-      {/* Category Filters */}
-      <WorkFilter
-        categories={categories}
-        activeCategory={selectedCategory}
-        onSelectCategory={setSelectedCategory}
-        layoutId="work-page-filter"
-      />
-
-      {/* Project Grid */}
-      {filteredProjects.length === 0 ? (
-        <div className="py-16 text-center space-y-3 rounded bg-neutral-50 dark:bg-white/[0.02] border border-black/5 dark:border-white/10">
-          <p className="text-sm text-neutral-500 font-mono-accent">No projects found in this category.</p>
-          <button
-            onClick={() => setSelectedCategory("All")}
-            className="text-xs font-mono-accent underline text-neutral-900 dark:text-white"
+      <section className="mt-12 sm:mt-18 wide:mt-30">
+        {projects.map((project) => (
+          <Link
+            key={project.id}
+            href={`/work/${project.slug}`}
+            data-cursor="View project ↗"
+            className="group mb-7 flex flex-col gap-2 wide:mb-9 sm:flex-row sm:justify-between sm:gap-6"
           >
-            Reset to All Projects
-          </button>
-        </div>
-      ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4 md:gap-5">
-          {filteredProjects.map((project, index) => (
-            <ProjectCard key={project.id} project={project} index={index} />
-          ))}
-        </div>
-      )}
+            <div>
+              <p className="text-[16px] leading-5.5 transition-colors group-hover:text-muted sm:text-[17px] wide:text-[20px] wide:leading-normal">
+                {project.title}
+              </p>
+              <p className="mt-1 text-[13px] font-medium text-dim sm:mt-1.5">
+                {project.tagline}
+              </p>
+            </div>
+
+            {/*
+              Only the primary category here. A full four-deep tag stack, as on
+              the home page's showcases, would make every row taller than its
+              own content and leave the title stranded in whitespace.
+            */}
+            <div className="sm:w-40 sm:shrink-0 sm:text-right">
+              <p className="text-[15px] font-medium leading-6.5 text-faint sm:text-[16px]">
+                {project.category}
+              </p>
+            </div>
+          </Link>
+        ))}
+      </section>
     </div>
   );
 }
