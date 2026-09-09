@@ -1,26 +1,5 @@
-import {
-  Braces,
-  Component,
-  Layers,
-  PenTool,
-  Sparkles,
-  Terminal,
-  Wind,
-  Zap,
-  type LucideIcon,
-} from "lucide-react";
-import { stack, type StackItem } from "@/data/profile";
-
-const icons: Record<StackItem["iconName"], LucideIcon> = {
-  design: PenTool,
-  component: Component,
-  types: Braces,
-  python: Terminal,
-  css: Wind,
-  motion: Zap,
-  ai: Sparkles,
-  system: Layers,
-};
+import { stack } from "@/data/profile";
+import { stackLogoMap } from "@/components/StackLogos";
 
 export function StackList() {
   return (
@@ -31,18 +10,20 @@ export function StackList() {
 
       <ul className="flex flex-wrap sm:block">
         {stack.map((item) => {
-          const Icon = icons[item.iconName];
+          const LogoComponent = stackLogoMap[item.name];
 
           return (
             <li
               key={item.name}
               className="mb-2.5 flex w-1/2 items-center gap-3 sm:w-full sm:gap-3.5 wide:mb-3"
             >
-              <Icon
-                aria-hidden="true"
-                strokeWidth={1.5}
-                className="h-5.5 w-5.5 shrink-0 text-muted"
-              />
+              <span className="flex h-5.5 w-5.5 shrink-0 items-center justify-center rounded-[5px] bg-neutral-100 dark:bg-white/10 p-1 border border-black/8 dark:border-white/12">
+                {LogoComponent ? (
+                  <LogoComponent className="h-3.5 w-3.5 object-contain" />
+                ) : (
+                  <span className="h-2 w-2 rounded-full bg-emerald-500" />
+                )}
+              </span>
               <span className="text-[14px] font-medium leading-5.5 wide:text-[15px]">
                 {item.name}
               </span>

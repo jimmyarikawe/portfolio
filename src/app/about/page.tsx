@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { ExperienceTimeline } from "@/components/ExperienceTimeline";
 import { ServicesGrid } from "@/components/ServicesGrid";
+import { CompanyFavicon } from "@/components/CompanyFavicon";
 
 export default function AboutPage() {
   return (
@@ -49,9 +50,13 @@ export default function AboutPage() {
           <p className="text-[16px] leading-5.5 sm:text-[17px] wide:text-[20px] wide:leading-normal">
             MSc in Artificial Intelligence &amp; Applications
           </p>
-          <p className="mt-1 text-[13px] font-medium text-dim sm:mt-1.5">
-            Postgraduate Degree with Distinction · University of Strathclyde
-            (Glasgow, Scotland).
+          <p className="mt-1 text-[13px] font-medium text-dim sm:mt-1.5 flex items-center gap-1.5 flex-wrap">
+            <span>Postgraduate Degree with Distinction</span>
+            <span>·</span>
+            <span className="inline-flex items-center gap-1.5 text-ink font-medium">
+              <CompanyFavicon name="University of Strathclyde" domain="strath.ac.uk" size={16} />
+              <span>University of Strathclyde (Glasgow, Scotland)</span>
+            </span>
           </p>
         </div>
 

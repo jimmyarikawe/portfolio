@@ -1,4 +1,5 @@
 import { experiences, education, publications } from "@/data/experience";
+import { CompanyFavicon } from "@/components/CompanyFavicon";
 
 /**
  * The fuller narrative history used on the about page: role, employer, dates
@@ -9,20 +10,30 @@ function TimelineRow({
   period,
   title,
   subtitle,
+  domain,
   summary,
   badge,
 }: {
   period: string;
   title: string;
   subtitle?: string;
+  domain?: string;
   summary: string;
   badge?: string;
 }) {
   return (
     <div className="mb-7 last:mb-0 sm:mb-8 wide:mb-10">
-      <p className="text-[16px] leading-5.5 sm:text-[17px] wide:text-[20px] wide:leading-normal">
-        {title}
-        {subtitle && <span className="text-muted"> at {subtitle}</span>}
+      <p className="text-[16px] leading-5.5 sm:text-[17px] wide:text-[20px] wide:leading-normal flex items-center gap-1.5 flex-wrap">
+        <span>{title}</span>
+        {subtitle && (
+          <>
+            <span className="text-muted">at</span>
+            <span className="inline-flex items-center gap-1.5 text-ink font-medium">
+              <CompanyFavicon name={subtitle} domain={domain} size={18} />
+              <span>{subtitle}</span>
+            </span>
+          </>
+        )}
       </p>
 
       <p className="mt-1 text-[13px] font-medium text-dim sm:mt-1.5">
@@ -58,6 +69,7 @@ export function ExperienceTimeline() {
             badge={exp.current ? "Current" : undefined}
             title={exp.role}
             subtitle={exp.company}
+            domain={exp.domain}
             summary={exp.summary}
           />
         ))}
@@ -75,6 +87,7 @@ export function ExperienceTimeline() {
             period={edu.period}
             title={edu.degree}
             subtitle={edu.institution}
+            domain={edu.domain}
             summary={edu.summary}
           />
         ))}
