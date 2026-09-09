@@ -31,11 +31,12 @@ export const stack: StackItem[] = [
 
 export const achievements: string[] = [
   "Earned an MSc in Artificial Intelligence & Applications with Distinction.",
-  "Published research on tech-driven solutions for Africa’s waste problem.",
-  "Designed a cinema booking flow that drove a 400% increase in bookings.",
-  "Led design for an operational data platform used across 14+ countries.",
+  "Lead / Staff Product Designer with strategic domain authority across fintech, enterprise, and AI.",
+  "Designed interfaces and visual systems for enterprise technology clients at Pentagram.",
+  "Led product design across client engagements from concept to prototype at Radical Company.",
   "Cut repeat cross-border transfer time to under 60 seconds at Omits.",
-  "Lifted user satisfaction by 50% through a web and mobile redesign.",
+  "Led design for an operational data platform used across 14+ countries.",
+  "Published research on tech-driven solutions for Africa’s waste problem.",
 ];
 
 export interface SocialLink {

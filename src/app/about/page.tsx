@@ -9,7 +9,7 @@ export default function AboutPage() {
       {/* 1. INTRO */}
       <section className="mt-20 sm:mt-22">
         <h1 className="font-display text-balance text-[28px] font-medium leading-8.25 sm:text-[34px] sm:leading-9.5 wide:text-[42px] wide:leading-10.75">
-          Product design, backed by research and applied AI.
+          Designing mission-critical software where business complexity, deep interaction architecture, and emerging AI intersect.
         </h1>
 
         {/*
@@ -31,20 +31,17 @@ export default function AboutPage() {
 
         <div className="mt-8 sm:mt-10 wide:mt-12.5 [&>p]:mb-5 [&>p]:text-[17px] [&>p]:leading-6.5 [&>p]:text-muted sm:[&>p]:mb-6 sm:[&>p]:text-[19px] sm:[&>p]:leading-7 wide:[&>p]:mb-7.5 wide:[&>p]:text-[21px] wide:[&>p]:leading-7.5">
           <p>
-            I’m <span className="text-ink">Jimmy Arikawe</span>, a product
-            designer and manager with 7+ years building digital products across
-            fintech, enterprise, and emerging AI. I work across the full
-            lifecycle — research, interaction design, prototyping, and shipping
-            — usually close to engineering.
+            I’m <span className="text-ink">Jimmy Arikawe</span> — a Lead / Staff Product Designer with strategic domain authority across enterprise fintech, cybersecurity, and intelligent systems.
           </p>
           <p>
-            I hold an{" "}
+            With pedigree spanning <span className="text-ink">Pentagram</span>, <span className="text-ink">Radical Company</span>, and <span className="text-ink">Omits</span>, I lead product design across the complete lifecycle — from zero-to-one product framing and deep interaction architecture to high-fidelity prototypes and production implementation.
+          </p>
+          <p>
+            I bring deep technical fluency to AI interaction design — mastering model evals, non-deterministic latency, agentic workflows, and human-in-the-loop systems. Backed by an{" "}
             <span className="text-ink">
               MSc in Artificial Intelligence (Distinction)
             </span>{" "}
-            and bring hands-on ML/LLM experience to design work — particularly
-            AI interaction patterns, human-in-the-loop systems, and
-            conversational interfaces.
+            from the University of Strathclyde, I translate complex neural capabilities into rigorous, intuitive software.
           </p>
         </div>
 

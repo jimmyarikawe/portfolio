@@ -17,24 +17,28 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://jimmyarikawe.com"),
-  title: "Jimmy Arikawe — Product Designer & Manager, Creative & AI Technologist",
+  title: "Jimmy Arikawe — Lead / Staff Product Designer",
   description:
-    "Product designer with 7+ years across fintech, enterprise, and AI. MSc in Artificial Intelligence (Distinction).",
+    "Lead / Staff Product Designer with strategic domain authority. Designing mission-critical software where business complexity, deep interaction architecture, and emerging AI intersect. Ex-Pentagram, Radical Company, Omits · MSc in Artificial Intelligence (Distinction).",
   keywords: [
     "Jimmy Arikawe",
-    "Product Designer",
-    "Product Manager",
-    "Creative & AI Technologist",
+    "Lead Product Designer",
+    "Staff Product Designer",
     "AI Interaction Design",
-    "Deep Learning",
-    "LLMs",
-    "Design Systems",
+    "Agentic Workflows",
+    "Human-in-the-loop Systems",
+    "Evals",
+    "Fintech Product Design",
+    "Enterprise Systems",
+    "Pentagram",
+    "Radical Company",
     "London Product Designer",
   ],
   authors: [{ name: "Jimmy Arikawe" }],
   openGraph: {
-    title: "Jimmy Arikawe — Product Designer & Manager, Creative & AI Technologist",
-    description: "Product design for complex, high-stakes technology.",
+    title: "Jimmy Arikawe — Lead / Staff Product Designer",
+    description:
+      "Designing mission-critical software where business complexity, deep interaction architecture, and emerging AI intersect. Ex-Pentagram, Radical Company, Omits · MSc Artificial Intelligence (Distinction).",
     url: "https://jimmyarikawe.com",
     siteName: "Jimmy Arikawe Portfolio",
     images: [

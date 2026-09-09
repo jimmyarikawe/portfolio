@@ -11,19 +11,20 @@ export interface SkillCategory {
 export const skillCategories: SkillCategory[] = [
   {
     number: "01",
-    category: "AI & Machine Learning",
+    category: "AI Interaction & Machine Learning",
     iconName: "ai",
-    tagline: "Bridging neural architectures, LLMs, and human-computer interaction.",
-    focus: "Applied AI Systems & Interaction Models",
-    impact: "Agentic Workflows & Safety Guardrails",
+    tagline: "Deep technical fluency in AI interaction design — bridging evals, non-deterministic latency, and neural models.",
+    focus: "AI Interaction Architecture & Applied Intelligence",
+    impact: "Agentic Workflows & Human-in-the-Loop Safeguards",
     skills: [
-      "Python",
-      "Machine Learning & Deep Learning",
-      "LLMs & RAG Architectures",
-      "Generative AI & Conversational UI",
-      "AI Interaction Design",
-      "Prompt Design & Guardrails",
-      "Human-in-the-Loop Systems"
+      "AI Interaction Design & Mental Models",
+      "Model Evals & Quality Benchmarks",
+      "Non-Deterministic Latency & Streaming UX",
+      "Agentic Workflows & Multi-Turn State",
+      "Human-in-the-Loop Control Systems",
+      "LLMs, RAG & Neural Architectures",
+      "Prompt Guardrails & Safety Mitigations",
+      "Python & Deep Learning Foundations"
     ]
   },
   {

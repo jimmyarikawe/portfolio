@@ -16,7 +16,7 @@ export default function WorkPage() {
         </h1>
 
         <p className="mt-3.5 text-[17px] leading-6 text-muted sm:mt-4.5 sm:text-[20px] sm:leading-7 wide:mt-6.25 wide:text-[24px] wide:leading-8">
-          Product work across fintech, AI security, and enterprise systems.
+          Mission-critical product design across complex systems, fintech, and AI-native software.
         </p>
       </section>
 

@@ -14,16 +14,19 @@ export default function HomePage() {
       {/* 1. INTRO */}
       <section className="mt-20 sm:mt-22">
         <h1 className="font-display text-balance text-[28px] font-medium leading-8.25 sm:text-[34px] sm:leading-9.5 wide:text-[42px] wide:leading-10.75">
-          Product Designer &amp; Manager at the intersection of craft, code
-          &amp; AI.
+          Staff / Senior Product Designer specializing in complex systems, fintech, and AI-native products.
         </h1>
 
         <p className="mt-3.5 text-[17px] leading-6 text-muted sm:mt-4.5 sm:text-[20px] sm:leading-7 wide:mt-6.25 wide:text-[24px] wide:leading-8">
-          I’m <span className="text-ink">Jimmy Arikawe</span>. With 7+ years
-          across fintech, cybersecurity and enterprise systems — backed by an
-          MSc in Artificial Intelligence (Distinction) — I lead products from
-          zero-to-one strategy and interaction architecture to production code
-          and human-in-the-loop AI.
+          I’m <span className="text-ink">Jimmy Arikawe</span> — a Lead / Staff Product Designer with strategic domain authority. I design mission-critical software where business complexity, deep interaction architecture, and emerging AI intersect.
+        </p>
+
+        <p className="mt-3 text-[14px] font-medium text-dim sm:mt-4 sm:text-[15px] wide:text-[16px]">
+          Ex-Pentagram · Radical Company · Omits · MSc Artificial Intelligence (Distinction)
+        </p>
+
+        <p className="mt-3.5 text-[15px] leading-6 text-muted sm:mt-4 sm:text-[17px] sm:leading-6.5 wide:text-[18px] wide:leading-7">
+          Deep technical fluency in AI interaction design — from model evals and non-deterministic latency to agentic workflows and human-in-the-loop systems.
         </p>
       </section>
 
@@ -53,14 +56,14 @@ export default function HomePage() {
 
         <div className="[&>p]:mb-5 [&>p]:text-[17px] [&>p]:leading-6.5 [&>p]:text-muted sm:[&>p]:mb-6 sm:[&>p]:text-[19px] sm:[&>p]:leading-7 wide:[&>p]:mb-7.5 wide:[&>p]:text-[21px] wide:[&>p]:leading-7.5">
           <p>
-            I’m a product designer and manager with 7+ years building digital
-            products across fintech, enterprise and emerging AI. I work across
-            the full lifecycle — research, interaction design, prototyping and
-            shipping — usually close to engineering.
+            I’m <span className="text-ink">Jimmy Arikawe</span>, a Lead / Staff Product Designer with strategic domain authority. I design mission-critical software where business complexity, deep interaction architecture, and emerging AI intersect.
           </p>
           <p>
-            I hold an MSc in Artificial Intelligence &amp; Applications, passed
-            with Distinction, from the{" "}
+            I bring deep technical fluency to AI interaction design — mastering evals, non-deterministic latency, agentic workflows, and human-in-the-loop systems. Backed by an{" "}
+            <span className="text-ink">
+              MSc in Artificial Intelligence &amp; Applications (Distinction)
+            </span>{" "}
+            from the{" "}
             <a
               href="https://www.strath.ac.uk"
               target="_blank"
@@ -69,19 +72,13 @@ export default function HomePage() {
             >
               University of Strathclyde
             </a>
-            , and bring hands-on ML and LLM experience to design work —
-            particularly AI interaction patterns, human-in-the-loop systems and
-            conversational interfaces.
+            , I bridge machine learning capabilities with rigorous interaction architecture.
           </p>
           <p>
-            I’m currently a Product Designer, Researcher &amp; Manager at
-            Radical Company, leading design and research across client
-            engagements from early concept through to high-fidelity prototype.
+            With experience spanning <span className="text-ink">Pentagram</span>, <span className="text-ink">Radical Company</span>, and <span className="text-ink">Omits</span>, I lead product design across the full lifecycle — from zero-to-one product strategy and systems architecture to high-fidelity prototypes and production implementation.
           </p>
           <p>
-            Before that I led product design at Omits Technology on a
-            cross-border payments platform, and at Recyclan on an operational
-            data platform used across 14+ countries. I’ve also published{" "}
+            Previously, I led product design at Omits on cross-border payments, and at Recyclan on an operational data telemetry platform used across 14+ countries. I’ve also published{" "}
             <Link
               href="/journal/tech-driven-solutions-for-africas-waste-problem"
               className="prose-link"

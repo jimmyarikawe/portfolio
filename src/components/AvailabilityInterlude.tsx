@@ -42,8 +42,8 @@ export function AvailabilityInterlude() {
         </h2>
 
         <p className="mt-3 max-w-[46ch] text-[16px] font-medium leading-5.75 text-[#7E7E7E] sm:mt-4 sm:text-[18px] sm:leading-6.5 wide:mt-5 wide:text-[28px] wide:leading-9.5">
-          Open to product design and leadership work across fintech, enterprise
-          and AI — from zero-to-one strategy through to production code.
+          Designing mission-critical software where business complexity, deep
+          interaction architecture, and emerging AI intersect.
         </p>
 
         <Link href="/contact" className="btn btn-invert mt-5 sm:mt-6">
