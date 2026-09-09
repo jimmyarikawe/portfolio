@@ -134,10 +134,11 @@ export const projects: Project[] = [
       }
     ],
     "gallery": [
-      "/images/work/omits/05-onboarding.png",
-      "/images/work/omits/06-convert.png",
-      "/images/work/omits/07-wallet-analytics.png",
-      "/images/work/omits/08-light-dark.png"
+      "/images/work/omits/05-home.png",
+      "/images/work/omits/06-analytics.png",
+      "/images/work/omits/07-convert-notifications.png",
+      "/images/work/omits/08-settings.png",
+      "/images/work/omits/09-onboarding-failures.png"
     ],
     "features": [
       {
@@ -348,24 +349,24 @@ export const projects: Project[] = [
   },
   {
     "id": "04",
-    "slug": "voxaid",
-    "title": "VoxAid",
+    "slug": "voxxy-ai",
+    "title": "Voxxy.ai",
     "tagline": "Conversational AI Speech Technology & Voice Modulation Interface",
-    "category": "AI & Healthcare",
+    "category": "AI",
     "categories": [
-      "AI & Healthcare",
+      "AI",
       "Interface Design",
       "Interaction Design",
       "Voice AI"
     ],
     "services": "User Research, Interface Design, Interaction Design, Voice Modulation UX",
-    "client": "VoxAid AI Labs",
+    "client": "Voxxy.ai",
     "year": "2023–2024",
     "role": "Lead Product Designer",
     "duration": "6 Months",
-    "coverImage": "/images/work/voxaid/10.png",
-    "heroImage": "/images/work/voxaid/10.png",
-    "description": "VoxAid is a voice-first AI application combining speech recognition, natural language processing (NLP), text-to-speech, and an AI voice modulation engine to deliver a conversational, highly customizable user experience.",
+    "coverImage": "/images/work/voxxy-ai/00-voice-generator.png",
+    "heroImage": "/images/work/voxxy-ai/00-voice-generator.png",
+    "description": "Voxxy.ai is a voice-first AI application combining speech recognition, natural language processing (NLP), text-to-speech, and an AI voice modulation engine to deliver a conversational, highly customizable user experience.",
     "goal": "Build an intuitive multi-modal voice AI interface that makes complex auditory modulation and natural conversation feel instant and accessible.",
     "outcome": "Pioneered a real-time vocal feedback interface with under 200ms latency, achieving an 85% task completion rate on complex multi-turn commands.",
     "principles": [
@@ -396,23 +397,25 @@ export const projects: Project[] = [
         "value": "45K+"
       }
     ],
-    "overview": "Voice AI systems often fail because users feel disconnected from the black-box audio pipeline. VoxAid bridges this gap by combining real-time spectral visualization with responsive conversation flows.",
+    "overview": "Voice AI systems often fail because users feel disconnected from the black-box audio pipeline. Voxxy.ai bridges this gap by combining real-time spectral visualization with responsive conversation flows.",
     "challenge": "Designing a reliable experience for non-deterministic speech recognition where accents, audio jitter, and ambient noise create uncertainty.",
     "solution": "Built an interactive audio waveform HUD with real-time confidence scoring, instant rollback triggers, and customizable voice avatars.",
     "designSystem": "Dark-mode optimized UI with neon audio frequency indicators, fluid dynamic typography, and minimal cognitive load controls.",
+    "figures": [
+      {
+        "src": "/images/work/voxxy-ai/00-user-flow.png",
+        "title": "The flow behind four tools in one app",
+        "caption": "Voice Command, Text-to-Speech, Speech-to-Text and Voice Changer are four different jobs, and the map is what kept them from becoming four different products. Each column converges on the same terminal step \u2014 select a voice, generate, act \u2014 so the interaction a user learns in one mode carries into the next. History, Files and Profile hang off the same root rather than being nested inside any single tool.",
+        "wide": true
+      }
+    ],
     "gallery": [
-      "/images/work/voxaid/10.png",
-      "/images/work/voxaid/hero-in-hand.png",
-      "/images/work/voxaid/01.png",
-      "/images/work/voxaid/02.png",
-      "/images/work/voxaid/03.png",
-      "/images/work/voxaid/04.png",
-      "/images/work/voxaid/05.png",
-      "/images/work/voxaid/06.png",
-      "/images/work/voxaid/07.png",
-      "/images/work/voxaid/08.png",
-      "/images/work/voxaid/09.png",
-      "/images/work/voxaid/11.png"
+      "/images/work/voxxy-ai/01-modes.png",
+      "/images/work/voxxy-ai/02-voice-command.png",
+      "/images/work/voxxy-ai/03-voice-generator.png",
+      "/images/work/voxxy-ai/04-select-voice.png",
+      "/images/work/voxxy-ai/05-speech-to-text.png",
+      "/images/work/voxxy-ai/06-voice-changer.png"
     ],
     "features": [
       {
@@ -535,36 +538,36 @@ export const projects: Project[] = [
     "id": "06",
     "slug": "spotfinance",
     "title": "Spot Finance",
-    "tagline": "Comprehensive Mobile Fintech App for Savings, Investments & Payments",
+    "tagline": "Investing, Saving and Paying in One Consumer Fintech App",
     "category": "Fintech",
     "categories": [
       "Fintech",
       "Mobile UX",
-      "Interface Design",
-      "Design System"
+      "Design System",
+      "UX Research"
     ],
-    "services": "User Research, Interface Design, User Flows, Dark & Light Mode UX",
-    "client": "Spot Finance App",
+    "services": "User Research, Wireframing, UI Design, Prototyping, User Testing",
+    "client": "Spot Finance",
     "year": "2023",
     "role": "Senior Product Designer",
     "duration": "5 Months",
-    "coverImage": "/images/work/spotfinance/13.png",
-    "heroImage": "/images/work/spotfinance/13.png",
-    "description": "Spot Finance is a unified fintech mobile application integrating stock investments, automated savings vaults, peer-to-peer transfers, and QR code merchant payments into a single intuitive interface.",
-    "goal": "Consolidate fragmented banking, fractional stock investing, automated round-up savings, and P2P payments into a unified consumer app.",
-    "outcome": "Achieved a 4.9★ rating across 120,000+ active users with 99.8% transaction success and seamless dark/light mode parity.",
+    "coverImage": "/images/work/spotfinance/00-invest.png",
+    "heroImage": "/images/work/spotfinance/00-invest.png",
+    "description": "Spot Finance puts fractional stock investing, automated savings and everyday payments in one app, for people who want to start investing without first learning the language of investing.",
+    "goal": "Let someone move between spending, saving and investing without feeling they have crossed into a different, more intimidating product.",
+    "outcome": "Shipped to a 4.9★ App Store rating across 120,000+ active users, built on a documented component library with full light and dark parity.",
     "principles": [
       {
-        "title": "Progressive Financial Disclosure",
-        "description": "Present high-level portfolio summaries cleanly, allowing users to drill down into dense candlestick charts on demand."
+        "title": "One account, three behaviours",
+        "description": "Home, Invest, Savings and Profile sit on a single tab bar with one balance behind them. Moving money between them is a transfer, not a migration into another product."
       },
       {
-        "title": "Micro-Haptic Confirmation",
-        "description": "Reinforce critical financial actions with tactile feedback and multi-factor biometric approvals."
+        "title": "Recognition before research",
+        "description": "The Discover grid leads with logos people already know — Dell, Canon, McDonald's, Amazon, Netflix — because a first-time investor searches for brands, not tickers."
       },
       {
-        "title": "Adaptive Dual-Theme Engine",
-        "description": "Curate bespoke contrast ratios for high-sunlight outdoor payments and low-light evening portfolio monitoring."
+        "title": "Security that stays out of the way",
+        "description": "Two-factor and biometric authentication guard the account and the transaction, not every screen in between, so protection is felt at the two moments it matters."
       }
     ],
     "metrics": [
@@ -577,44 +580,71 @@ export const projects: Project[] = [
         "value": "120K+"
       },
       {
-        "label": "Transaction Success",
-        "value": "99.8%"
+        "label": "Research & Testing",
+        "value": "15 Days"
       }
     ],
-    "overview": "In today's dynamic financial landscape, individuals struggle with fragmented apps for banking, stock trading, and savings. Spot Finance consolidates these services into a holistic, secure mobile experience tailored for both casual savers and active investors.",
-    "challenge": "Combining high-frequency payment features with dense stock portfolio charts without cluttering navigation or intimidating everyday users.",
-    "solution": "Designed modular financial cards with progressive disclosure, customizable dashboard widgets, biometric payment approvals, and a native dark/light mode engine.",
-    "designSystem": "Sophisticated typography, high-contrast currency counters, micro-haptic transaction feedback, and vibrant portfolio gain/loss indicators.",
+    "overview": "Most people who want to start investing are not short of options — they are short of confidence. They already have a banking app, and the investing app they are told to download speaks a different language: tickers, spreads, order types. Spot Finance was built for the two people we designed against, Alex and Emma, both in their twenties, both financially capable, neither an investor yet. The product question was not how to add investing to a wallet. It was how to make investing feel like the same app as the wallet.",
+    "challenge": "Consolidation is easy to say and hard to design. Payments, savings and investing have genuinely different rhythms — a payment is instant and forgettable, a savings deposit is periodic and passive, an investment is deliberate and carries loss. Put them behind one tab bar carelessly and you either flatten investing into something that feels trivially safe, or you drag the anxiety of a brokerage account onto the screen where someone pays for lunch. The interface had to hold both without lying about either.",
+    "solution": "I ran research and usability testing around two personas, then mapped the whole product as a single flow before designing a screen: one authenticated entry point branching into Home, Savings, Invest, Scan-to-pay and Profile, with the same PIN and biometric gate on every action that moves money. Investing was made approachable by leading with recognisable brands and interactive charts rather than market data, and by keeping the buy path to the same number of steps as a transfer. Everything was assembled from a documented component library — inputs, buttons, selection controls and the tab bar, each with its states drawn in both themes.",
+    "designSystem": "A dark-first system with a single violet accent, built as components and variants rather than screens: text fields in four states, buttons in three sizes across enabled and disabled, checkboxes, radios and toggles, and the tab bar in light and dark. Light mode uses neutral tones for a clean, professional read; dark mode uses subdued colour to reduce eye strain. Colour is reserved for the accent, for gain and loss, and for nothing else.",
+    "figures": [
+      {
+        "src": "/images/work/spotfinance/01-personas.png",
+        "title": "Two people, one product",
+        "caption": "Alex, 28, a software developer who values simplicity, and Emma, 25, a marketing executive who prioritises efficiency and aesthetics. Both want to invest; neither wants to learn a trading terminal to do it. Every subsequent decision was argued against these two.",
+        "wide": true
+      },
+      {
+        "src": "/images/work/spotfinance/02-user-flow.png",
+        "title": "Mapped as one product, not three",
+        "caption": "A single authenticated entry — PIN or Face ID — branching into Profile, Savings, Home, Invest and Scan-to-pay. Drawing it this way made the shared spine obvious: every branch reaches the same balance, and every money-moving action passes the same gate.",
+        "wide": true
+      },
+      {
+        "src": "/images/work/spotfinance/03-components.png",
+        "title": "Components and variants, both themes",
+        "caption": "Inputs across four states, buttons across three sizes and two states, selection controls, and the tab bar drawn in light and dark. Building the states before the screens is what made light and dark parity a property of the system rather than a second design pass."
+      },
+      {
+        "src": "/images/work/spotfinance/04-considerations.png",
+        "title": "The decisions behind the surface",
+        "caption": "Colour, typography and iconography set against the three product requirements they had to serve: navigation simple enough for a first-time investor, security strong enough for a financial account, and charts interactive enough to be worth looking at."
+      }
+    ],
     "gallery": [
-      "/images/work/spotfinance/13.png",
       "/images/work/spotfinance/hero-in-hand.png",
-      "/images/work/spotfinance/08.png",
-      "/images/work/spotfinance/01.png",
-      "/images/work/spotfinance/03.png",
-      "/images/work/spotfinance/04.png",
       "/images/work/spotfinance/05.png",
       "/images/work/spotfinance/06.png",
-      "/images/work/spotfinance/07.png",
       "/images/work/spotfinance/09.png",
       "/images/work/spotfinance/10.png",
       "/images/work/spotfinance/11.png",
-      "/images/work/spotfinance/12.png"
+      "/images/work/spotfinance/12.png",
+      "/images/work/spotfinance/13.png"
     ],
     "features": [
       {
-        "title": "Stock Investments & Fractional Shares",
-        "description": "Zero-commission real-time trading with candlestick charting and instant portfolio rebalancing."
+        "title": "Fractional Investing by Recognition",
+        "description": "The Discover grid leads with brands rather than tickers, filtered by Recent, Popular, Watchlist and Latest, so a first-time investor starts from something they already have an opinion about."
       },
       {
-        "title": "Automated Round-Up Savings",
-        "description": "Spare-change round-up vaults with goal tracking and yield-bearing interest accounts."
+        "title": "Interactive Stock Detail",
+        "description": "Each holding opens to Overview, Financials and News with a chart across 1D to 5Y, and a watchlist action beside the buy action so following is a lower-commitment first step than owning."
       },
       {
-        "title": "QR Code & P2P Instant Payments",
-        "description": "Contactless merchant checkout and immediate peer transfers via phone numbers or username tags."
+        "title": "Automated Savings",
+        "description": "Savings sits on the same tab bar and the same balance as spending, with top-up and withdrawal as ordinary transfers rather than a separate product with its own account."
+      },
+      {
+        "title": "Scan-to-Pay",
+        "description": "QR payment is a first-class branch of the flow rather than a feature buried in a menu, because in-person payment is the behaviour that brings someone back to the app daily."
+      },
+      {
+        "title": "Two-Factor and Biometric Auth",
+        "description": "Authentication guards the session and each money-moving action, with biometrics as the fast path — the same two-checkpoint pattern rather than security friction spread across the whole product."
       }
     ],
-    "takeaways": "Balancing density with simplicity is the hallmark of great fintech design. When complex portfolio charts feel effortless to explore, users gain agency over their financial future."
+    "takeaways": "Designing three financial behaviours into one app taught me that consolidation is mostly a hierarchy problem, not a feature problem. The temptation is to give each capability its own home and let navigation stitch them together; what actually made the product feel like one thing was a single balance and a single authentication model behind all of it. Building the component library before the screens was the other decision that paid off — light and dark parity stopped being a design task and became a property of the system."
   }
 ];
 

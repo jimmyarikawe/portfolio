@@ -29,15 +29,6 @@ export const stack: StackItem[] = [
   { name: "Design Systems", iconName: "system" },
 ];
 
-export const achievements: string[] = [
-  "Earned an MSc in Artificial Intelligence & Applications with Distinction.",
-  "Lead / Staff Product Designer with strategic domain authority across fintech, enterprise, and AI.",
-  "Designed interfaces and visual systems for enterprise technology clients at Pentagram.",
-  "Led product design across client engagements from concept to prototype at Radical Company.",
-  "Cut repeat cross-border transfer time to under 60 seconds at Omits.",
-  "Led design for an operational data platform used across 14+ countries.",
-  "Published research on tech-driven solutions for Africa’s waste problem.",
-];
 
 export interface SocialLink {
   name: string;

@@ -74,7 +74,7 @@ export function CustomCursor() {
     <>
       {/* 1. Precise Center Cursor Dot (Always visible at pointer tip unless over text input) */}
       <motion.div
-        className="fixed top-0 left-0 pointer-events-none z-50"
+        className="fixed top-0 left-0 pointer-events-none z-[100]"
         animate={{
           x: mousePosition.x - 4,
           y: mousePosition.y - 4,
@@ -87,7 +87,7 @@ export function CustomCursor() {
           mass: 0.05,
         }}
       >
-        <div className="h-2 w-2 rounded-full border border-background/40 bg-ink shadow-xs" />
+        <div className="h-2 w-2 rounded-full border border-background/40 bg-ink" />
       </motion.div>
 
       {/* 2. Floating Context Tooltip / Pill on Hover */}
@@ -108,7 +108,7 @@ export function CustomCursor() {
               stiffness: 450,
               mass: 0.1,
             }}
-            className="fixed top-0 left-0 z-50 flex max-w-xs flex-col gap-0.5 rounded-full bg-ink px-4 py-2.5 text-background pointer-events-none"
+            className="fixed top-0 left-0 z-[100] flex max-w-xs flex-col gap-0.5 rounded-full bg-ink px-4 py-2.5 text-background pointer-events-none"
           >
             <div className="flex items-center gap-1.5 text-[14.5px] font-medium">
               <span>{cursorData.title}</span>

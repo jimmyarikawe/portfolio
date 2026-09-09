@@ -54,9 +54,20 @@ export function CaseStudySection({
   // Consolidate hero + gallery images for lightbox navigation. The hero is
   // usually already inside `gallery`; when it is not it leads the sequence.
   const primaryHero = project.heroImage || project.coverImage;
-  const modalImages = project.gallery.includes(primaryHero)
-    ? project.gallery
-    : [primaryHero, ...project.gallery];
+  /*
+   * Everything the reader can click, in the order it appears on the page:
+   * hero, then the full-width figures, then the gallery strip. The figures were
+   * missing here, so `openLightbox`'s `indexOf` returned -1 for them and the
+   * fallback index opened the hero instead of the artefact that was clicked.
+   * `Set` dedupes the hero when it also leads the gallery.
+   */
+  const modalImages = [
+    ...new Set([
+      primaryHero,
+      ...(project.figures ?? []).map((figure) => figure.src),
+      ...project.gallery,
+    ]),
+  ];
   const heroIndex = Math.max(0, modalImages.indexOf(primaryHero));
   const galleryId = `case-study-gallery-${project.slug}`;
 

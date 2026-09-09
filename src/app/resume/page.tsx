@@ -69,9 +69,9 @@ export default function ResumePage() {
 
       {/* Print-only masthead. */}
       <div className="hidden print:block">
-        <h1 className="text-[20pt] font-semibold leading-tight text-black">
+        <p className="text-[20pt] font-semibold leading-tight text-black">
           Jimmy Arikawe
-        </h1>
+        </p>
         <p className="mt-1 text-[10pt] text-black">
           Senior Product Designer &amp; Design Engineer · United Kingdom ·{" "}
           {CONTACT.map((c) => c.label).join(" · ")}
@@ -83,14 +83,12 @@ export default function ResumePage() {
         <h2 className={SECTION_LABEL}>Summary</h2>
         <p className="mt-3 text-[17px] leading-6.5 text-body sm:text-[19px] sm:leading-7 print:mt-2 print:text-[10pt] print:leading-[1.4] print:text-black">
           Senior Product Designer and design engineer with seven years across
-          fintech, enterprise operations and AI. I take ambiguous problems
-          through research, interaction design and prototyping to shipped
-          software, and write the production front-end alongside the engineers
-          building it. Product Lead at Omits, where I owned strategy and design
-          for a cross-border payments platform across web, iOS and Android. MSc
-          Artificial Intelligence (Distinction); I prototype against live models
-          rather than mocking them, which is how latency, failure states and
-          human-in-the-loop handoffs get designed properly.
+          fintech, enterprise operations and AI. Research, interaction design
+          and prototyping through to shipped software, including production
+          front-end in TypeScript and React. Product Lead at Omits, owning
+          strategy and design for a cross-border payments platform across web,
+          iOS and Android. MSc Artificial Intelligence (Distinction), with
+          hands-on experience prototyping against live models.
         </p>
       </section>
 

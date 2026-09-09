@@ -47,9 +47,9 @@ export const experiences: ExperienceItem[] = [
       "Design and research lead across client engagements, turning ambiguous problems into tested product concepts.",
     highlights: [
       "Lead design and research on client engagements, taking ambiguous business and technology problems to tested interaction models and high-fidelity prototypes.",
-      "Build working prototypes against live LLM APIs to validate AI product concepts before engineering commits — surfacing latency and failure-state problems that static mockups hide.",
-      "Set the reusable patterns and research frameworks the team now starts from, cutting repeat setup on every new engagement.",
-      "Partner with engineers from exploration through implementation, owning the handoff and the interaction quality that survives it.",
+      "Build working prototypes against live LLM APIs to validate AI product concepts before engineering commits, surfacing latency and failure-state problems early.",
+      "Established reusable patterns and research frameworks now used as the starting point on new engagements.",
+      "Partner with engineers from exploration through implementation, owning handoff and final interaction quality.",
     ],
   },
   {
@@ -61,10 +61,10 @@ export const experiences: ExperienceItem[] = [
     summary:
       "Owned end-to-end design for a cross-border payments platform across web, iOS and Android.",
     highlights: [
-      "Owned product strategy and design for a cross-border payments platform across web, iOS and Android — discovery through delivery.",
-      "Cut repeat transfer time to under 60 seconds by redesigning beneficiary management and rate confirmation around the one thing users feared most: the rate changing after they committed.",
-      "Redesigned tiered KYC with Compliance and Risk, turning a regulatory checklist into a progressive flow that 94% of users completed unassisted on first attempt.",
-      "Established the product metrics and cross-platform design standards the team measured against, and worked alongside engineers through implementation.",
+      "Owned product strategy and design for a cross-border payments platform across web, iOS and Android, from discovery to delivery.",
+      "Cut repeat transfer time to under 60 seconds by redesigning beneficiary management and rate confirmation.",
+      "Redesigned tiered KYC with Compliance and Risk into a progressive flow; 94% of users completed it unassisted on first attempt.",
+      "Defined the product metrics and cross-platform design standards used by the team, and supported engineering through implementation.",
     ],
   },
   {
@@ -78,7 +78,7 @@ export const experiences: ExperienceItem[] = [
     highlights: [
       "First designer at the studio, covering discovery, research, interaction and UI design across multiple client products.",
       "Built and maintained the shared component library that every subsequent product was assembled from.",
-      "Turned ambiguous client briefs into journeys, prototypes and shippable high-fidelity design, testing flows iteratively rather than presenting them finished.",
+      "Translated client briefs into journeys, prototypes and production-ready design, testing flows iteratively.",
     ],
   },
   {
@@ -91,7 +91,7 @@ export const experiences: ExperienceItem[] = [
       "Designed interfaces and visual systems for enterprise technology clients inside a multidisciplinary studio.",
     highlights: [
       "Designed interfaces and visual systems for enterprise and B2B technology clients within a multidisciplinary studio.",
-      "Simplified complex user flows through research and usability exploration, then produced implementation-ready design in Figma.",
+      "Simplified complex user flows through research and usability exploration, producing implementation-ready design in Figma.",
       "Worked with writers, brand designers and strategists to build coherent visual narratives around technical products.",
     ],
   },
@@ -105,7 +105,7 @@ export const experiences: ExperienceItem[] = [
       "Redesigned web and mobile products, lifting user satisfaction by 50%.",
     highlights: [
       "Redesigned the web and mobile products, contributing to a 50% improvement in measured user satisfaction.",
-      "Wrote production front-end alongside design — prototyping in code to validate interaction concepts in days rather than in review cycles.",
+      "Wrote production front-end alongside design, prototyping in code to validate interaction concepts.",
       "Grew the design system from ad-hoc components into reusable, documented patterns.",
     ],
   },
@@ -118,8 +118,8 @@ export const experiences: ExperienceItem[] = [
       "Led design for an operational data platform deployed across 14+ countries, improving adoption by 15%.",
     highlights: [
       "Led UX and product design for an operational data platform deployed across 14+ countries.",
-      "Designed the dashboards and workflows three different audiences depended on — plant operators, compliance officers and business users — without building three products.",
-      "Raised product adoption 15% by using research and usability testing to find where operators were abandoning the tool and falling back to paper.",
+      "Designed dashboards and workflows serving three audiences: plant operators, compliance officers and business users.",
+      "Raised product adoption 15% through research and usability testing that identified where operators abandoned the tool.",
     ],
   },
   {
@@ -132,7 +132,7 @@ export const experiences: ExperienceItem[] = [
       "Designed B2B SaaS analytics and reporting tools, shaped by ongoing usability research.",
     highlights: [
       "Designed B2B SaaS analytics, reporting and operational tooling.",
-      "Ran usability research and iterated on behavioural data rather than opinion.",
+      "Ran usability research and iterated on behavioural data.",
       "Built dashboard and data-visualisation patterns for dense information environments.",
     ],
   },
