@@ -4,15 +4,18 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 
 /**
- * The full-bleed interlude that separates the project reel from the about
- * copy: a black panel bracketed by dashed hairlines, carrying the site's
- * single loudest statement. The reference pins and zooms this on scroll with
- * GSAP; here a scroll-triggered scale-in reads the same without the extra
- * dependency, and collapses to a plain fade under reduced motion.
+ * The closing panel: a full-bleed black block bracketed by dashed hairlines,
+ * carrying the site's single loudest statement.
+ *
+ * That statement used to be "I'm available for select projects," which read as
+ * a freelance notice to anyone hiring for a permanent role — and it sat in the
+ * middle of the page, so it was the loudest thing on the site before a reader
+ * had seen any work. It now names the role being sought, and closes rather than
+ * interrupts.
  */
 export function AvailabilityInterlude() {
   return (
-    <section className="my-30 wide:my-50">
+    <section className="mt-20 sm:mt-24 wide:mt-30">
       <div className="rule-dashed" />
 
       <motion.div
@@ -37,18 +40,28 @@ export function AvailabilityInterlude() {
           </svg>
         </span>
 
-        <h2 className="font-display max-w-[16ch] text-balance text-[32px] font-bold leading-9 text-white sm:text-[48px] sm:leading-13 wide:max-w-none wide:text-[80px] wide:leading-20">
-          I’m available for select projects.
+        <h2 className="font-display max-w-[18ch] text-balance text-[32px] font-bold leading-9 text-white sm:text-[48px] sm:leading-13 wide:max-w-none wide:text-[80px] wide:leading-20">
+          Open to Senior Product Designer roles.
         </h2>
 
         <p className="mt-3 max-w-[46ch] text-[16px] font-medium leading-5.75 text-[#7E7E7E] sm:mt-4 sm:text-[18px] sm:leading-6.5 wide:mt-5 wide:text-[28px] wide:leading-9.5">
-          Designing mission-critical software where business complexity, deep
-          interaction architecture, and emerging AI intersect.
+          Currently at Radical Company, in the UK. If you&apos;re building
+          something complex and want a designer who can build it too, I&apos;d
+          like to hear about it.
         </p>
 
-        <Link href="/contact" className="btn btn-invert mt-5 sm:mt-6">
-          Get in touch
-        </Link>
+        <div className="mt-5 flex flex-wrap items-center justify-center gap-3 sm:mt-6">
+          <Link href="/contact" className="btn btn-invert">
+            Get in touch
+          </Link>
+          <a
+            href="/Jimmy-Arikawe-CV.pdf"
+            download
+            className="btn border-white/25 bg-transparent text-white"
+          >
+            Download CV
+          </a>
+        </div>
       </motion.div>
 
       <div className="rule-dashed" />

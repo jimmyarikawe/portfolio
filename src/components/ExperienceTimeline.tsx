@@ -13,6 +13,7 @@ function TimelineRow({
   domain,
   summary,
   badge,
+  note,
 }: {
   period: string;
   title: string;
@@ -20,6 +21,7 @@ function TimelineRow({
   domain?: string;
   summary: string;
   badge?: string;
+  note?: string;
 }) {
   return (
     <div className="mb-7 last:mb-0 sm:mb-8 wide:mb-10">
@@ -39,6 +41,7 @@ function TimelineRow({
       <p className="mt-1 text-[13px] font-medium text-dim sm:mt-1.5">
         {period}
         {badge && <span className="text-ink"> · {badge}</span>}
+        {note && <span> · {note}</span>}
       </p>
 
       <p className="mt-2 text-[16px] leading-6 text-soft sm:mt-2.5 sm:text-[17px] wide:text-[18px] wide:leading-7">
@@ -58,7 +61,7 @@ export function ExperienceTimeline() {
         </h2>
 
         <p className="mb-7 text-[16px] leading-6 text-soft sm:mb-8 sm:text-[17px] wide:mb-10 wide:text-[18px] wide:leading-7">
-          7+ years across fintech, enterprise, and AI — the roles,
+          Seven years across fintech, enterprise and AI — the roles,
           chronologically.
         </p>
 
@@ -67,6 +70,7 @@ export function ExperienceTimeline() {
             key={`${exp.company}-${exp.period}`}
             period={exp.period}
             badge={exp.current ? "Current" : undefined}
+            note={exp.note}
             title={exp.role}
             subtitle={exp.company}
             domain={exp.domain}

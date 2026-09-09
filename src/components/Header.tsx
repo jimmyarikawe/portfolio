@@ -12,6 +12,7 @@ const navLinks = [
   { name: "Work", href: "/work" },
   { name: "About", href: "/about" },
   { name: "Journal", href: "/journal" },
+  { name: "Résumé", href: "/resume" },
 ];
 
 export function Header() {
@@ -19,7 +20,7 @@ export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <header className="w-full pt-4 sm:pt-5">
+    <header className="w-full pt-4 sm:pt-5 print:hidden">
       {/* Accessible Skip Link for keyboard/screen reader users */}
       <a
         href="#main-content"
@@ -35,7 +36,7 @@ export function Header() {
             delay={150}
           />
 
-          <div className="flex items-center gap-5">
+          <div className="flex items-center gap-3 wide:gap-5">
             <nav className="hidden items-center gap-5 wide:flex">
               {navLinks.map((link) => {
                 const isActive = pathname.startsWith(link.href);
@@ -54,11 +55,13 @@ export function Header() {
               })}
             </nav>
 
-            <ThemeToggle className="p-0! text-muted hover:bg-transparent hover:text-ink" />
+            {/*
+              The toggle moves into the disclosure below 900px. Four controls on
+              a 390px bar left the hamburger pinned to the viewport edge and the
+              CTA squeezed; the CTA is the one that has to stay.
+            */}
+            <ThemeToggle className="hidden p-0! text-muted hover:bg-transparent hover:text-ink wide:inline-flex" />
 
-            {/* Stays visible at every width — it is the reference's only
-                header action, and the hamburger beside it carries the pages
-                the reference does not have. */}
             <Link href="/contact" className="btn btn-sml">
               Get in touch
             </Link>
@@ -97,6 +100,11 @@ export function Header() {
                   {link.name}
                 </Link>
               ))}
+
+              <div className="mt-2 flex items-center gap-2 border-t border-rule pt-3">
+                <ThemeToggle className="p-0! text-muted hover:bg-transparent hover:text-ink" />
+                <span className="text-[15px] text-muted">Switch theme</span>
+              </div>
             </motion.nav>
           )}
         </AnimatePresence>

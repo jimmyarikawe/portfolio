@@ -62,6 +62,9 @@ export function CaseStudySection({
   /* Every field the fact sheet can show, in reading order. */
   const factSheet: { label: string; value: string; note?: string }[] = [
     { label: "Company / Client", value: project.client },
+    ...(project.engagement
+      ? [{ label: "Engagement", value: project.engagement }]
+      : []),
     { label: "Responsibilities", value: project.role, note: project.services },
     { label: "Category", value: project.category },
     { label: "Year", value: project.year },
@@ -338,7 +341,15 @@ export function CaseStudySection({
           <p className={`mb-2 ${META}`}>06 / Outcomes &amp; Impact</p>
           <h2 className={`mb-3 sm:mb-4 ${HEADING}`}>Measurable Results</h2>
 
-          <dl className="grid grid-cols-2 gap-x-6 gap-y-7 sm:grid-cols-4">
+          <dl
+            className={`grid grid-cols-2 gap-x-6 gap-y-7 ${
+              project.metrics.length <= 2
+                ? "sm:grid-cols-2"
+                : project.metrics.length === 3
+                  ? "sm:grid-cols-3"
+                  : "sm:grid-cols-4"
+            }`}
+          >
             {project.metrics.map((metric) => (
               <div
                 key={metric.label}
@@ -381,7 +392,24 @@ export function CaseStudySection({
           )}
         </section>
 
-        {/* 4. PREVIOUS / NEXT CASE STUDY */}
+        {/* 4. CONTACT CTA — placed at the point of peak conviction. */}
+        <section className={`${SECTION} border-t border-rule pt-10 sm:pt-12`}>
+          <h2 className={HEADING}>Interested in working together?</h2>
+          <p className={`mt-2 max-w-[52ch] ${BODY}`}>
+            I&apos;m open to Senior Product Designer roles, and happy to walk through
+            the decisions behind this project in more detail.
+          </p>
+          <div className="mt-6 flex flex-wrap gap-3">
+            <Link href="/contact" className="btn">
+              Get in touch
+            </Link>
+            <Link href="/resume" className="btn btn-outline">
+              View résumé
+            </Link>
+          </div>
+        </section>
+
+        {/* 5. PREVIOUS / NEXT CASE STUDY */}
         {(prevProject || nextProject) && (
           <nav
             aria-label="More case studies"

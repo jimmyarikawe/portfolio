@@ -1,11 +1,21 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { projects } from "@/data/projects";
 
-/**
- * A compact index of every case study. The home page already renders each
- * project in full as an expandable gallery, so this page deliberately stays a
- * plain list of rows — title and tagline on the left, the project's first few
- * categories in a right-aligned tag column, matching ProjectShowcase.
+export const metadata: Metadata = {
+  title: "Work — Jimmy Arikawe",
+  description:
+    "Case studies in cross-border payments, enterprise operations, AI security and event software — the problem, the decisions, and what shipped.",
+};
+
+/*
+ * This is the first nav item and the most likely first click, so it leads with
+ * covers rather than the text list it used to be: a recruiter arriving here was
+ * previously shown seven grey rows and no evidence of design ability at all.
+ *
+ * Every project stays on this page — the home page features three, this is the
+ * complete index.
  */
 export default function WorkPage() {
   return (
@@ -15,40 +25,79 @@ export default function WorkPage() {
           Work
         </h1>
 
-        <p className="mt-3.5 text-[17px] leading-6 text-muted sm:mt-4.5 sm:text-[20px] sm:leading-7 wide:mt-6.25 wide:text-[24px] wide:leading-8">
-          Mission-critical product design across complex systems, fintech, and AI-native software.
+        <p className="mt-3.5 max-w-[46ch] text-[17px] leading-6 text-muted sm:mt-4.5 sm:text-[20px] sm:leading-7 wide:mt-6.25 wide:text-[24px] wide:leading-8">
+          Seven products across payments, enterprise operations, AI and events.
+          Each case study covers the problem, the decisions, and what shipped.
         </p>
       </section>
 
-      <section className="mt-12 sm:mt-18 wide:mt-30">
-        {projects.map((project) => (
+      <section className="mt-12 grid gap-x-6 gap-y-12 sm:mt-16 sm:grid-cols-2 wide:mt-20 wide:gap-y-16">
+        {projects.map((project, index) => (
           <Link
             key={project.id}
             href={`/work/${project.slug}`}
-            data-cursor="View project ↗"
-            className="group mb-7 flex flex-col gap-2 wide:mb-9 sm:flex-row sm:justify-between sm:gap-6"
+            data-cursor="View case study ↗"
+            className="group block"
           >
-            <div>
-              <p className="text-[16px] leading-5.5 transition-colors group-hover:text-muted sm:text-[17px] wide:text-[20px] wide:leading-normal">
+            <span className="relative block aspect-16/10 w-full overflow-hidden rounded-2xl bg-frame wide:rounded-3xl">
+              <Image
+                src={project.coverImage}
+                alt={`${project.title} — ${project.tagline}`}
+                fill
+                sizes="(max-width: 639px) calc(100vw - 50px), (max-width: 899px) calc(50vw - 32px), 418px"
+                loading={index < 2 ? "eager" : "lazy"}
+                className="object-contain transition-transform duration-500 ease-out group-hover:scale-[1.02]"
+              />
+            </span>
+
+            <span className="mt-4 flex items-baseline justify-between gap-4">
+              <span className="text-[17px] font-medium leading-6 transition-colors group-hover:text-muted sm:text-[18px] wide:text-[20px]">
                 {project.title}
-              </p>
-              <p className="mt-1 text-[13px] font-medium text-dim sm:mt-1.5">
-                {project.tagline}
-              </p>
-            </div>
+              </span>
+              <span className="shrink-0 text-[13px] font-medium text-faint">
+                {project.category}
+              </span>
+            </span>
+
+            <span className="mt-1.5 block text-[15px] leading-6 text-soft sm:text-[16px]">
+              {project.tagline}
+            </span>
 
             {/*
-              Only the primary category here. A full four-deep tag stack, as on
-              the home page's showcases, would make every row taller than its
-              own content and leave the title stranded in whitespace.
+              One number per card. The full set lives in the case study; here it
+              is doing the job of a reason to click.
             */}
-            <div className="sm:w-40 sm:shrink-0 sm:text-right">
-              <p className="text-[15px] font-medium leading-6.5 text-faint sm:text-[16px]">
-                {project.category}
-              </p>
-            </div>
+            {project.metrics[0] && (
+              <span className="mt-3 flex items-baseline gap-2">
+                <span className="text-[16px] font-medium text-ink">
+                  {project.metrics[0].value}
+                </span>
+                <span className="text-[13px] font-medium text-dim">
+                  {project.metrics[0].label}
+                </span>
+              </span>
+            )}
           </Link>
         ))}
+      </section>
+
+      <section className="mt-16 border-t border-rule pt-10 sm:mt-20 sm:pt-12">
+        <h2 className="text-[17px] font-medium sm:text-[18px] wide:text-[20px]">
+          Want the detail behind any of these?
+        </h2>
+        <p className="mt-2 max-w-[52ch] text-[16px] leading-6 text-soft sm:text-[17px] wide:text-[18px] wide:leading-7">
+          I&apos;m open to Senior Product Designer roles, and happy to walk
+          through the research, the trade-offs and the things that didn&apos;t
+          work.
+        </p>
+        <div className="mt-6 flex flex-wrap gap-3">
+          <Link href="/contact" className="btn">
+            Get in touch
+          </Link>
+          <Link href="/resume" className="btn btn-outline">
+            View résumé
+          </Link>
+        </div>
       </section>
     </div>
   );

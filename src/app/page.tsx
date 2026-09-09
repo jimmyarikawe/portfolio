@@ -1,12 +1,31 @@
 import Link from "next/link";
+import Image from "next/image";
 import { projects } from "@/data/projects";
 import { articles } from "@/data/articles";
-import { achievements } from "@/data/profile";
 import { ProjectShowcase } from "@/components/ProjectShowcase";
 import { AvailabilityInterlude } from "@/components/AvailabilityInterlude";
 import { ExperienceList } from "@/components/ExperienceList";
 import { StackList } from "@/components/StackList";
-import { SocialLinks } from "@/components/SocialLinks";
+
+/*
+ * Ordered for a reader who is deciding, in under a minute, whether to keep
+ * going: one claim, then borrowed credibility, then the work — with the three
+ * strongest projects at full size and the rest as a compact grid, so nothing is
+ * hidden but everything is not equally loud.
+ *
+ * The bio used to appear three times (here, in an "About me" section further
+ * down, and again on /about). It now appears once.
+ */
+const featured = projects.filter((p) => p.featured);
+const rest = projects.filter((p) => !p.featured);
+
+const PROOF = [
+  "Omits",
+  "Pentagram",
+  "Radical Company",
+  "Recyclan",
+  "MSc Artificial Intelligence, Distinction",
+];
 
 export default function HomePage() {
   return (
@@ -14,29 +33,59 @@ export default function HomePage() {
       {/* 1. INTRO */}
       <section className="mt-20 sm:mt-22">
         <h1 className="font-display text-balance text-[28px] font-medium leading-8.25 sm:text-[34px] sm:leading-9.5 wide:text-[42px] wide:leading-10.75">
-          Staff / Senior Product Designer specializing in complex systems, fintech, and AI-native products.
+          I design and build products for problems most teams find hard to look
+          at.
         </h1>
 
-        <p className="mt-3.5 text-[17px] leading-6 text-muted sm:mt-4.5 sm:text-[20px] sm:leading-7 wide:mt-6.25 wide:text-[24px] wide:leading-8">
-          I’m <span className="text-ink">Jimmy Arikawe</span> — a Lead / Staff Product Designer with strategic domain authority. I design mission-critical software where business complexity, deep interaction architecture, and emerging AI intersect.
+        <p className="mt-3.5 max-w-[54ch] text-[17px] leading-6 text-muted sm:mt-4.5 sm:text-[20px] sm:leading-7 wide:mt-6.25 wide:text-[24px] wide:leading-8">
+          I&apos;m <span className="text-ink">Jimmy Arikawe</span>, a Senior
+          Product Designer. Seven years across cross-border payments, enterprise
+          operations and AI — and I write the production front-end alongside the
+          engineers shipping it.
         </p>
 
-        <p className="mt-3 text-[14px] font-medium text-dim sm:mt-4 sm:text-[15px] wide:text-[16px]">
-          Ex-Pentagram · Radical Company · Omits · MSc Artificial Intelligence (Distinction)
-        </p>
-
-        <p className="mt-3.5 text-[15px] leading-6 text-muted sm:mt-4 sm:text-[17px] sm:leading-6.5 wide:text-[18px] wide:leading-7">
-          Deep technical fluency in AI interaction design — from model evals and non-deterministic latency to agentic workflows and human-in-the-loop systems.
-        </p>
+        <div className="mt-7 flex flex-wrap gap-3 sm:mt-8">
+          <Link href="/work" className="btn">
+            View selected work
+          </Link>
+          <Link href="/resume" className="btn btn-outline">
+            Résumé
+          </Link>
+        </div>
       </section>
 
-      {/* 2. PROJECTS */}
-      <section className="mt-25 sm:mt-30">
-        <h2 className="mb-3.5 text-[17px] font-medium sm:mb-4.5 sm:text-[18px] wide:mb-6.5 wide:text-[20px]">
-          Selected Work
-        </h2>
+      {/* 2. PROOF BAR — borrowed credibility, in one glance. */}
+      <section
+        aria-label="Background"
+        className="mt-10 border-t border-rule pt-5 sm:mt-12 sm:pt-6"
+      >
+        <ul className="flex flex-wrap items-center gap-x-5 gap-y-2 sm:gap-x-7">
+          {PROOF.map((item) => (
+            <li
+              key={item}
+              className="text-[14px] font-medium text-dim sm:text-[15px]"
+            >
+              {item}
+            </li>
+          ))}
+        </ul>
+      </section>
 
-        {projects.map((project, index) => (
+      {/* 3. FEATURED WORK */}
+      <section className="mt-20 sm:mt-24 wide:mt-30">
+        <div className="mb-3.5 flex items-baseline justify-between gap-4 sm:mb-4.5 wide:mb-6.5">
+          <h2 className="text-[17px] font-medium sm:text-[18px] wide:text-[20px]">
+            Selected Work
+          </h2>
+          <Link
+            href="/work"
+            className="text-[15px] text-muted transition-colors hover:text-ink sm:text-[16px]"
+          >
+            All seven projects →
+          </Link>
+        </div>
+
+        {featured.map((project, index) => (
           <ProjectShowcase
             key={project.id}
             project={project}
@@ -45,53 +94,86 @@ export default function HomePage() {
         ))}
       </section>
 
-      {/* 3. AVAILABILITY INTERLUDE */}
-      <AvailabilityInterlude />
-
-      {/* 4. ABOUT */}
-      <section>
-        <h2 className="mb-3 text-[17px] font-medium sm:mb-4 sm:text-[18px] wide:text-[20px]">
-          About me
+      {/* 4. THE REST — present, indexed, but not competing for the same weight. */}
+      <section className="mt-4 sm:mt-6">
+        <h2 className="mb-4 text-[17px] font-medium sm:mb-5 sm:text-[18px] wide:text-[20px]">
+          More work
         </h2>
 
-        <div className="[&>p]:mb-5 [&>p]:text-[17px] [&>p]:leading-6.5 [&>p]:text-muted sm:[&>p]:mb-6 sm:[&>p]:text-[19px] sm:[&>p]:leading-7 wide:[&>p]:mb-7.5 wide:[&>p]:text-[21px] wide:[&>p]:leading-7.5">
-          <p>
-            I’m <span className="text-ink">Jimmy Arikawe</span>, a Lead / Staff Product Designer with strategic domain authority. I design mission-critical software where business complexity, deep interaction architecture, and emerging AI intersect.
-          </p>
-          <p>
-            I bring deep technical fluency to AI interaction design — mastering evals, non-deterministic latency, agentic workflows, and human-in-the-loop systems. Backed by an{" "}
-            <span className="text-ink">
-              MSc in Artificial Intelligence &amp; Applications (Distinction)
-            </span>{" "}
-            from the{" "}
-            <a
-              href="https://www.strath.ac.uk"
-              target="_blank"
-              rel="noopener"
-              className="prose-link"
-            >
-              University of Strathclyde
-            </a>
-            , I bridge machine learning capabilities with rigorous interaction architecture.
-          </p>
-          <p>
-            With experience spanning <span className="text-ink">Pentagram</span>, <span className="text-ink">Radical Company</span>, and <span className="text-ink">Omits</span>, I lead product design across the full lifecycle — from zero-to-one product strategy and systems architecture to high-fidelity prototypes and production implementation.
-          </p>
-          <p>
-            Previously, I led product design at Omits on cross-border payments, and at Recyclan on an operational data telemetry platform used across 14+ countries. I’ve also published{" "}
+        <div className="grid gap-x-6 gap-y-9 sm:grid-cols-2">
+          {rest.map((project) => (
             <Link
-              href="/journal/tech-driven-solutions-for-africas-waste-problem"
-              className="prose-link"
+              key={project.id}
+              href={`/work/${project.slug}`}
+              data-cursor="View case study ↗"
+              className="group block"
             >
-              research on tech-driven solutions for Africa’s waste problem
+              <span className="relative block aspect-16/10 w-full overflow-hidden rounded-2xl bg-frame">
+                <Image
+                  src={project.coverImage}
+                  alt={`${project.title} — ${project.tagline}`}
+                  fill
+                  sizes="(max-width: 639px) calc(100vw - 50px), (max-width: 899px) calc(50vw - 32px), 418px"
+                  loading="lazy"
+                  className="object-contain transition-transform duration-500 ease-out group-hover:scale-[1.02]"
+                />
+              </span>
+
+              <span className="mt-3 flex items-baseline justify-between gap-4">
+                <span className="text-[16px] font-medium leading-6 transition-colors group-hover:text-muted sm:text-[17px]">
+                  {project.title}
+                </span>
+                <span className="shrink-0 text-[13px] font-medium text-faint">
+                  {project.category}
+                </span>
+              </span>
+
+              <span className="mt-1 block text-[15px] leading-6 text-soft">
+                {project.tagline}
+              </span>
             </Link>
-            .
-          </p>
+          ))}
         </div>
       </section>
 
-      {/* 5. EXPERIENCE + STACK */}
-      <div className="mt-10 flex flex-col sm:mt-14 sm:flex-row sm:justify-between sm:gap-6 wide:mt-22.5">
+      {/* 5. DESIGNER WHO CODES — the differentiator, made concrete. */}
+      <section className="mt-20 border-t border-rule pt-10 sm:mt-24 sm:pt-12 wide:mt-30">
+        <h2 className="text-[17px] font-medium sm:text-[18px] wide:text-[20px]">
+          I ship the front-end too
+        </h2>
+
+        <div className="mt-3 max-w-[62ch] [&>p]:mb-4 [&>p]:text-[17px] [&>p]:leading-6.5 [&>p]:text-muted sm:[&>p]:text-[19px] sm:[&>p]:leading-7">
+          <p>
+            Design that stops at handoff loses the argument at implementation. I
+            write TypeScript and React, so I can prototype an interaction, test
+            it against a real API, and hand engineers something that already
+            works rather than something that looks like it should.
+          </p>
+          <p>
+            It matters most with AI. A static artboard can&apos;t show you what a
+            four-second first token feels like, or what happens when a model
+            returns something confidently wrong — so I build against live models
+            and design the failure states from what actually comes back.
+          </p>
+        </div>
+
+        <div className="mt-6 flex flex-wrap gap-3">
+          <a
+            href="https://github.com/jimmyarikawe"
+            target="_blank"
+            rel="noopener"
+            className="btn btn-outline"
+          >
+            See the code on GitHub
+          </a>
+          <Link href="/journal" className="btn btn-outline">
+            Read the writing
+          </Link>
+        </div>
+      </section>
+
+      {/* 6. EXPERIENCE + STACK */}
+      <div className="mt-16 flex flex-col sm:mt-20 sm:flex-row sm:justify-between sm:gap-6 wide:mt-24">
         <div className="sm:w-[62%] wide:w-145">
           <ExperienceList />
         </div>
@@ -101,13 +183,21 @@ export default function HomePage() {
         </div>
       </div>
 
-      {/* 6. WRITING */}
-      <section className="mt-12 sm:mt-18 wide:mt-30">
-        <h2 className="mb-3 text-[17px] font-medium sm:mb-4 sm:text-[18px] wide:text-[20px]">
-          Writing
-        </h2>
+      {/* 7. WRITING */}
+      <section className="mt-16 sm:mt-20 wide:mt-24">
+        <div className="mb-3 flex items-baseline justify-between gap-4 sm:mb-4">
+          <h2 className="text-[17px] font-medium sm:text-[18px] wide:text-[20px]">
+            Writing
+          </h2>
+          <Link
+            href="/journal"
+            className="text-[15px] text-muted transition-colors hover:text-ink sm:text-[16px]"
+          >
+            All writing →
+          </Link>
+        </div>
 
-        {articles.map((article) => (
+        {articles.slice(0, 3).map((article) => (
           <Link
             key={article.slug}
             href={`/journal/${article.slug}`}
@@ -124,26 +214,8 @@ export default function HomePage() {
         ))}
       </section>
 
-      {/* 7. ACHIEVEMENTS */}
-      <section className="mt-12 sm:mt-18 wide:mt-30">
-        <h2 className="mb-3 text-[17px] font-medium sm:mb-4 sm:text-[18px] wide:text-[20px]">
-          Achievements
-        </h2>
-
-        <ul>
-          {achievements.map((achievement) => (
-            <li
-              key={achievement}
-              className="mb-2.5 text-[16px] leading-5.5 text-muted sm:mb-3 sm:text-[17px] wide:mb-3.5 wide:text-[20px] wide:leading-6"
-            >
-              {achievement}
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      {/* 8. SOCIALS */}
-      <SocialLinks />
+      {/* 8. CLOSING CTA */}
+      <AvailabilityInterlude />
     </div>
   );
 }

@@ -1,5 +1,7 @@
 export interface Project {
   id: string;
+  /** Leads the home page. The rest are reachable from /work. */
+  featured?: boolean;
   slug: string;
   title: string;
   tagline: string;
@@ -9,6 +11,13 @@ export interface Project {
   client: string;
   year: string;
   role: string;
+  /**
+   * How the work was actually done — employment, client engagement via a
+   * studio, freelance, or self-initiated. Rendered in the case-study fact
+   * sheet. Left undefined where it is not yet confirmed, so nothing
+   * unverified is published.
+   */
+  engagement?: string;
   duration: string;
   liveUrl?: string;
   coverImage: string;
@@ -32,8 +41,9 @@ export const projects: Project[] = [
   {
     "id": "01",
     "slug": "omits",
+    "featured": true,
     "title": "Omits Finance",
-    "tagline": "Cross-Border Remittance & Global Money Transfer Application",
+    "tagline": "Cross-Border Money Transfer & Multi-Currency Wallet for the UK–Africa Corridor",
     "category": "Fintech",
     "categories": [
       "Fintech",
@@ -45,24 +55,25 @@ export const projects: Project[] = [
     "client": "Omits Technology Limited",
     "year": "2025–2026",
     "role": "Product Lead & Product Designer",
+    "engagement": "Full-time · Omits Technology Limited",
     "duration": "12 Months",
     "coverImage": "/images/work/omits/02.png",
     "heroImage": "/images/work/omits/05.png",
-    "description": "Omits is a cross-border remittance application engineered to remove friction, hidden fees, and delays in international money transfers, reducing repeat transaction time to under 60 seconds.",
-    "goal": "Eliminate exchange rate anxiety, streamline multi-tiered KYC verification, and reduce repeat transfer time to under 60 seconds.",
-    "outcome": "Shipped multi-currency remittance ecosystem across 25+ FX corridors with 94% unassisted completion and zero rate slippage.",
+    "description": "The iOS and Android app people use to send money from the UK to Nigeria, Ghana and Kenya — multi-currency wallets, a five-step guarded send flow, and in-app conversion at a rate you lock before you commit.",
+    "goal": "Remove the two things that stop people completing a transfer — not trusting the rate they were quoted, and not knowing whether the money arrived — without loosening the security a regulated payments app has to carry.",
+    "outcome": "Shipped a multi-currency wallet and send flow across iOS and Android, with rate confirmation before commit, biometric and PIN-guarded authorisation, and progressive KYC that defers verification until the moment it is actually required.",
     "principles": [
       {
-        "title": "Progressive Reassurance",
-        "description": "Provide immediate, transparent fee breakdowns and real-time status tracking at every touchpoint to eliminate financial anxiety."
+        "title": "Show the rate before the commitment",
+        "description": "The review screen states the exact rate, fee and amount the recipient receives before the PIN step. Nothing changes after you authorise — the anxiety in remittance is not the price, it is the suspicion that the price will move."
       },
       {
-        "title": "Frictionless Repetition",
-        "description": "Surface smart beneficiary lists and biometric 1-tap confirmation to turn recurring transfers into effortless sub-minute routines."
+        "title": "Ask for identity when it is needed, not at the door",
+        "description": "Onboarding gets you to a working account first. Verification, transaction PIN and biometrics are introduced at the points they become necessary, rather than as a wall between signup and the product."
       },
       {
-        "title": "Uncompromising Trust",
-        "description": "Card-based visual boundaries, crisp cryptographic indicators, and high-contrast states reinforce security without adding cognitive clutter."
+        "title": "Security you feel once, not every time",
+        "description": "Biometric unlock and a transaction PIN sit at the two moments that matter — opening the app and authorising money — so the rest of the experience carries no security tax."
       }
     ],
     "metrics": [
@@ -75,18 +86,14 @@ export const projects: Project[] = [
         "value": "94%"
       },
       {
-        "label": "End-to-End Encryption",
-        "value": "100%"
-      },
-      {
-        "label": "Multi-Currency Coverage",
-        "value": "25+ FX"
+        "label": "Send Flow",
+        "value": "5 Steps"
       }
     ],
-    "overview": "Omits successfully addresses the core challenges of cross-border remittance through thoughtful design and user-centered development. As both designer and product manager, I collaborated closely with engineering, compliance, risk, and CX teams to ensure design feasibility, regulatory adherence, and seamless scalability.",
-    "challenge": "Cross-border financial transactions carry high cognitive load and anxiety for users. Senders worry about unpredictable exchange rate slippage, delayed settlement, and hidden intermediary fees. Traditional remittance apps suffer from cumbersome multi-step KYC processes and disjointed transaction status communication.",
-    "solution": "We engineered an ultra-streamlined remittance flow combining real-time exchange rate synchronization, smart beneficiary management, progressive tiered verification, and multi-factor biometric authentication. The interface provides constant reassurance through instant push feedback, transparent fee breakdowns, and real-time transaction tracking.",
-    "designSystem": "Card-based visual boundaries guide the user's eye through clear information hierarchies. Consistent padding, high-contrast states, and typography establish rhythm and reinforce security at every touchpoint.",
+    "overview": "Sending money home is a high-stakes, low-trust transaction. The sender is usually paying for something specific at the other end — school fees, rent, a medical bill — and the cost of the transfer going wrong is not inconvenience, it is a missed obligation. I led design on the mobile app across iOS and Android, working with engineering, compliance and risk to take the product from an existing codebase to a flow people would complete without calling support.",
+    "challenge": "Two problems sat on top of each other. Senders did not trust quoted rates, because in this category the number you are shown and the number you are charged often differ — so people screenshot the quote before confirming. And regulated onboarding wants full identity verification up front, which is precisely the point at which a first-time user has been given no reason to hand over a passport. Solving either one carelessly makes the other worse: reassurance costs steps, and removing steps costs compliance.",
+    "solution": "The send flow was rebuilt as five explicit steps — choose recipient, enter details, review, authorise with PIN, see the outcome — with the review step carrying the full breakdown and the recipient\u2019s exact receiving amount. Recipients can be reached either by Omits username or by bank account, so the common case of sending to someone already on the platform skips account-number entry entirely. Onboarding defers verification: an account works first, identity checks arrive when a limit or a payout requires them, and the transaction PIN and biometric unlock are introduced at their moment of use. Conversion between held currencies is its own flow rather than a hidden step inside sending.",
+    "designSystem": "A card-based system with one consistent hierarchy: what you are doing at the top, the number that matters in the largest type on the screen, and the irreversible action last. Success, pending and failure states are designed as full screens rather than toasts, because in a payments app the outcome of a transfer is the most important thing the product ever tells you.",
     "gallery": [
       "/images/work/omits/02.png",
       "/images/work/omits/05.png",
@@ -96,20 +103,24 @@ export const projects: Project[] = [
     ],
     "features": [
       {
-        "title": "Real-Time FX Lock & Sync",
-        "description": "The app leverages real-time synchronization for global exchange rates, ensuring users lock exact rates before confirming transfers with zero hidden slippage."
+        "title": "Guarded Five-Step Send Flow",
+        "description": "Recipient, details, review, PIN, outcome. The review step is the contract — rate, fee and exact receiving amount — and nothing after it changes the numbers. Success and failure are full screens, each with a clear next action."
       },
       {
-        "title": "Smart Beneficiary Management",
-        "description": "Beneficiary lists load progressively, surfacing frequently used recipients first to reduce friction on repeat transfers significantly."
+        "title": "Send by Username or Bank Account",
+        "description": "Transfers to someone already on Omits resolve by username, skipping account numbers and sort codes entirely; transfers out use the bank flow. The two paths converge on the same review screen so the confirmation is always identical."
       },
       {
-        "title": "Multi-Factor Biometric Security",
-        "description": "Combines biometric verification with PIN codes, end-to-end encryption, and secure token-based session management with automatic timeout."
+        "title": "Multi-Currency Wallets & In-App Conversion",
+        "description": "Users hold balances in several currencies and convert between them as a first-class flow with its own rate screen, rather than as a hidden step buried inside a transfer."
       },
       {
-        "title": "Multi-Currency Financial Statements",
-        "description": "Comprehensive account statements with custom date ranges, providing users and businesses with complete financial visibility and instant audit exports."
+        "title": "Deferred Identity Verification",
+        "description": "Signup, phone verification and profile come first; address, identity documents, transaction PIN and biometrics are introduced at the point each becomes necessary — so a new user reaches a working account before being asked for a passport."
+      },
+      {
+        "title": "PIN and Biometric Authorisation",
+        "description": "A device lock screen on re-entry and a transaction PIN at the moment of authorisation, with biometrics offered as the fast path for both — two checkpoints instead of security friction spread across the whole app."
       }
     ],
     "roadmap": [
@@ -117,7 +128,7 @@ export const projects: Project[] = [
       "Group payment functionality allowing multiple senders to contribute to a single transfer",
       "Cross-border utility bill payment integrations"
     ],
-    "takeaways": "In financial applications, every design decision must reinforce security and reliability. Users need constant reassurance through visual feedback, clear communication, and transparent processes. Creating a simple experience for complex transactions requires deep backend intelligence and disciplined information architecture."
+    "takeaways": "The instinct in a transfer flow is to compress steps, and it is usually wrong. Users did not want fewer screens \u2014 they wanted the screen before the irreversible one to be complete and honest. Adding an explicit review step made the flow longer and made people more willing to finish it. The corollary held on the other side: the steps genuinely worth removing were the ones asking for something the product had not yet earned, which is why verification moved out of onboarding and into the moments that require it."
   },
   {
     "id": "02",
@@ -134,7 +145,7 @@ export const projects: Project[] = [
     "services": "User Research, Design Leadership, Product Strategy, Systems Architecture",
     "client": "CirculaOps Enterprise",
     "year": "2024–2025",
-    "role": "Director of Product Design",
+    "role": "Lead Product Designer",
     "duration": "10 Months",
     "coverImage": "/images/work/circulaops/08.png",
     "heroImage": "/images/work/circulaops/02.png",
@@ -167,10 +178,6 @@ export const projects: Project[] = [
       {
         "label": "Plant Floor Adoption",
         "value": "98%"
-      },
-      {
-        "label": "Telemetry Uptime",
-        "value": "99.9%"
       }
     ],
     "overview": "Managing circular economy supply chains requires tracking millions of material assets across fragmented processing facilities, remote weighbridges, and stringent international environmental compliance standards. CirculaOps unifies operational telemetry, IoT weight verification, and chain-of-custody data into an actionable digital cockpit.",
@@ -219,13 +226,13 @@ export const projects: Project[] = [
     "services": "Research → UX Strategy → IA → Design System → UI → Prototyping",
     "client": "Mindgard Labs",
     "year": "2024",
-    "role": "Staff Product Designer & AI UX Technologist",
+    "role": "Senior Product Designer",
     "duration": "6 Months",
     "coverImage": "/images/work/mindgard-ai-security-labs/11.png",
     "heroImage": "/images/work/mindgard-ai-security-labs/02.png",
     "description": "Automated red-teaming and security analysis suite protecting enterprise AI models from prompt injections, adversarial exploits, and data leakage.",
     "goal": "Demystify complex probabilistic LLM attack vectors and empower security engineers to triage model risks 3.5x faster.",
-    "outcome": "Delivered MITRE ATLAS-aligned automated red teaming dashboard evaluating 100+ attack vectors with instant guardrail generation.",
+    "outcome": "Delivered an automated red-teaming dashboard that cut security triage from days to hours, with guardrail recommendations generated from each run.",
     "principles": [
       {
         "title": "Explainable Threat Topography",
@@ -248,14 +255,6 @@ export const projects: Project[] = [
       {
         "label": "Security Triage Speed",
         "value": "3.5x Faster"
-      },
-      {
-        "label": "Threat Mapping",
-        "value": "MITRE ATLAS"
-      },
-      {
-        "label": "Enterprise Readiness",
-        "value": "SOC2"
       }
     ],
     "overview": "Conducted extensive competitive and user analysis comparing Mindgard against Sydelabs, Adversa, Robust Intelligence, and Hiddenlayer to inform Mindgard's Overview Dashboard, ensuring it delivers a superior, high-density analytical experience for AI security engineers.",
@@ -330,20 +329,12 @@ export const projects: Project[] = [
     ],
     "metrics": [
       {
-        "label": "Voice Modulation Options",
-        "value": "20+ Profiles"
-      },
-      {
         "label": "Task Execution Latency",
         "value": "< 250ms"
       },
       {
         "label": "User Engagement",
         "value": "+85%"
-      },
-      {
-        "label": "Accessibility Score",
-        "value": "WCAG AAA"
       }
     ],
     "overview": "Most voice assistants rely on rigid command structures and generic voices, creating friction in nuanced tasks and limiting emotional connection. VoxAid transforms voice into a primary productivity interface by introducing expressive, customizable voice modulation.",
@@ -424,10 +415,6 @@ export const projects: Project[] = [
         "value": "120K+"
       },
       {
-        "label": "Modes Supported",
-        "value": "Light & Dark"
-      },
-      {
         "label": "Transaction Success",
         "value": "99.8%"
       }
@@ -470,6 +457,7 @@ export const projects: Project[] = [
   {
     "id": "06",
     "slug": "yourparkingspace",
+    "featured": true,
     "title": "YourParkingSpace",
     "tagline": "Event Parking & Smart Mobility Experience for the UK & Ireland Market",
     "category": "Mobility",
@@ -513,10 +501,6 @@ export const projects: Project[] = [
         "value": "-22%"
       },
       {
-        "label": "Space Discovery Latency",
-        "value": "< 100ms"
-      },
-      {
         "label": "Annual Drivers Served",
         "value": "1.5M+"
       }
@@ -553,5 +537,195 @@ export const projects: Project[] = [
       }
     ],
     "takeaways": "Eliminating friction for time-sensitive, high-anxiety journeys requires anticipating physical real-world constraints like road closures and post-match stadium traffic."
+  },
+  {
+    "id": "07",
+    "slug": "eventspad",
+    "featured": true,
+    "title": "Eventspad",
+    "tagline": "End-to-End Event, Guest & Secure Check-In Operating System",
+    "category": "Event Technology",
+    "categories": [
+      "Event Technology",
+      "SaaS Platform",
+      "Systems Design",
+      "Product Strategy"
+    ],
+    "services": "Product Strategy, Design System, UI/UX Design, Front-End Implementation",
+    "client": "EventspadHQ Ltd",
+    "year": "2026",
+    "role": "Founder & Product Designer",
+    "engagement": "Own product · EventspadHQ Ltd",
+    "duration": "4 Months",
+    "liveUrl": "https://eventspad.com",
+    "coverImage": "/images/work/eventspad/01-event-overview.png",
+    "heroImage": "/images/work/eventspad/02-seating-floorplan.png",
+    "description": "Eventspad is an event operating system that carries organisers from the first invitation to the final check-in — guest lists, RSVPs, seating, secure QR passes, and sub-second door validation held in a single synchronised platform.",
+    "goal": "Collapse the spreadsheet, printed card, and clipboard workflow into one system where every guest record, seat assignment, and QR pass stays in sync from invitation to door.",
+    "outcome": "Shipped the full guest lifecycle: a three-step event wizard, a drag-and-drop 2D floor planner, three-channel invitations, an offline-capable door scanner, and an attendance funnel — priced per guest with no subscription.",
+    "principles": [
+      {
+        "title": "One Guest Record, Everywhere",
+        "description": "The guest is the single source of truth. RSVP status, table number, and QR pass all read from one record, so the scanner at the door can never disagree with the seating chart."
+      },
+      {
+        "title": "Design for the Door",
+        "description": "The highest-stakes three seconds of any event is the scan. The validator resolves to one of three unambiguous colour-coded states — granted, already used, not valid — legible at arm's length in low light."
+      },
+      {
+        "title": "Pay for Guests, Not Software",
+        "description": "Pricing follows the real unit of value. A credit per guest pass means a once-a-year wedding host is never billed like a monthly enterprise seat."
+      }
+    ],
+    "metrics": [
+      {
+        "label": "Door Verification",
+        "value": "< 1s"
+      },
+      {
+        "label": "Event Setup",
+        "value": "3 Steps"
+      },
+      {
+        "label": "Cost Per Guest Pass",
+        "value": "$0.10"
+      },
+      {
+        "label": "Offline Check-In",
+        "value": "100%"
+      }
+    ],
+    "overview": "Most event tools stop at the invitation. Eventspad was built to own the entire lifecycle — creation, invitation, RSVP, seating, ticketing, check-in, and post-event insight — as one connected system rather than six disconnected ones. I led product direction and design across the web application, the marketing site, and the Validator scanner, working alongside engineering to define the data model, the flows, and the interface language that hold them together.",
+    "challenge": "The same five failures recur at every wedding, conference, and church programme: guests forget their invitations, hosts lose track of RSVPs across WhatsApp threads, entrances queue while ushers scan paper lists by eye, forged or forwarded passes let uninvited guests through, and once the lights go up nobody knows who actually attended. Each existing tool solved one of these and handed the rest back to a spreadsheet.",
+    "solution": "We modelled the platform around the guest rather than the event. A three-step wizard — event details, then seating, tickets and RSVP, then guests and invitations — gets an organiser to a live event page in minutes, with seating skippable for events that do not need it. Guest lists import from CSV through a column-matching step that reconciles whatever headers a spreadsheet arrives with. Invitations go out over WhatsApp, SMS, or email to a browser-based RSVP that requires no download. Confirmed guests receive a unique QR pass carrying their assigned table, and the door team verifies it in under a second — offline if the venue Wi-Fi fails, syncing when it returns.",
+    "designSystem": "A violet-on-ink accent system built on Radix primitives and Tailwind, set in Geist Sans with Geist Mono reserved for operational readouts — table counts, scan latency, credit balances. Colour is spent almost entirely on state: violet for action, and a green/amber/red triad held back exclusively for the three check-in outcomes so a scan result reads correctly at a glance without being parsed.",
+    "gallery": [
+      "/images/work/eventspad/02-seating-floorplan.png",
+      "/images/work/eventspad/01-event-overview.png",
+      "/images/work/eventspad/03-guest-management.png",
+      "/images/work/eventspad/04-seating-list.png",
+      "/images/work/eventspad/05-ticket-designer.png",
+      "/images/work/eventspad/06-notifications.png",
+      "/images/work/eventspad/07-check-in.png",
+      "/images/work/eventspad/08-analytics-dashboard.png",
+      "/images/work/eventspad/09-events-list.png",
+      "/images/work/eventspad/10-create-wizard.png"
+    ],
+    "features": [
+      {
+        "title": "Drag-and-Drop 2D Floor Planner",
+        "description": "Round, long, stage, and block objects positioned on a zoom-and-pan canvas with smart-guide snapping and fit-to-view, backed by a list view and a dedicated mobile layout for planning on site."
+      },
+      {
+        "title": "Live Ticket-to-Seat Sync",
+        "description": "Reassigning a guest updates the table number printed on their digital pass and shown on the usher's scanner screen, removing the class of error where the chart and the door hold different truths."
+      },
+      {
+        "title": "Offline-First Door Validation",
+        "description": "A browser scanner and a dedicated Validator app resolve every pass to entry granted, already checked in, or not valid — queueing scans through patchy signal and syncing automatically, with unlimited usher logins on one shared list."
+      },
+      {
+        "title": "Three-Channel Invitations",
+        "description": "WhatsApp, SMS, and email composers share one recipient selector and one guest database, so a reminder to non-responders is a filter rather than a rebuilt list."
+      },
+      {
+        "title": "Attendance Funnel Analytics",
+        "description": "Invited, RSVP'd, confirmed, and checked-in tracked as a single funnel with attendance rate, per event or across a planner's whole portfolio, closed out by post-event reviews."
+      }
+    ],
+    "roadmap": [
+      "Native Validator app releases on the App Store and Google Play",
+      "Multi-gate access control with per-entrance usher assignment and live gate throughput",
+      "Recurring-event templates that carry guest segments and seating layouts forward"
+    ],
+    "takeaways": "Owning the whole lifecycle is what makes the individual features work. Seating is only trustworthy because the pass reads from the same record; analytics are only honest because the door writes back to it. The harder design problem was not any single screen but keeping one guest record coherent across an organiser's laptop, a guest's browser, and an usher's phone on a venue's failing Wi-Fi."
+  },
+  {
+    "id": "08",
+    "slug": "omits-admin",
+    "title": "Omits Admin Portal",
+    "tagline": "Back-Office Console for Cross-Border Transaction Operations & Compliance",
+    "category": "Fintech Operations",
+    "categories": [
+      "Fintech",
+      "Enterprise Tools",
+      "Systems Design",
+      "Design Systems"
+    ],
+    "services": "Product Strategy, Information Architecture, Interaction Design, Design System",
+    "client": "Omits Technology Limited",
+    "engagement": "Full-time · Omits Technology Limited",
+    "year": "2025–2026",
+    "role": "Product Lead & Product Designer",
+    "duration": "5 Months",
+    "coverImage": "/images/work/omits-admin/02-transactions.png",
+    "heroImage": "/images/work/omits-admin/01-transaction-detail.png",
+    "description": "The internal console Omits staff use to investigate cross-border transactions, verify customers, adjust FX rates and approve one another's actions — designed so that no single person can move money alone.",
+    "goal": "Give operations, compliance and support one console for the money, with every sensitive action gated behind a second signature and written to an audit trail.",
+    "outcome": "Shipped a thirteen-module back-office built on a granular permission model, a maker-checker approval queue, and a transaction timeline that shows where money actually is rather than only its final status.",
+    "principles": [
+      {
+        "title": "Show the journey, not the verdict",
+        "description": "\"Pending\" tells an agent nothing they can act on. Every transaction renders as a timeline — initiated, screened, risk cleared, credited — so the next question is always obvious."
+      },
+      {
+        "title": "No single pair of hands",
+        "description": "Anything that moves money or unlocks an account is a request, not an action. One person raises it, another approves it, and both are recorded."
+      },
+      {
+        "title": "Permission is part of the layout",
+        "description": "Roles are modelled at the level of the individual action, so the interface a support agent sees is genuinely a different product from the one a finance approver sees."
+      }
+    ],
+    "metrics": [
+      {
+        "label": "Operational Modules",
+        "value": "13"
+      },
+      {
+        "label": "Granular Permissions",
+        "value": "~50"
+      },
+      {
+        "label": "Sensitive Actions Gated",
+        "value": "2-of-2"
+      }
+    ],
+    "overview": "Omits moves money between the UK, Nigeria, Ghana and Kenya. Everything a customer does on the mobile app eventually lands on a member of staff — a stalled payout, a KYC document that needs a human decision, a rate that has to be corrected before the next batch. Before this console, that work happened across database queries, spreadsheets and messages. I led design for the internal product that replaced it, working from the operations team's actual escalation paths rather than from a feature list.",
+    "challenge": "Back-office tools in regulated finance carry a specific tension: the people using them need to move quickly, and the regulator needs them to be unable to move alone. An agent chasing a stuck transfer wants one screen with the whole story. A compliance officer needs the same screen to prove, months later, exactly who did what and on whose authority. Designing for speed usually means fewer steps; designing for auditability usually means more. Both requirements are non-negotiable, and the console had to hold them at once.",
+    "solution": "The console is organised around the objects staff actually escalate — a transaction, a customer, a rate, a request — rather than around the teams that own them. Transactions open into a summary, a full detail record and a timeline that shows every stage the money passed through. Customers open into a tabbed record covering wallets, transaction history, compliance documents, security events and their own audit log. Sensitive actions do not execute inline: they create a request that lands in an authorisation queue for a second, differently-permissioned admin to approve or decline, with the reason captured on both sides.",
+    "designSystem": "A deliberately quiet system: white ground, near-black chrome, and colour reserved almost entirely for state — green for completed, amber for pending, red for failed or blocked. Every table shares one row anatomy, one status pill and one empty state, so an agent moving between transactions, users and requests is reading the same grammar. Dense by intent: these are screens people work in for a full shift, not screens they visit.",
+    "gallery": [
+      "/images/work/omits-admin/01-transaction-detail.png",
+      "/images/work/omits-admin/02-transactions.png",
+      "/images/work/omits-admin/03-overview.png",
+      "/images/work/omits-admin/04-user-management.png",
+      "/images/work/omits-admin/05-user-detail.png",
+      "/images/work/omits-admin/06-roles.png",
+      "/images/work/omits-admin/07-login.png"
+    ],
+    "features": [
+      {
+        "title": "Transaction Timeline",
+        "description": "Each transfer renders as the sequence it actually passed through — deposit initiated, compliance scan, flag raised, risk cleared, wallet credited — so an agent can see where a payment stopped instead of inferring it from a status word."
+      },
+      {
+        "title": "Maker-Checker Authorisation Queue",
+        "description": "Refunds, cancellations, wallet adjustments, credential resets and role changes are raised as requests with a stated reason, then approved or declined by a second admin from a shared queue split into all requests and the ones assigned to you."
+      },
+      {
+        "title": "Action-Level Permission Model",
+        "description": "Roles are composed from roughly fifty discrete permissions — transactions:refund, compliance:review, wallets:adjust — so a Support Agent, a Compliance Reviewer and a Finance Approver each see a genuinely different console."
+      },
+      {
+        "title": "Tabbed Customer Record",
+        "description": "One customer, eight views: profile, wallet accounts, transactions, compliance documents, referrals, security events, support tickets and their audit log — so an investigation never requires leaving the person you are investigating."
+      },
+      {
+        "title": "Audit Trail at Three Levels",
+        "description": "Actions are written to a global log, to the acting admin's own record, and to the affected customer's record, so the same event can be reconstructed from whichever direction a question arrives."
+      }
+    ],
+    "takeaways": "Designing for auditability changed how I think about confirmation. In consumer products a confirmation step is friction to be minimised; here the second pair of eyes is the product, and the design problem is making a deliberately slow path feel purposeful rather than obstructive. Framing sensitive actions as requests with a stated reason — rather than as buttons with a warning dialog — turned a compliance requirement into something the operations team could actually use to hand work to each other."
   }
 ];

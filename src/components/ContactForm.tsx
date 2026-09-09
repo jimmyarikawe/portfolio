@@ -14,20 +14,20 @@ import {
 const labelClass = "mb-1.5 block text-[13px] font-medium text-muted sm:text-[14px]";
 
 const fieldClass =
-  "w-full rounded-2xl border border-rule bg-surface px-4 py-3.5 text-[15px] font-medium text-ink outline-none transition-colors placeholder:text-faint focus:border-ink";
+  "w-full rounded-2xl border border-rule bg-surface px-4 py-3.5 text-[15px] font-medium text-ink outline-none transition-colors placeholder:text-placeholder focus:border-ink";
 
 /*
  * The option list of a native select is drawn by the browser, so the theme
  * tokens have to be set on the options themselves — otherwise the popup keeps
  * the UA's light palette while the closed control follows the site's theme.
  */
-const selectClass = `${fieldClass} appearance-none pr-10 [&>option]:bg-surface [&>option]:text-ink`;
+const selectClass = `${fieldClass} appearance-none truncate pr-10 [&>option]:bg-surface [&>option]:text-ink`;
 
 export function ContactForm() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    service: "Product Design & Architecture",
+    service: "A full-time role",
     timeline: "Flexible",
     message: "",
   });
@@ -131,7 +131,7 @@ export function ContactForm() {
                 setFormData({
                   name: "",
                   email: "",
-                  service: "Product Design & Architecture",
+                  service: "A full-time role",
                   timeline: "Flexible",
                   message: "",
                 });
@@ -195,18 +195,17 @@ export function ContactForm() {
                     }
                     className={selectClass}
                   >
-                    <option value="Product Design & Architecture">
-                      Product Design &amp; Architecture
+                    <option value="A full-time role">A full-time role</option>
+                    <option value="A contract or freelance project">
+                      A contract or freelance project
                     </option>
-                    <option value="AI / Generative AI Interaction Design">
-                      AI / Generative AI Interaction Design
+                    <option value="AI interaction design">
+                      AI interaction design
                     </option>
-                    <option value="Rapid Prototyping & Engineering">
-                      Rapid Prototyping &amp; Engineering
+                    <option value="Prototyping & front-end">
+                      Prototyping &amp; front-end
                     </option>
-                    <option value="Product Leadership & Management">
-                      Product Leadership &amp; Management
-                    </option>
+                    <option value="Something else">Something else</option>
                   </select>
                   <ChevronDown
                     aria-hidden="true"
@@ -254,7 +253,7 @@ export function ContactForm() {
                 id="contact-message"
                 required
                 rows={4}
-                placeholder="Tell me about your product challenges, objectives, and what you are building..."
+                placeholder="What are you building, and what would you want me to work on?"
                 value={formData.message}
                 onChange={(e) =>
                   setFormData({ ...formData, message: e.target.value })
@@ -303,9 +302,9 @@ export function ContactForm() {
         </h3>
 
         <p className="mt-2 text-[16px] leading-6 text-soft sm:text-[17px] wide:leading-7">
-          Whether you are looking to design complex platforms, lead product
-          teams, explore emerging AI interfaces, or collaborate on rapid
-          prototyping, let’s talk.
+          I&apos;m open to Senior Product Designer roles in the UK and
+          remote, and to selective contract work. Happy to walk through any
+          project in more detail.
         </p>
 
         {/*
@@ -353,9 +352,9 @@ export function ContactForm() {
           <dd className="flex items-center gap-2 text-[15px] font-medium">
             <span
               aria-hidden="true"
-              className="animate-pulse-subtle h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-500"
+              className="animate-pulse-subtle h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-600"
             />
-            Open for Engagements
+            Open to new roles
           </dd>
 
           <dt className="mt-4 text-[13px] font-medium text-dim">

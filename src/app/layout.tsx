@@ -17,40 +17,40 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://jimmyarikawe.com"),
-  title: "Jimmy Arikawe — Lead / Staff Product Designer",
+  title: {
+    default: "Jimmy Arikawe — Senior Product Designer",
+    template: "%s",
+  },
   description:
-    "Lead / Staff Product Designer with strategic domain authority. Designing mission-critical software where business complexity, deep interaction architecture, and emerging AI intersect. Ex-Pentagram, Radical Company, Omits · MSc in Artificial Intelligence (Distinction).",
+    "Senior Product Designer with seven years across fintech, enterprise operations and AI products. I design and build — research through to production front-end. Ex-Pentagram, Omits, Radical Company. MSc Artificial Intelligence (Distinction).",
   keywords: [
     "Jimmy Arikawe",
-    "Lead Product Designer",
-    "Staff Product Designer",
-    "AI Interaction Design",
-    "Agentic Workflows",
-    "Human-in-the-loop Systems",
-    "Evals",
-    "Fintech Product Design",
-    "Enterprise Systems",
+    "Senior Product Designer",
+    "Product Designer London",
+    "Product Designer UK",
+    "Fintech Product Designer",
+    "Design Engineer",
+    "AI Product Designer",
+    "Design Systems",
     "Pentagram",
     "Radical Company",
-    "London Product Designer",
   ],
   authors: [{ name: "Jimmy Arikawe" }],
+  alternates: { canonical: "/" },
   openGraph: {
-    title: "Jimmy Arikawe — Lead / Staff Product Designer",
+    title: "Jimmy Arikawe — Senior Product Designer",
     description:
-      "Designing mission-critical software where business complexity, deep interaction architecture, and emerging AI intersect. Ex-Pentagram, Radical Company, Omits · MSc Artificial Intelligence (Distinction).",
+      "Seven years designing fintech, enterprise and AI products — and writing the front-end that ships them. Ex-Pentagram, Omits, Radical Company. MSc Artificial Intelligence (Distinction).",
     url: "https://jimmyarikawe.com",
-    siteName: "Jimmy Arikawe Portfolio",
-    images: [
-      {
-        url: "/images/branding/ja-monogram.png",
-        width: 200,
-        height: 201,
-        alt: "Jimmy Arikawe Portfolio",
-      },
-    ],
+    siteName: "Jimmy Arikawe",
     locale: "en_GB",
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Jimmy Arikawe — Senior Product Designer",
+    description:
+      "Seven years designing fintech, enterprise and AI products — and writing the front-end that ships them.",
   },
 };
 

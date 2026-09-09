@@ -1,6 +1,14 @@
 import Link from "next/link";
 import { articles } from "@/data/articles";
 
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Journal — Jimmy Arikawe",
+  description:
+    "Writing on AI interaction design, prototyping against live models, and the psychology behind interfaces that work.",
+};
+
 /**
  * The writing index. Same compact list rows as the home page's Writing
  * section — nothing here needs state, so it stays a server component.

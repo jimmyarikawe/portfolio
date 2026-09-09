@@ -23,13 +23,14 @@
     --frame: #F3F3F3;          /* image/media placeholder ground */
     --ink: #000000;            /* headings + emphasised body */
     --body: #2D2D2D;           /* default text */
-    --muted: #9A9DAB;          /* lead paragraphs, prose, list copy */
-    --soft: #969696;           /* project descriptions */
-    --faint: #C8C8C8;          /* tag columns */
-    --dim: #A4A4A4;            /* dates, fine print */
-    --ghost: #CED2D4;          /* footer */
+    --muted: #5F6472;          /* lead paragraphs, prose, list copy — 5.9:1 */
+    --soft: #646464;           /* project descriptions — 6.1:1 */
+    --faint: #767676;          /* tag columns — 4.6:1 */
+    --dim: #6E6E6E;            /* dates, fine print — 5.3:1 */
+    --ghost: #767676;          /* footer — 4.6:1 */
     --rule: #E0E0E0;           /* dashed dividers, hairlines */
-    --control-border: #DADADA; /* secondary button outline */
+    --control-border: #C4C4C4; /* secondary button outline */
+    --placeholder: #767676;    /* form placeholder text — 4.6:1 */
     --border-subtle: rgba(0, 0, 0, 0.07);
     --border-strong: rgba(0, 0, 0, 0.15);
     --accent-green: #22C55E;
@@ -44,11 +45,12 @@
     --body: #E4E4E7;
     --muted: #9EA2B0;
     --soft: #8A8A93;
-    --faint: #5A5A63;
-    --dim: #77777F;
-    --ghost: #45474B;
+    --faint: #9195A1;          /* 6.5:1 */
+    --dim: #9DA1AD;            /* 7.4:1 */
+    --ghost: #8B8F9A;          /* 5.9:1 */
     --rule: #2A2A2E;
-    --control-border: rgba(255, 255, 255, 0.16);
+    --control-border: rgba(255, 255, 255, 0.28);
+    --placeholder: #9195A1;
     --border-subtle: rgba(255, 255, 255, 0.08);
     --border-strong: rgba(255, 255, 255, 0.18);
   }
@@ -88,6 +90,7 @@
   --color-ghost: var(--ghost);
   --color-rule: var(--rule);
   --color-control: var(--control-border);
+  --color-placeholder: var(--placeholder);
 
   --font-sans: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-display: var(--font-geist-sans), var(--font-inter), -apple-system, sans-serif;
@@ -326,9 +329,26 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
   .animate-spin-slow,
   .animate-pulse-subtle {
     animation: none;
+  }
+
+  /*
+   * Framer Motion reads this preference per-component, but several entrances
+   * are declarative `whileInView` transforms that would still run. Collapsing
+   * every animation and transition here is blunter and more reliable.
+   */
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }
 
@@ -375,4 +395,51 @@
 
 .custom-cursor-active select {
   cursor: pointer !important;
+}
+
+/*
+ * Print. The /resume page is the CV, and the PDF in /public is printed from it,
+ * so this block has to strip the site chrome and force an ink-on-white palette
+ * regardless of which theme the visitor was using when they hit Print.
+ */
+@media print {
+  :root,
+  [data-theme="dark"] {
+    --background: #FFFFFF;
+    --surface: #FFFFFF;
+    --ink: #000000;
+    --body: #000000;
+    --muted: #333333;
+    --soft: #222222;
+    --faint: #555555;
+    --dim: #333333;
+    --rule: #BBBBBB;
+  }
+
+  /*
+   * Site chrome is hidden by its own `print:hidden` classes, not by element
+   * selectors: a blanket `header { display: none }` also catches the résumé's
+   * print masthead, and `.custom-cursor-active` lives on <html>, so hiding
+   * that prints a blank page.
+   */
+
+  html,
+  body {
+    background: #FFFFFF !important;
+    color: #000000 !important;
+    font-size: 10pt;
+  }
+
+  main {
+    padding: 0 !important;
+  }
+
+  a {
+    text-decoration: none !important;
+    color: #000000 !important;
+  }
+
+  @page {
+    margin: 14mm 14mm;
+  }
 }
