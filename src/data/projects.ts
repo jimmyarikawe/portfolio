@@ -277,7 +277,7 @@ export const projects: Project[] = [
     "engagement": "Side project · Founded EventspadHQ Ltd",
     "duration": "4 Months",
     "liveUrl": "https://eventspad.com",
-    "coverImage": "/images/work/eventspad/cover.png",
+    "coverImage": "/images/work/eventspad/01-event-overview.png",
     "heroImage": "/images/work/eventspad/02-seating-floorplan.png",
     "description": "Eventspad is an event operating system that carries organisers from the first invitation to the final check-in — guest lists, RSVPs, seating, secure QR passes, and sub-second door validation held in a single synchronised platform.",
     "goal": "Collapse the spreadsheet, printed card, and clipboard workflow into one system where every guest record, seat assignment, and QR pass stays in sync from invitation to door.",
