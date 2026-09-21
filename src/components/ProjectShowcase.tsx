@@ -14,8 +14,8 @@ interface ProjectShowcaseProps {
  * description and CTAs on the left with a right-aligned column of tags.
  *
  * The gallery has two states. Closed (wide screens only) it shows just the
- * cover at column width. Opened — or on any screen below 900px, where a lone
- * cover would waste the space — it breaks out to the full viewport width and
+ * cover at column width. Opened, or on any screen below 900px, where a lone
+ * cover would waste the space, it breaks out to the full viewport width and
  * becomes a horizontally snapping scroller of every image.
  *
  * Breakpoints track the 860px column rather than Tailwind's `md`: the
@@ -23,7 +23,7 @@ interface ProjectShowcaseProps {
  * has a non-negative value once the viewport clears 860px.
  */
 export function ProjectShowcase({ project, eager = false }: ProjectShowcaseProps) {
-  // coverImage is usually gallery[0], but not on every project — dedupe so the
+  // coverImage is usually gallery[0], but not on every project, dedupe so the
   // cover always leads and never appears twice.
   const images = [...new Set([project.coverImage, ...project.gallery])];
   const galleryId = `project-gallery-${project.slug}`;
@@ -51,7 +51,7 @@ export function ProjectShowcase({ project, eager = false }: ProjectShowcaseProps
                 src={src}
                 alt={
                   isCover
-                    ? `${project.title} — ${project.tagline}`
+                    ? `${project.title}: ${project.tagline}`
                     : `${project.title}, image ${index + 1}`
                 }
                 fill
@@ -61,7 +61,7 @@ export function ProjectShowcase({ project, eager = false }: ProjectShowcaseProps
                 /*
                  * Source captures range from 1:1 to 2.75:1, so `cover` would
                  * crop the taller ones past the point of being readable.
-                 * `contain` letterboxes them onto the frame ground instead —
+                 * `contain` letterboxes them onto the frame ground instead,
                  * which is what that background colour is there for.
                  */
                 className="object-contain"
@@ -74,7 +74,7 @@ export function ProjectShowcase({ project, eager = false }: ProjectShowcaseProps
 
       {/*
         Title and its categories stack on the left; the actions sit opposite.
-        The long description that used to sit under the title is gone — the
+        The long description that used to sit under the title is gone, the
         tagline and the full write-up both live on the case study itself, and
         repeating a paragraph under every thumbnail buried the actions.
       */}

@@ -3,7 +3,7 @@ import { CompanyFavicon } from "@/components/CompanyFavicon";
 
 /**
  * The compact role list used on the home page: role, employer, dates. The
- * fuller narrative version — with summaries, education and publications —
+ * fuller narrative version, with summaries, education and publications,
  * lives in `ExperienceTimeline` on the about page.
  */
 export function ExperienceList() {

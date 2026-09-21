@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 /*
- * Tailwind v4 has no `darkMode` config option — the `dark:` variant matches
+ * Tailwind v4 has no `darkMode` config option, the `dark:` variant matches
  * `prefers-color-scheme` by default. This app toggles theme manually via a
  * `data-theme` attribute on <html> (see ThemeProvider + the inline script in
  * layout.tsx), so `dark:` must be redefined to key off that attribute instead
@@ -23,14 +23,14 @@
     --frame: #F3F3F3;          /* image/media placeholder ground */
     --ink: #000000;            /* headings + emphasised body */
     --body: #2D2D2D;           /* default text */
-    --muted: #5F6472;          /* lead paragraphs, prose, list copy — 5.9:1 */
-    --soft: #646464;           /* project descriptions — 6.1:1 */
-    --faint: #767676;          /* tag columns — 4.6:1 */
-    --dim: #6E6E6E;            /* dates, fine print — 5.3:1 */
-    --ghost: #767676;          /* footer — 4.6:1 */
+    --muted: #5F6472;          /* lead paragraphs, prose, list copy, 5.9:1 */
+    --soft: #646464;           /* project descriptions, 6.1:1 */
+    --faint: #767676;          /* tag columns, 4.6:1 */
+    --dim: #6E6E6E;            /* dates, fine print, 5.3:1 */
+    --ghost: #767676;          /* footer, 4.6:1 */
     --rule: #E0E0E0;           /* dashed dividers, hairlines */
     --control-border: #C4C4C4; /* secondary button outline */
-    --placeholder: #767676;    /* form placeholder text — 4.6:1 */
+    --placeholder: #767676;    /* form placeholder text, 4.6:1 */
     --border-subtle: rgba(0, 0, 0, 0.07);
     --border-strong: rgba(0, 0, 0, 0.15);
     --accent-green: #22C55E;
@@ -155,7 +155,7 @@
  * Everything below is in `@layer components` so that Tailwind utilities can
  * still override it. Unlayered CSS beats every layered rule, so an unlayered
  * `.btn { display: inline-flex }` would defeat a `hidden` utility on the same
- * element — the layer is what keeps these composable.
+ * element, the layer is what keeps these composable.
  */
 @layer components {
   /*
@@ -184,13 +184,13 @@
 
 
   /*
-   * Category badge. Used for every project category tag on the site — the
-   * showcase tag column, the /work grid and the home page's "more work" grid —
+   * Category badge. Used for every project category tag on the site, the
+   * showcase tag column, the /work grid and the home page's "more work" grid,
    * so the same taxonomy reads the same way wherever it appears.
    *
    * Geist Mono in uppercase needs positive tracking: mono glyphs are already
    * evenly spaced, and capitals without extra letter-spacing read as a block.
-   * Colours are tokens, so it follows the theme — verified 5.33:1 in light and
+   * Colours are tokens, so it follows the theme, verified 5.33:1 in light and
    * 7.03:1 in dark, both clear of WCAG AA.
    */
   .badge {
@@ -216,7 +216,25 @@
     }
   }
 
-  /* Pill buttons — solid ink primary, outlined secondary. */
+
+  /*
+   * Inline company marker for the about page. Uses the site's own solid-ink
+   * pill language rather than inventing brand colours for other people's
+   * companies. `inline` keeps it inside the line box so a marked name can wrap
+   * mid-paragraph without breaking the leading.
+   */
+  .mark {
+    display: inline-block;
+    background: var(--ink);
+    color: var(--background);
+    border-radius: 7px;
+    padding: 0 8px 2px;
+    margin: 0 1px;
+    font-weight: 535;
+    white-space: nowrap;
+  }
+
+  /* Pill buttons, solid ink primary, outlined secondary. */
   .btn {
     display: inline-flex;
     align-items: center;

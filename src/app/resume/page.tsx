@@ -10,14 +10,14 @@ import {
 import { projects } from "@/data/projects";
 
 export const metadata: Metadata = {
-  title: "Résumé — Jimmy Arikawe, Senior Product Designer & Design Engineer",
+  title: "Résumé · Jimmy Arikawe, Senior Product Designer & Design Engineer",
   description:
     "Seven years designing fintech, enterprise and AI products. Full CV: experience, selected work, skills and education. Available as a PDF download.",
 };
 
 /*
  * This page is the CV. The PDF in /public is printed from it, and both read the
- * same `experience.ts` the About timeline uses — so the downloadable document
+ * same `experience.ts` the About timeline uses, so the downloadable document
  * and the site can no longer contradict each other, which is exactly the gap a
  * hiring manager checks for first.
  *
@@ -92,7 +92,7 @@ export default function ResumePage() {
         </p>
       </section>
 
-      {/* EXPERIENCE — before education, because seven years outweighs a degree. */}
+      {/* EXPERIENCE, before education, because seven years outweighs a degree. */}
       <section className="mt-12 sm:mt-16 print:mt-5">
         <h2 className={SECTION_LABEL}>Experience</h2>
 
@@ -137,7 +137,7 @@ export default function ResumePage() {
         </div>
       </section>
 
-      {/* SELECTED WORK — the CV's link back into the case studies. */}
+      {/* SELECTED WORK, the CV's link back into the case studies. */}
       <section className="mt-12 sm:mt-16 print:mt-5 print:break-inside-avoid">
         <h2 className={SECTION_LABEL}>Selected Work</h2>
         <p className="mt-2 text-[14px] text-dim print:text-[9pt] print:text-black">
@@ -159,7 +159,7 @@ export default function ResumePage() {
                 </Link>
                 <span className="text-muted print:text-black">
                   {" "}
-                  — {project.tagline}
+                 , {project.tagline}
                 </span>
               </p>
             </div>
@@ -223,7 +223,7 @@ export default function ResumePage() {
               </span>
               <span className="text-muted print:text-black">
                 {" "}
-                — {pub.summary}
+               , {pub.summary}
               </span>
             </p>
           ))}

@@ -61,7 +61,7 @@ export function ExperienceTimeline() {
         </h2>
 
         <p className="mb-7 text-[16px] leading-6 text-soft sm:mb-8 sm:text-[17px] wide:mb-10 wide:text-[18px] wide:leading-7">
-          Seven years across fintech, enterprise and AI — the roles,
+          Seven years across fintech, enterprise and AI. The roles,
           chronologically.
         </p>
 

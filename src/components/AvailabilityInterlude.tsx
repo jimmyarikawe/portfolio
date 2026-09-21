@@ -8,7 +8,7 @@ import { motion } from "framer-motion";
  * carrying the site's single loudest statement.
  *
  * That statement used to be "I'm available for select projects," which read as
- * a freelance notice to anyone hiring for a permanent role — and it sat in the
+ * a freelance notice to anyone hiring for a permanent role, and it sat in the
  * middle of the page, so it was the loudest thing on the site before a reader
  * had seen any work. It now names the role being sought, and closes rather than
  * interrupts.

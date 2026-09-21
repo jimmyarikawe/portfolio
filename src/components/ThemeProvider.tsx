@@ -30,7 +30,7 @@ function resolveSystemTheme(): Theme {
 // The blocking inline script in layout.tsx already sets data-theme on <html>
 // before paint, so read it back here instead of defaulting to "light" and
 // correcting later (that would flash, and make the first toggle click a
-// no-op). Falls back to localStorage/system if the attribute isn't there —
+// no-op). Falls back to localStorage/system if the attribute isn't there ,
 // e.g. React Strict Mode's dev-only remount clears attributes the script set.
 function getInitialTheme(): Theme {
   if (typeof document === "undefined") return "light";
@@ -54,7 +54,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     try {
       localStorage.setItem(STORAGE_KEY, newTheme);
     } catch {
-      // localStorage unavailable (private mode, disabled storage) — theme
+      // localStorage unavailable (private mode, disabled storage), theme
       // still applies for the session, it just won't persist.
     }
   };

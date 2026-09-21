@@ -13,7 +13,7 @@ export const skillCategories: SkillCategory[] = [
     number: "01",
     category: "AI Interaction & Machine Learning",
     iconName: "ai",
-    tagline: "Deep technical fluency in AI interaction design — bridging evals, non-deterministic latency, and neural models.",
+    tagline: "Deep technical fluency in AI interaction design, bridging evals, non-deterministic latency, and neural models.",
     focus: "AI Interaction Architecture & Applied Intelligence",
     impact: "Agentic Workflows & Human-in-the-Loop Safeguards",
     skills: [

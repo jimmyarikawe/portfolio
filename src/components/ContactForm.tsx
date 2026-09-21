@@ -18,7 +18,7 @@ const fieldClass =
 
 /*
  * The option list of a native select is drawn by the browser, so the theme
- * tokens have to be set on the options themselves — otherwise the popup keeps
+ * tokens have to be set on the options themselves, otherwise the popup keeps
  * the UA's light palette while the closed control follows the site's theme.
  */
 const selectClass = `${fieldClass} appearance-none truncate pr-10 [&>option]:bg-surface [&>option]:text-ink`;

@@ -201,7 +201,7 @@ export function CaseStudySection({
         </header>
 
         {/*
-          2. HERO VISUAL — breaks the 860px column to sit in viewport gutters.
+          2. HERO VISUAL, breaks the 860px column to sit in viewport gutters.
           `max()` keeps the inset non-negative between 900px and 1000px, where
           a bare `calc(50vw - 500px)` would go negative and overflow.
         */}
@@ -214,10 +214,10 @@ export function CaseStudySection({
           >
             <Image
               src={primaryHero}
-              alt={`${project.title} — ${project.tagline}`}
+              alt={`${project.title}: ${project.tagline}`}
               fill
               sizes="(max-width: 639px) calc(100vw - 50px), (max-width: 899px) calc(100vw - 48px), 1000px"
-              /* `priority` is deprecated in Next 16 — see next/dist/docs image.md */
+              /* `priority` is deprecated in Next 16, see next/dist/docs image.md */
               loading="eager"
               fetchPriority="high"
               className="object-contain"
@@ -284,7 +284,7 @@ export function CaseStudySection({
           </section>
         )}
 
-        {/* CHAPTER 04: ARTEFACTS — full width, natural aspect, captioned. */}
+        {/* CHAPTER 04: ARTEFACTS, full width, natural aspect, captioned. */}
         {project.figures && project.figures.length > 0 && (
           <section className={SECTION}>
             <p className={`mb-2 ${META}`}>04 / Systems &amp; Flows</p>
@@ -312,7 +312,7 @@ export function CaseStudySection({
                   >
                     <Image
                       src={figure.src}
-                      alt={`${project.title} — ${figure.title}`}
+                      alt={`${project.title}: ${figure.title}`}
                       width={1920}
                       height={1080}
                       sizes={figure.wide ? "100vw" : "(max-width: 899px) 100vw, 860px"}
@@ -353,7 +353,7 @@ export function CaseStudySection({
             ))}
           </div>
 
-          {/* Visual walkthrough — full-bleed, horizontally snapping */}
+          {/* Visual walkthrough, full-bleed, horizontally snapping */}
           <div className="mt-10 flex flex-wrap items-baseline justify-between gap-2 sm:mt-12">
             <h3 className={SUBHEADING}>
               High-Fidelity Artifacts &amp; Flows
@@ -456,7 +456,7 @@ export function CaseStudySection({
           )}
         </section>
 
-        {/* 4. CONTACT CTA — placed at the point of peak conviction. */}
+        {/* 4. CONTACT CTA, placed at the point of peak conviction. */}
         <section className={`${SECTION} border-t border-rule pt-10 sm:pt-12`}>
           <h2 className={HEADING}>Interested in working together?</h2>
           <p className={`mt-2 max-w-[52ch] ${BODY}`}>
@@ -525,7 +525,7 @@ export function CaseStudySection({
         )}
       </div>
 
-      {/* FULLSCREEN LIGHTBOX — always dark, so it carries its own palette. */}
+      {/* FULLSCREEN LIGHTBOX, always dark, so it carries its own palette. */}
       <AnimatePresence>
         {activeImageIndex !== null && modalImages.length > 0 && (
           <motion.div

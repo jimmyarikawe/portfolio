@@ -9,7 +9,7 @@ import { MEDIA_FRAME } from "@/lib/utils";
 
 /*
  * Ordered for a reader who is deciding, in under a minute, whether to keep
- * going: one claim, then borrowed credibility, then the work — with the three
+ * going: one claim, then borrowed credibility, then the work, with the three
  * strongest projects at full size and the rest as a compact grid, so nothing is
  * hidden but everything is not equally loud.
  *
@@ -25,16 +25,19 @@ export default function HomePage() {
       {/* 1. INTRO */}
       <section className="mt-20 sm:mt-22">
         <h1 className="font-display text-balance text-[28px] font-medium leading-8.25 sm:text-[34px] sm:leading-9.5 wide:text-[42px] wide:leading-10.75">
-          I design and build products for problems most teams find hard to look
-          at.
+          I design and build products where being wrong is expensive.
         </h1>
 
-        <p className="mt-3.5 max-w-[54ch] text-[17px] leading-6 text-muted sm:mt-4.5 sm:text-[20px] sm:leading-7 wide:mt-6.25 wide:text-[24px] wide:leading-8">
-          I&apos;m <span className="text-ink">Jimmy Arikawe</span> — a Senior
+        {/*
+          58ch rather than 54: at the display size the narrower measure pushed
+          the closing word onto a line of its own. `text-pretty` alone did not
+          resolve it.
+        */}
+        <p className="mt-3.5 max-w-[58ch] text-pretty text-[17px] leading-6 text-muted sm:mt-4.5 sm:text-[20px] sm:leading-7 wide:mt-6.25 wide:text-[24px] wide:leading-8">
+          I&apos;m <span className="text-ink">Jimmy Arikawe</span>, a Senior
           Product Designer and design engineer. Seven years across cross-border
-          payments, enterprise operations and AI. I led product at{" "}
-          <span className="text-ink">Omits</span>, and I still write the
-          front-end that ships.
+          payments, operations and AI. I map the system before the screen, and
+          still write the front-end that ships.
         </p>
 
         <div className="mt-7 flex flex-wrap gap-3 sm:mt-8">
@@ -70,7 +73,7 @@ export default function HomePage() {
         ))}
       </section>
 
-      {/* 3. THE REST — present, indexed, but not competing for the same weight. */}
+      {/* 3. THE REST, present, indexed, but not competing for the same weight. */}
       <section className="mt-4 sm:mt-6">
         <h2 className="mb-4 text-[17px] font-medium sm:mb-5 sm:text-[18px] wide:text-[20px]">
           More work
@@ -89,7 +92,7 @@ export default function HomePage() {
               >
                 <Image
                   src={project.coverImage}
-                  alt={`${project.title} — ${project.tagline}`}
+                  alt={`${project.title}: ${project.tagline}`}
                   fill
                   sizes="(max-width: 639px) calc(100vw - 50px), (max-width: 899px) calc(50vw - 32px), 418px"
                   loading="lazy"
@@ -112,7 +115,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 4. DESIGNER WHO CODES — the differentiator, made concrete. */}
+      {/* 4. DESIGNER WHO CODES, grounded in the projects above. */}
       <section className="mt-20 border-t border-rule pt-10 sm:mt-24 sm:pt-12 wide:mt-30">
         <h2 className="text-[17px] font-medium sm:text-[18px] wide:text-[20px]">
           I ship the front-end too
@@ -121,27 +124,18 @@ export default function HomePage() {
         <div className="mt-3 max-w-[62ch] [&>p]:mb-4 [&>p]:text-[17px] [&>p]:leading-6.5 [&>p]:text-muted sm:[&>p]:text-[19px] sm:[&>p]:leading-7">
           <p>
             Design that stops at handoff loses the argument at implementation. I
-            write TypeScript and React, so I can prototype an interaction, test
-            it against a real API, and hand engineers something that already
-            works rather than something that looks like it should.
+            write TypeScript and React, so an interaction gets tested against a
+            real API before anyone commits to building it.
           </p>
           <p>
-            It matters most with AI. A static artboard can&apos;t show you what a
-            four-second first token feels like, or what happens when a model
-            returns something confidently wrong — so I build against live models
-            and design the failure states from what actually comes back.
+            That matters most when the interface depends on something you
+            can&apos;t mock. A transfer that has to show the exact rate before
+            the PIN screen, and never move it after. A door scanner that keeps
+            working when the venue&apos;s Wi-Fi drops. A model that takes four
+            seconds to return its first token, or returns something confidently
+            wrong. I build against the real thing and design the failure states
+            from what actually comes back.
           </p>
-        </div>
-
-        <div className="mt-6 flex flex-wrap gap-3">
-          <a
-            href="https://github.com/jimmyarikawe"
-            target="_blank"
-            rel="noopener"
-            className="btn btn-outline"
-          >
-            See the code on GitHub
-          </a>
         </div>
       </section>
 

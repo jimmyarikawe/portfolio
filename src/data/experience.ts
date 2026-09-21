@@ -1,6 +1,6 @@
 /**
  * Single source of truth for the CV. The /resume page renders this, the PDF is
- * printed from that page, and the About timeline reads the same array — so the
+ * printed from that page, and the About timeline reads the same array, so the
  * site and the downloadable CV can no longer disagree with each other.
  *
  * Titles and dates here are the CV's, verbatim. Where two roles overlap in
@@ -37,7 +37,7 @@ export interface PublicationItem {
 
 export const experiences: ExperienceItem[] = [
   {
-    period: "Mar 2026 — Present",
+    period: "Mar 2026 – Present",
     role: "Product Designer, Researcher & Manager",
     company: "Radical Company",
     location: "United Kingdom",
@@ -53,7 +53,7 @@ export const experiences: ExperienceItem[] = [
     ],
   },
   {
-    period: "Jan 2025 — Jan 2026",
+    period: "Jan 2025 – Jan 2026",
     role: "Product Lead & Product Designer",
     company: "Omits Technology",
     location: "United Kingdom",
@@ -68,13 +68,13 @@ export const experiences: ExperienceItem[] = [
     ],
   },
   {
-    period: "2024 — 2025",
+    period: "2024 – 2025",
     role: "Founding Product Designer & Product Manager",
     company: "Persona Design",
     location: "United Kingdom",
     domain: "persona.design",
     summary:
-      "First designer across multiple client products — discovery, design, and the shared component library, from zero.",
+      "First designer across multiple client products: discovery, design, and the shared component library, from zero.",
     highlights: [
       "First designer at the studio, covering discovery, research, interaction and UI design across multiple client products.",
       "Built and maintained the shared component library that every subsequent product was assembled from.",
@@ -82,7 +82,7 @@ export const experiences: ExperienceItem[] = [
     ],
   },
   {
-    period: "2023 — 2024",
+    period: "2023 – 2024",
     role: "Product Designer / Creative & Visual Designer",
     company: "Pentagram",
     location: "London",
@@ -96,7 +96,7 @@ export const experiences: ExperienceItem[] = [
     ],
   },
   {
-    period: "2022 — 2023",
+    period: "2022 – 2023",
     role: "Senior Product Designer & Product Engineer",
     company: "Engage Messaging",
     domain: "engage.so",
@@ -110,7 +110,7 @@ export const experiences: ExperienceItem[] = [
     ],
   },
   {
-    period: "2020 — 2022",
+    period: "2020 – 2022",
     role: "Lead Product Designer / Data & Technology Analyst",
     company: "Recyclan",
     domain: "recyclan.com",
@@ -123,11 +123,11 @@ export const experiences: ExperienceItem[] = [
     ],
   },
   {
-    period: "2019 — 2021",
+    period: "2019 – 2021",
     role: "Product Designer",
     company: "Analytics Intelligence",
     domain: "analyticsintelligence.com",
-    note: "Overlaps Recyclan — part-time",
+    note: "Overlaps Recyclan, part-time",
     summary:
       "Designed B2B SaaS analytics and reporting tools, shaped by ongoing usability research.",
     highlights: [
@@ -137,7 +137,7 @@ export const experiences: ExperienceItem[] = [
     ],
   },
   {
-    period: "2018 — 2019",
+    period: "2018 – 2019",
     role: "Junior UI/UX Designer",
     company: "Filmhouse Group",
     domain: "filmhouseng.com",
@@ -152,7 +152,7 @@ export const experiences: ExperienceItem[] = [
 
 export const education: EducationItem[] = [
   {
-    period: "2022 — 2023",
+    period: "2022 – 2023",
     degree: "MSc Artificial Intelligence & Applications",
     institution: "University of Strathclyde",
     location: "Glasgow, Scotland",
@@ -161,7 +161,7 @@ export const education: EducationItem[] = [
       "Distinction. Deep learning and neural networks, machine learning for data analytics, AI for finance and autonomous systems. Research project: detecting plant disease with deep learning.",
   },
   {
-    period: "2013 — 2018",
+    period: "2013 – 2018",
     degree: "BSc Electrical & Electronics Engineering",
     institution: "University of Lagos",
     location: "Nigeria",
@@ -179,7 +179,7 @@ export const publications: PublicationItem[] = [
   },
 ];
 
-/** Grouped for the CV's skills block. Kept short — a list of 40 tools reads as none. */
+/** Grouped for the CV's skills block. Kept short, a list of 40 tools reads as none. */
 export const skillGroups: { label: string; items: string[] }[] = [
   {
     label: "Design",

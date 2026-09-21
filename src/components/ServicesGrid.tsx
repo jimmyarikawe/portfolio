@@ -16,7 +16,7 @@ const icons: Record<SkillCategory["iconName"], LucideIcon> = {
 
 /**
  * The capability list on the about page: category, its focus, the tagline and
- * the individual skills — two entries across from 640px up. Plain rows rather
+ * the individual skills, two entries across from 640px up. Plain rows rather
  * than cards, so it reads at the same volume as the experience list above it.
  */
 export function ServicesGrid() {

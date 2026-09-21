@@ -1,14 +1,14 @@
 import { ImageResponse } from "next/og";
 
 /*
- * The previous card was the 200x201 monogram, which LinkedIn — where design
- * recruiters actually are — renders as a blank or badly cropped tile. This is
+ * The previous card was the 200x201 monogram, which LinkedIn, where design
+ * recruiters actually are, renders as a blank or badly cropped tile. This is
  * the 1200x630 it wants, generated at build time so there is no binary asset to
  * keep in sync with the positioning copy.
  */
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
-export const alt = "Jimmy Arikawe — Senior Product Designer & Design Engineer";
+export const alt = "Jimmy Arikawe · Senior Product Designer & Design Engineer";
 
 export default function OpengraphImage() {
   return new ImageResponse(
@@ -62,7 +62,7 @@ export default function OpengraphImage() {
               lineHeight: 1.4,
             }}
           >
-            Fintech, enterprise operations and AI — designed, led and built.
+            Fintech, enterprise operations and AI. Designed, led and built.
           </div>
         </div>
 

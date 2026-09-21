@@ -27,7 +27,7 @@ export function ThemeToggle({ className = "" }: { className?: string }) {
 
   // The server always renders "light" (it doesn't know the visitor's actual
   // preference), while the client's real theme is known immediately from the
-  // DOM (see ThemeProvider). That's fine for CSS — the colour tokens resolve
+  // DOM (see ThemeProvider). That's fine for CSS, the colour tokens resolve
   // from a `data-theme` attribute on an ancestor, so the markup is identical
   // either way and only the computed values differ. But this icon and its
   // label DO branch in React, so showing the real value pre-mount would mismatch

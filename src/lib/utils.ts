@@ -11,7 +11,7 @@ export type ArticleBlock = { type: "heading" | "paragraph"; text: string };
  * Splits lightweight article content into heading/paragraph blocks.
  *
  * Content isn't required to put a blank line between a "### Heading" line
- * and its body text — splitting on "\n\n" alone would then lump the heading
+ * and its body text, splitting on "\n\n" alone would then lump the heading
  * and the paragraph that immediately follows it into one block. This walks
  * line by line instead, so a heading always ends its own block regardless of
  * whether the next line is blank.
@@ -46,7 +46,7 @@ export function parseArticleContent(content: string): ArticleBlock[] {
 }
 
 /**
- * The single aspect ratio every project cover is framed in — the /work grid,
+ * The single aspect ratio every project cover is framed in, the /work grid,
  * the home page showcase and "more work" grid, the case-study hero, the
  * gallery strip and the prev/next cards.
  *
@@ -56,7 +56,7 @@ export function parseArticleContent(content: string): ArticleBlock[] {
  * than writing the class inline, so the ratio cannot drift apart again.
  *
  * Covers currently range from 1.387 to 1.778, and every frame pairs this with
- * `object-contain` — so an image letterboxes onto `bg-frame` (which is
+ * `object-contain`, so an image letterboxes onto `bg-frame` (which is
  * theme-aware) instead of being cropped. `object-cover` would fill the frame
  * edge to edge but would clip roughly 10-13% off the tallest and widest
  * covers, which on a UI screenshot means cutting off real interface.

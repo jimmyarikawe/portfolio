@@ -5,9 +5,9 @@ import { projects } from "@/data/projects";
 import { MEDIA_FRAME } from "@/lib/utils";
 
 export const metadata: Metadata = {
-  title: "Work — Jimmy Arikawe",
+  title: "Work · Jimmy Arikawe",
   description:
-    "Case studies in cross-border payments, enterprise operations, AI security and event software — the problem, the decisions, and what shipped.",
+    "Case studies in cross-border payments, enterprise operations, AI security and event software, the problem, the decisions, and what shipped.",
 };
 
 /*
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
  * covers rather than the text list it used to be: a recruiter arriving here was
  * previously shown seven grey rows and no evidence of design ability at all.
  *
- * Every project stays on this page — the home page features three, this is the
+ * Every project stays on this page, the home page features three, this is the
  * complete index.
  */
 export default function WorkPage() {
@@ -45,7 +45,7 @@ export default function WorkPage() {
             >
               <Image
                 src={project.coverImage}
-                alt={`${project.title} — ${project.tagline}`}
+                alt={`${project.title}: ${project.tagline}`}
                 fill
                 sizes="(max-width: 639px) calc(100vw - 50px), (max-width: 899px) calc(50vw - 32px), 418px"
                 loading={index < 2 ? "eager" : "lazy"}

@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
+import { ArrowUpRight } from "lucide-react";
 import { ExperienceTimeline } from "@/components/ExperienceTimeline";
 import { ServicesGrid } from "@/components/ServicesGrid";
 
 export const metadata: Metadata = {
-  title: "About — Jimmy Arikawe",
+  title: "About · Jimmy Arikawe",
   description:
     "Electrical engineer turned product designer, with an MSc in Artificial Intelligence. Seven years, eight teams, and the through-line between them.",
 };
@@ -26,7 +27,7 @@ const PRINCIPLES = [
   },
   {
     title: "One record, everywhere",
-    body: "Most interface confusion is really data confusion — two screens reading two sources and disagreeing. I'd rather fix the model than add a warning message.",
+    body: "Most interface confusion is really data confusion, two screens reading two sources and disagreeing. I'd rather fix the model than add a warning message.",
   },
 ];
 
@@ -57,25 +58,42 @@ export default function AboutPage() {
           />
         </div>
 
-        <div className="mt-8 max-w-[62ch] sm:mt-10 wide:mt-12.5 [&>p]:mb-5 [&>p]:text-[17px] [&>p]:leading-6.5 [&>p]:text-muted sm:[&>p]:mb-6 sm:[&>p]:text-[19px] sm:[&>p]:leading-7 wide:[&>p]:mb-7.5 wide:[&>p]:text-[21px] wide:[&>p]:leading-7.5">
+        {/*
+          Short paragraphs, one idea each, with the companies marked inline and
+          a real number beside each one. Every figure here comes from the CV or
+          the project decks, nothing is placeholder.
+        */}
+        <div className="mt-8 max-w-[62ch] sm:mt-10 wide:mt-12.5 [&>p]:mb-5 [&>p]:text-[17px] [&>p]:leading-7 [&>p]:text-muted sm:[&>p]:mb-6 sm:[&>p]:text-[19px] sm:[&>p]:leading-8 wide:[&>p]:mb-7 wide:[&>p]:text-[21px] wide:[&>p]:leading-9">
           <p>
-            I studied{" "}
-            <span className="text-ink">
-              electrical and electronics engineering
-            </span>{" "}
-            at the University of Lagos, and the first thing I designed
-            professionally was a cinema booking flow. What followed has stayed
-            in roughly the same territory ever since: B2B analytics tools, an
-            operational data platform running across 14+ countries, and then
-            cross-border payments — systems where being wrong has a cost
-            somebody can measure.
+            I&apos;m <span className="text-ink">Jimmy Arikawe</span>. A designer
+            who writes the code too, because a design that can&apos;t survive
+            implementation was never really a design.
           </p>
           <p>
-            The{" "}
-            <span className="text-ink">
-              MSc in Artificial Intelligence (Distinction)
-            </span>{" "}
-            at{" "}
+            Seven years between product and engineering, mostly on systems where
+            being wrong costs money. Long enough to know that most interface
+            problems are really data problems. The rest of the job is proving
+            that to the room, usually more than once.
+          </p>
+          <p>
+            My work has lived in the messy middle: between design and
+            engineering, between what the brief says and what the system will
+            actually allow. <span className="mark">Omits</span>, 500+ beta
+            users across four corridors.{" "}
+            <span className="mark">Recyclan</span>, operations across 14+
+            countries. <span className="mark">Engage</span>, 50% lift in
+            satisfaction. <span className="mark">Filmhouse</span>, 400% more
+            online bookings.
+          </p>
+          <p>
+            Currently Senior Product Designer at{" "}
+            <span className="mark">Radical Company</span>. Before that, Product
+            Lead at Omits, and enterprise interfaces at{" "}
+            <span className="mark">Pentagram</span>.
+          </p>
+          <p>
+            I studied electrical engineering first, then went back for an{" "}
+            <span className="text-ink">MSc in Artificial Intelligence</span> at{" "}
             <a
               href="https://www.strath.ac.uk"
               target="_blank"
@@ -83,31 +101,25 @@ export default function AboutPage() {
               className="prose-link"
             >
               Strathclyde
-            </a>{" "}
-            came out of that work rather than away from it. Designing for
-            machine learning without understanding it produces confident,
-            plausible, wrong software — so I went and learned the maths. Deep
-            learning, ML for data analytics, AI for finance, and a research
-            project detecting plant disease from images.
+            </a>
+            . Designing for models I didn&apos;t understand felt like guessing.
           </p>
           <p>
-            Today I&apos;m a{" "}
-            <span className="text-ink">
-              Senior Product Designer and design engineer
-            </span>{" "}
-            at <span className="text-ink">Radical Company</span>. Before that I
-            was <span className="text-ink">Product Lead at Omits</span>, owning
-            strategy and design for a cross-border payments platform across web,
-            iOS and Android, and designed for enterprise technology clients at{" "}
-            <span className="text-ink">Pentagram</span>. I still write the
-            front-end.
+            These days I&apos;m drawn to the parts that aren&apos;t figured out
+            yet: AI, payments, operational tooling. Places where design still
+            has something real to say.
+          </p>
+          <p className="text-ink!">
+            If you&apos;re building something where being wrong is expensive, I
+            want to be part of it.
           </p>
         </div>
 
         <div className="mt-7 flex flex-wrap gap-3 sm:mt-8">
-          <Link href="/contact" className="btn">
-            Get in touch
-          </Link>
+          <a href="mailto:hi@jimmyarikawe.com" className="btn">
+            hi@jimmyarikawe.com
+            <ArrowUpRight aria-hidden="true" className="h-4 w-4" />
+          </a>
           <Link href="/resume" className="btn btn-outline">
             Résumé
           </Link>

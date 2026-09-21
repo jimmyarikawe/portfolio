@@ -18,11 +18,11 @@ import "./globals.css";
 export const metadata: Metadata = {
   metadataBase: new URL("https://jimmyarikawe.com"),
   title: {
-    default: "Jimmy Arikawe — Senior Product Designer & Design Engineer",
+    default: "Jimmy Arikawe · Senior Product Designer & Design Engineer",
     template: "%s",
   },
   description:
-    "Senior Product Designer and design engineer with seven years across fintech, enterprise operations and AI. Product Lead at Omits; I design and build — research through to production front-end. Ex-Pentagram, Radical Company. MSc Artificial Intelligence (Distinction).",
+    "Senior Product Designer and design engineer with seven years across fintech, enterprise operations and AI. Product Lead at Omits; I design and build, research through to production front-end. Ex-Pentagram, Radical Company. MSc Artificial Intelligence (Distinction).",
   keywords: [
     "Jimmy Arikawe",
     "Senior Product Designer",
@@ -40,9 +40,9 @@ export const metadata: Metadata = {
   authors: [{ name: "Jimmy Arikawe" }],
   alternates: { canonical: "/" },
   openGraph: {
-    title: "Jimmy Arikawe — Senior Product Designer & Design Engineer",
+    title: "Jimmy Arikawe · Senior Product Designer & Design Engineer",
     description:
-      "Seven years designing fintech, enterprise and AI products — and writing the front-end that ships them. Product Lead at Omits. Ex-Pentagram, Radical Company. MSc Artificial Intelligence (Distinction).",
+      "Seven years designing fintech, enterprise and AI products, and writing the front-end that ships them. Product Lead at Omits. Ex-Pentagram, Radical Company. MSc Artificial Intelligence (Distinction).",
     url: "https://jimmyarikawe.com",
     siteName: "Jimmy Arikawe",
     locale: "en_GB",
@@ -50,9 +50,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Jimmy Arikawe — Senior Product Designer & Design Engineer",
+    title: "Jimmy Arikawe · Senior Product Designer & Design Engineer",
     description:
-      "Seven years designing fintech, enterprise and AI products — and writing the front-end that ships them.",
+      "Seven years designing fintech, enterprise and AI products, and writing the front-end that ships them.",
   },
 };
 
