@@ -60,7 +60,7 @@ export default function HomePage() {
             href="/work"
             className="text-[15px] text-muted transition-colors hover:text-ink sm:text-[16px]"
           >
-            All six projects →
+            All seven projects →
           </Link>
         </div>
 

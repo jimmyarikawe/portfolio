@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import { projects } from "@/data/projects";
 import { CaseStudySection } from "@/components/CaseStudySection";
+import { PisonCaseStudy } from "@/components/PisonCaseStudy";
 
 interface CaseStudyProps {
   params: Promise<{
@@ -56,6 +57,16 @@ export default async function CaseStudyPage({ params }: CaseStudyProps) {
   const project = projects[currentIndex];
   const nextProject = projects[(currentIndex + 1) % projects.length];
   const prevProject = projects[(currentIndex - 1 + projects.length) % projects.length];
+
+  if (slug === "pison-labs") {
+    return (
+      <PisonCaseStudy
+        project={project}
+        nextProject={nextProject}
+        prevProject={prevProject}
+      />
+    );
+  }
 
   return (
     <CaseStudySection

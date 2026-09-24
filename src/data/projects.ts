@@ -167,6 +167,109 @@ export const projects: Project[] = [
   {
     "id": "02",
     "featured": true,
+    "slug": "pison-labs",
+    "title": "Pison Labs",
+    "tagline": "Designing the voice intelligence layer for Africa",
+    "category": "AI & Voice",
+    "categories": [
+      "AI & Voice",
+      "Systems Design",
+      "Information Architecture",
+      "Design System"
+    ],
+    "services": "Product Strategy, Information Architecture, Interaction Design, Design System, Front-end Implementation",
+    "client": "Pison Labs",
+    "engagement": "Self-initiated product exploration",
+    "year": "2026",
+    "role": "Product Design & Systems Architecture",
+    "duration": "Ongoing",
+    "coverImage": "/images/work/pison-labs/00-workspace-home.png",
+    "heroImage": "/images/work/pison-labs/00-workspace-home.png",
+    "description": "A voice intelligence platform built around African languages, voices and cultural context: speech generation, transcription, translation, dubbing, voice agents and the community data network underneath them. Two front-ends, one design system, and a working prototype rather than a deck.",
+    "goal": "Work out what it takes to design AI voice infrastructure when language, dialect and cultural context are product primitives rather than a settings dropdown, and build enough of it to find out where the idea breaks.",
+    "outcome": "A working prototype of eight product surfaces and a contributor platform, sharing one token system across two front-ends: a language model with dialect and tonality as first-class fields, claim-level provenance on every AI answer, a seven-stage data lineage from recording to shipped model, and seven granular consent scopes with two off by default.",
+    "principles": [
+      {
+        "title": "Language is an object, not a dropdown",
+        "description": "A language carries a family, a tonality, a set of mapped dialects, a readiness state and a coverage gap. Every one of those fields changes what the interface can honestly offer, so all of them are modelled rather than flattened to a locale code."
+      },
+      {
+        "title": "Say what the model does not know",
+        "description": "Every cultural claim carries its own provenance label of verified, community, AI interpretation or uncertain, and generated output is labelled as demo where no model is connected. An AI product that hides its confidence is harder to trust, not easier."
+      },
+      {
+        "title": "Contribution is the product, not the backend",
+        "description": "The dataset a model needs is produced by people. Their recording, review, pay and consent experience is designed to the same standard as the creator tooling, because nothing downstream is better than that pipeline."
+      },
+      {
+        "title": "One system, two front-ends",
+        "description": "The creator workspace and the contributor platform serve very different people on very different devices, but share one token set, one type scale and one component vocabulary, so a change to the system lands in both."
+      }
+    ],
+    "metrics": [
+      {
+        "label": "Product surfaces designed",
+        "value": "8"
+      },
+      {
+        "label": "Languages modelled, African-first",
+        "value": "20"
+      },
+      {
+        "label": "Consent scopes, 2 off by default",
+        "value": "7"
+      },
+      {
+        "label": "Front-ends, one token set",
+        "value": "2"
+      }
+    ],
+    "overview": "Voice is becoming a primary interface for software, and the systems being built on it are trained overwhelmingly on languages that are not African. The gap is not only a data gap. Translation moves meaning between languages; it does not carry the honorific system that decides whether a sentence sounds respectful or rude, the dialect that tells a listener where a voice is from, or the tone marks that separate one Yorùbá word from another. Meanwhile the data that would close the gap sits with people who have good reason to ask what happens to their voice once they hand it over. Pison started from that intersection: what does voice AI look like if language, dialect and cultural context are treated as infrastructure rather than as edge cases handled later.",
+    "challenge": "One platform, six audiences with opposing needs. Creators want a result in three clicks. Developers want an endpoint and a rate limit. Businesses want a support agent that speaks Pidgin. Researchers want corpora with provenance. Contributors want to know what their recording is for, what it pays, and how to take it back. Everyday users want to be understood. Designing for all six without collapsing into either a toy or an admin console meant resolving six live tensions as interface decisions rather than as strategy slides: simplicity against technical depth, automation against human control, scale against local context, collection against trust, voice identity against privacy, and translation against cultural adaptation.",
+    "solution": "The platform is organised as four layers over one shared data model. Create covers text-to-speech, the voice library and dubbing. Understand covers speech-to-text, translation, language detection and Cultural AI. Build exposes all of it as a REST API with voice agents on top. Contribute is the community platform where recordings, translations and cultural knowledge enter the system, get reviewed and become a dataset version. Every tool hands its output to the next one without a re-upload, so a recording can become a transcript, a translation, a generated voice and a dubbed video in one chain, which is what makes the eight surfaces one product rather than eight.",
+    "designSystem": "One token set drives both front-ends: a warm neutral ground rather than clinical white, a 1.5rem card radius, pill controls, and a type scale of seven named ramps. Dark mode is re-derived from the same warm neutrals rather than inverted, and checked for contrast rather than assumed. The system carries the parts a voice product actually needs: waveform players, audio recorders with live quality checks, language and dialect selectors, provenance badges, pipeline and timeline visualisations, and a full set of required states covering loading, empty, error, offline, permission denied, processing and validation. Every important view handles all of them, because an AI product spends most of its time in one of those states rather than on the happy path.",
+    "figures": [],
+    "gallery": [
+      "/images/work/pison-labs/00-workspace-home.png",
+      "/images/work/pison-labs/03-voice-studio.png",
+      "/images/work/pison-labs/04-voice-library.png",
+      "/images/work/pison-labs/05-cultural-ai.png",
+      "/images/work/pison-labs/07-dubbing-result.png",
+      "/images/work/pison-labs/08-contributor-home.png",
+      "/images/work/pison-labs/12-my-voice.png",
+      "/images/work/pison-labs/14-developer-api.png"
+    ],
+    "features": [
+      {
+        "title": "Voice Studio",
+        "description": "Language, region, voice, style, emotion, speed, stability and expressiveness, arranged so a first generation takes one click and the depth is there when it is wanted."
+      },
+      {
+        "title": "Voice library",
+        "description": "Voices described by language, country, region, dialect, age, style and tone, with Pison, community and cloned voices separated, and community voices credited to the speaker."
+      },
+      {
+        "title": "Cultural AI",
+        "description": "Answers about etiquette, honorifics and regional variation, split into claims that each carry their own source label, including the ones marked uncertain."
+      },
+      {
+        "title": "Dubbing",
+        "description": "A five-step pipeline with explicit switches for the things that usually get lost: voice identity, emotion, line timing and lip sync, each stated as a decision rather than a default."
+      },
+      {
+        "title": "Contributor platform",
+        "description": "Recording with live quality checks, peer review, transparent pay with an effective hourly rate, and offline-first submission for contributors on unreliable connections."
+      },
+      {
+        "title": "Consent and data rights",
+        "description": "Seven separate permissions, each with plain-language scope, an honest statement of what withdrawal can and cannot undo, and a lineage trail from a contribution to the dataset version it entered."
+      }
+    ],
+    "takeaways": "Three things I would take into any AI product. The first is that the data pipeline is the product surface with the most design leverage and the least design attention. I spent as long on the contributor's consent and review experience as on the studio, and the studio is only as good as what comes out of it. The second is that honesty is a design material: the screens that say demo output, coverage gap or model already trained are the ones that make the rest of the product credible, and every time I softened one of those labels the interface got worse. The third is that cultural context is a data-modelling decision before it is a copy decision. Once tonality, dialect and honorific register became fields, the interface questions answered themselves; while language was a locale string, no amount of interface work could have made the product right."
+  },
+  {
+    "id": "03",
+    "featured": true,
     "slug": "mindgard-ai-security-labs",
     "title": "Mindgard AI Security Labs",
     "tagline": "Automated Red-Teaming & Vulnerability Assessment for LLMs and AI Models",
@@ -259,7 +362,7 @@ export const projects: Project[] = [
     "takeaways": "What went well: Rigorous competitive research (Sydelabs, Adversa, Robust Intelligence, Hiddenlayer) and in-depth interviews with 10 security engineers uncovered critical pain points that steered the product from passive log dumping to proactive, actionable risk management. What challenged us: Balancing the fast-paced AI security threat landscape with MVP delivery required close collaboration with engineering to de-scope secondary features and focus relentlessly on core risk overview, inventory, and 1-click remediation. The platform is currently deployed in enterprise Beta testing."
   },
   {
-    "id": "03",
+    "id": "04",
     "slug": "circulaops",
     "title": "Circula",
     "tagline": "Operations, Inventory & Impact Reporting for the Circular Economy",
@@ -348,7 +451,7 @@ export const projects: Project[] = [
     "takeaways": "The insight that shaped the product was that impact reporting fails at the point of data entry, not at the point of reporting. Every organisation in this sector can produce a sustainability report; almost none can defend the numbers in it, because the numbers were reconstructed months later from records that were never designed to support them. Making waste a required field alongside output was the single most consequential decision in the system, it is mildly annoying at the moment of entry and it is the only reason the recovery rate downstream means anything. Designing for that trade-off, rather than for the report itself, is what I would carry into any measurement product."
   },
   {
-    "id": "04",
+    "id": "05",
     "slug": "voxxy-ai",
     "title": "Voxxy.ai",
     "tagline": "Conversational AI Speech Technology & Voice Modulation Interface",
@@ -434,7 +537,7 @@ export const projects: Project[] = [
     "takeaways": "Voice interfaces succeed when they provide transparent visual feedback for auditory inputs. Blending sound and screen creates confidence in conversational AI."
   },
   {
-    "id": "05",
+    "id": "06",
     "slug": "eventspad",
     "title": "Eventspad",
     "tagline": "End-to-End Event, Guest & Secure Check-In Operating System",
@@ -535,7 +638,7 @@ export const projects: Project[] = [
     "takeaways": "Owning the whole lifecycle is what makes the individual features work. Seating is only trustworthy because the pass reads from the same record; analytics are only honest because the door writes back to it. The harder design problem was not any single screen but keeping one guest record coherent across an organiser's laptop, a guest's browser, and an usher's phone on a venue's failing Wi-Fi."
   },
   {
-    "id": "06",
+    "id": "07",
     "slug": "spotfinance",
     "title": "Spot Finance",
     "tagline": "Investing, Saving and Paying in One Consumer Fintech App",
