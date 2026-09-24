@@ -541,7 +541,6 @@ export function PisonCaseStudy({
     { label: "Responsibilities", value: project.role, note: project.services },
     { label: "Category", value: project.category },
     { label: "Year", value: project.year },
-    { label: "Status", value: "Working prototype, no model connected" },
     { label: "Core objective", value: project.goal ?? project.description },
     { label: "What the work produced", value: project.outcome ?? "" },
   ];
