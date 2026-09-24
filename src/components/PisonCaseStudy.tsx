@@ -944,7 +944,7 @@ export function PisonCaseStudy({
             The workspace opens on a question rather than a dashboard. Most
             visits start with an intention, not with a metric, so the top of the
             page is seven verbs, the tool set sits under them, and telemetry (recent
-            projects, activity, usage) is below the fold where it belongs
+            projects, activity, usage) comes only after them, where it belongs
             for a creative tool.
           </p>
           <p className={`mt-4 sm:mt-5 ${PROSE}`}>
