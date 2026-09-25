@@ -1,5 +1,6 @@
 /**
- * Single source of truth for the CV. The /resume page renders this, the PDF is
+ * Single source of truth for the CV. The About timeline and home page render
+ * this, the PDF in /public is
  * printed from that page, and the About timeline reads the same array, so the
  * site and the downloadable CV can no longer disagree with each other.
  *

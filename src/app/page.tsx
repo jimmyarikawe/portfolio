@@ -44,9 +44,13 @@ export default function HomePage() {
           <Link href="/work" className="btn">
             View selected work
           </Link>
-          <Link href="/resume" className="btn btn-outline">
-            Résumé
-          </Link>
+          <a
+            href="/Jimmy-Arikawe-CV.pdf"
+            download
+            className="btn btn-outline"
+          >
+            Download CV
+          </a>
         </div>
       </section>
 
@@ -115,32 +119,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 4. DESIGNER WHO CODES, grounded in the projects above. */}
-      <section className="mt-20 border-t border-rule pt-10 sm:mt-24 sm:pt-12 wide:mt-30">
-        <h2 className="text-[17px] font-medium sm:text-[18px] wide:text-[20px]">
-          I ship the front-end too
-        </h2>
-
-        <div className="mt-3 max-w-[62ch] [&>p]:mb-4 [&>p]:text-[17px] [&>p]:leading-6.5 [&>p]:text-muted sm:[&>p]:text-[19px] sm:[&>p]:leading-7">
-          <p>
-            Design that stops at handoff loses the argument at implementation. I
-            write TypeScript and React, so an interaction gets tested against a
-            real API before anyone commits to building it.
-          </p>
-          <p>
-            That matters most when the interface depends on something you
-            can&apos;t mock. A transfer that has to show the exact rate before
-            the PIN screen, and never move it after. A door scanner that keeps
-            working when the venue&apos;s Wi-Fi drops. A model that takes four
-            seconds to return its first token, or returns something confidently
-            wrong. I build against the real thing and design the failure states
-            from what actually comes back.
-          </p>
-        </div>
-      </section>
-
-      {/* 5. EXPERIENCE + STACK */}
-      <div className="mt-16 flex flex-col sm:mt-20 sm:flex-row sm:justify-between sm:gap-6 wide:mt-24">
+      {/* 4. EXPERIENCE + STACK */}
+      <div className="mt-20 border-t border-rule pt-10 sm:mt-24 sm:pt-12 wide:mt-30 flex flex-col sm:flex-row sm:justify-between sm:gap-6">
         <div className="sm:w-[62%] wide:w-145">
           <ExperienceList />
         </div>

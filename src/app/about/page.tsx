@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import { ExperienceTimeline } from "@/components/ExperienceTimeline";
@@ -78,18 +77,18 @@ export default function AboutPage() {
           <p>
             My work has lived in the messy middle: between design and
             engineering, between what the brief says and what the system will
-            actually allow. <span className="mark">Omits</span>, 500+ beta
+            actually allow. <span className="text-ink">Omits</span>, 500+ beta
             users across four corridors.{" "}
-            <span className="mark">Recyclan</span>, operations across 14+
-            countries. <span className="mark">Engage</span>, 50% lift in
-            satisfaction. <span className="mark">Filmhouse</span>, 400% more
+            <span className="text-ink">Recyclan</span>, operations across 14+
+            countries. <span className="text-ink">Engage</span>, 50% lift in
+            satisfaction. <span className="text-ink">Filmhouse</span>, 400% more
             online bookings.
           </p>
           <p>
             Currently Senior Product Designer at{" "}
-            <span className="mark">Radical Company</span>. Before that, Product
-            Lead at Omits, and enterprise interfaces at{" "}
-            <span className="mark">Pentagram</span>.
+            <span className="text-ink">Radical Company</span>. Before that, Product
+            Lead at <span className="text-ink">Omits</span>, and enterprise interfaces at{" "}
+            <span className="text-ink">Pentagram</span>.
           </p>
           <p>
             I studied electrical engineering first, then went back for an{" "}
@@ -120,9 +119,13 @@ export default function AboutPage() {
             hi@jimmyarikawe.com
             <ArrowUpRight aria-hidden="true" className="h-4 w-4" />
           </a>
-          <Link href="/resume" className="btn btn-outline">
-            Résumé
-          </Link>
+          <a
+            href="/Jimmy-Arikawe-CV.pdf"
+            download
+            className="btn btn-outline"
+          >
+            Download CV
+          </a>
         </div>
       </section>
 

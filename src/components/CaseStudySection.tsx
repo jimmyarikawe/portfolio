@@ -468,9 +468,13 @@ export function CaseStudySection({
             <Link href="/contact" className="btn">
               Get in touch
             </Link>
-            <Link href="/resume" className="btn btn-outline">
-              View résumé
-            </Link>
+            <a
+              href="/Jimmy-Arikawe-CV.pdf"
+              download
+              className="btn btn-outline"
+            >
+              Download CV
+            </a>
           </div>
         </section>
 
