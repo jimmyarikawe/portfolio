@@ -25,7 +25,7 @@ export default function HomePage() {
       {/* 1. INTRO */}
       <section className="mt-20 sm:mt-22">
         <h1 className="font-display text-balance text-[28px] font-medium leading-8.25 sm:text-[34px] sm:leading-9.5 wide:text-[42px] wide:leading-10.75">
-          I design and build products where being wrong is expensive.
+          I design and build products.
         </h1>
 
         {/*
