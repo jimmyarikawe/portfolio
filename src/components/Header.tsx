@@ -5,13 +5,12 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
+import { Atom } from "loading-dev";
 import { ThemeToggle } from "@/components/ThemeToggle";
-import { TypewriterLogo } from "@/components/TypewriterLogo";
 
 const navLinks = [
   { name: "Work", href: "/work" },
   { name: "About", href: "/about" },
-  { name: "Résumé", href: "/resume" },
 ];
 
 export function Header() {
@@ -30,10 +29,26 @@ export function Header() {
 
       <div className="site-col">
         <div className="flex min-h-10 items-center justify-between gap-4">
-          <TypewriterLogo
-            className="text-[16px] font-medium leading-10 text-muted wide:text-[17px]"
-            delay={150}
-          />
+          {/*
+            The wordmark. Geist Mono in caps, with tracking pulled in rather
+            than opened out: `.badge` adds positive tracking because mono caps
+            at small sizes read as a block, but at wordmark size the opposite
+            is true and the letters drift apart.
+
+            The mark inherits `currentColor`, so it follows the theme and the
+            hover state without being told to, and the reduced-motion rule in
+            globals.css already clamps its animation.
+          */}
+          <Link
+            href="/"
+            aria-label="Jimmy Arikawe, home"
+            className="group inline-flex select-none items-center gap-2 leading-10 text-muted transition-colors hover:text-ink"
+          >
+            <span className="font-mono text-[13.5px] font-medium uppercase tracking-[-0.04em] sm:text-[14px] wide:text-[15px]">
+              Jimmy Arikawe
+            </span>
+            <Atom size={24} aria-hidden="true" />
+          </Link>
 
           <div className="flex items-center gap-3 wide:gap-5">
             <nav className="hidden items-center gap-5 wide:flex">
