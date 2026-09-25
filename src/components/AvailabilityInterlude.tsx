@@ -44,13 +44,12 @@ export function AvailabilityInterlude() {
           Open to Senior Product Design and Design Engineering roles.
         </h2>
 
-        <p className="mt-3 max-w-[46ch] text-[16px] font-medium leading-5.75 text-[#7E7E7E] sm:mt-4 sm:text-[18px] sm:leading-6.5 wide:mt-5 wide:text-[28px] wide:leading-9.5">
-          Currently at Radical Company, in the UK. If you&apos;re building
-          something complex and want a designer who can build it too, I&apos;d
-          like to hear about it.
-        </p>
-
-        <div className="mt-5 flex flex-wrap items-center justify-center gap-3 sm:mt-6">
+        {/*
+          The supporting line under the heading is gone, so the actions carry
+          more top margin than they did: at `wide` the heading is 80px, and the
+          spacing that sat right under a paragraph reads as cramped under that.
+        */}
+        <div className="mt-7 flex flex-wrap items-center justify-center gap-3 sm:mt-9 wide:mt-11">
           <Link href="/contact" className="btn btn-invert">
             Get in touch
           </Link>

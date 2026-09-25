@@ -10,7 +10,6 @@ import { socials } from "@/data/profile";
 const navColumn = [
   { name: "Work", href: "/work" },
   { name: "About", href: "/about" },
-  { name: "Résumé", href: "/resume" },
   { name: "Contact", href: "/contact" },
 ];
 
@@ -82,16 +81,11 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-10 flex flex-col gap-1.5 border-t border-rule pt-6 sm:flex-row sm:justify-between">
+        {/* The colophon that used to sit opposite has gone, so this is a
+            single row rather than a two-column one. */}
+        <div className="mt-10 border-t border-rule pt-6">
           <p className="text-[13px] font-medium text-ghost">
             © {new Date().getFullYear()} Jimmy Arikawe
-          </p>
-          {/*
-            Quietly reinforces the designer-who-codes positioning at the one
-            place a curious reader is already looking for meta-information.
-          */}
-          <p className="text-[13px] font-medium text-ghost">
-            Designed and built in Next.js and Tailwind
           </p>
         </div>
       </div>
