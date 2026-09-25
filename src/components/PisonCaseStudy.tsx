@@ -207,7 +207,6 @@ export function PisonCaseStudy({
 
   const factSheet: { label: string; value: string; note?: string }[] = [
     { label: "Company / Client", value: project.client },
-    { label: "Engagement", value: project.engagement ?? "Self-initiated" },
     { label: "Responsibilities", value: project.role, note: project.services },
     { label: "Category", value: project.category },
     { label: "Year", value: project.year },
