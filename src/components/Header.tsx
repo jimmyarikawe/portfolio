@@ -44,10 +44,10 @@ export function Header() {
             aria-label="Jimmy Arikawe, home"
             className="group inline-flex select-none items-center gap-2 leading-10 text-muted transition-colors hover:text-ink"
           >
+            <Atom size={24} aria-hidden="true" />
             <span className="font-mono text-[13.5px] font-medium uppercase tracking-[-0.04em] sm:text-[14px] wide:text-[15px]">
               Jimmy Arikawe
             </span>
-            <Atom size={24} aria-hidden="true" />
           </Link>
 
           <div className="flex items-center gap-3 wide:gap-5">
